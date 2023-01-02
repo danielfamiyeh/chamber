@@ -4,7 +4,7 @@ import { WebsocketChatService } from './websocket';
 import { Chat, ChatMap, Message, UserMap } from '../../../types';
 import { assertExists } from '../../utils/assert';
 import { ChatSchema } from '../../models/chat';
-import { UserSchema } from '../../models';
+import { MessageSchema, UserSchema } from '../../models';
 
 export class ChatService {
   static sse = SSEChatService;
@@ -44,11 +44,23 @@ export class ChatService {
     return (chats[chat.id] = chat);
   }
 
-  static sendMessage(senderId: string, chatId: string): Message {
-    return null;
+  static sendMessage(
+    chatId: string,
+    senderId: string,
+    content: string
+  ): Message {
+    const { users, chats } = this;
+    const [sender, chat] = [users[senderId], chats[chatId]];
+
+    assertExists({ sender }) && assertExists({ chat });
+
+    const message = { ...MessageSchema.model, content, senderId };
+    chat.messages.push(message);
+
+    return message;
   }
 
   static getMessages(chatId: string, startIdx = 0, endIdx = 20): Message[] {
-    return [];
+    return (this.chats[chatId]?.messages ?? []).slice(startIdx, endIdx);
   }
 }
