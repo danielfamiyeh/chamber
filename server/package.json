@@ -1,5 +1,5 @@
 {
-  "name": "@plusultrasoftware/messenger-ultra-server",
+  "name": "@danielfamiyeh/messenger-ultra-server",
   "version": "0.0.1",
   "description": "Realtime messaging service backend.",
   "main": "index.js",
