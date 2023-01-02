@@ -1,6 +1,6 @@
-import { Schema } from '../../types';
+import { Schema } from '../utils/schema';
 
-export const UserSchema: Schema = [
+export const UserSchema = new Schema([
   { key: 'id', type: String },
-  { key: 'conversations', type: Array<String> },
-];
+  { key: 'chatIds', type: Array<String> },
+]);
