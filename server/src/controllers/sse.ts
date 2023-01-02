@@ -1,10 +1,10 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 
-import { CreateSSERequest } from '../../types';
+import { CreateSSERequest, ListenSSERequest } from '../../types';
 import { ChatService } from '../services/chat';
 
-export const listenSSE = async (req: Request, res: Response) => {
-  const { userId } = (<{ query: { userId: string } }>(<unknown>req)).query;
+export const listenSSE = async (req: ListenSSERequest, res: Response) => {
+  const { userId } = req.query;
 
   const user = ChatService.users[userId];
   const client = ChatService.sse.clients[userId];
