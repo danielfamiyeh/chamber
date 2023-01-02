@@ -1,7 +1,6 @@
-import { randomUUID } from 'crypto';
-
-import { ChatMap, UserMap } from '../../types';
+import { Chat, ChatMap, UserMap } from '../../types';
 import { assertExists } from '../utils/assert';
+import { ChatSchema } from '../models/chat';
 import { UserSchema } from '../models';
 
 export default class SSEChatService {
@@ -12,18 +11,29 @@ export default class SSEChatService {
     if (this.users[username])
       throw new Error(`User with username: ${username} already exists.`);
 
-    const id = randomUUID();
-    const user = { ...UserSchema.model, id, username };
+    const user = { ...UserSchema.model, username };
 
     this.users[username] = user;
     return user;
   }
-  static createChat(userId1: string, userId2: string) {
+  static createChat(userId1: string, userId2: string): Chat {
     const { chats, users } = this;
     const [user1, user2] = [users[userId1], users[userId2]];
 
     assertExists({ user1 }) && assertExists({ user2 });
 
-    // const convoExists = Object.values(chats).find(({user1, user2}))
+    const [existingChatId] = user1.chatIds.filter(
+      (chatId) =>
+        chats[chatId] && !!user2.chatIds.find((_chatId) => chatId === _chatId)
+    );
+
+    if (existingChatId) return chats[existingChatId];
+
+    const chat = { ...ChatSchema.model, userId1, userId2 };
+
+    user1.chatIds.push(chat.id);
+    user2.chatIds.push(chat.id);
+
+    return chat;
   }
 }
