@@ -1,9 +1,15 @@
-import { Chat, ChatMap, UserMap } from '../../types';
-import { assertExists } from '../utils/assert';
-import { ChatSchema } from '../models/chat';
-import { UserSchema } from '../models';
+import { SSEChatService } from './sse';
+import { WebsocketChatService } from './websocket';
 
-export default class SSEChatService {
+import { Chat, ChatMap, Message, UserMap } from '../../../types';
+import { assertExists } from '../../utils/assert';
+import { ChatSchema } from '../../models/chat';
+import { UserSchema } from '../../models';
+
+export class ChatService {
+  static sse = SSEChatService;
+  static socket = WebsocketChatService;
+
   static users: UserMap = {};
   static chats: ChatMap = {};
 
@@ -16,6 +22,7 @@ export default class SSEChatService {
     this.users[username] = user;
     return user;
   }
+
   static createChat(userId1: string, userId2: string): Chat {
     const { chats, users } = this;
     const [user1, user2] = [users[userId1], users[userId2]];
@@ -34,6 +41,14 @@ export default class SSEChatService {
     user1.chatIds.push(chat.id);
     user2.chatIds.push(chat.id);
 
-    return chat;
+    return (chats[chat.id] = chat);
+  }
+
+  static sendMessage(senderId: string, chatId: string): Message {
+    return null;
+  }
+
+  static getMessages(chatId: string, startIdx = 0, endIdx = 20): Message[] {
+    return [];
   }
 }
