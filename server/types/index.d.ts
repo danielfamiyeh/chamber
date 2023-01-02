@@ -1,9 +1,10 @@
-import { Request, Response } from 'express';
+import { Request } from 'express';
 
 export type Message = {
-  senderId: string;
-  content: string;
+  sender: string;
   createdAt: Date;
+  content: string;
+  chatId: string;
   id: string;
 };
 
@@ -15,8 +16,8 @@ export type User = {
 
 export type Chat = {
   id: string;
-  userId1: string;
-  userId2: string;
+  user1: string;
+  user2: string;
   messages: Message[];
 };
 
@@ -45,7 +46,7 @@ export interface CreateUserRequest extends Request {
 
 export interface CreateSSERequest extends Request {
   body: {
-    senderId: string;
+    sender: string;
     content: string;
     chatId: string;
   };
