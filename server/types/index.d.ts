@@ -1,4 +1,3 @@
-// Models
 export type Message = {
   recipientId: string;
   senderId: string;
