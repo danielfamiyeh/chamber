@@ -2,9 +2,9 @@ import { SSEChatService } from './sse';
 import { WebsocketChatService } from './websocket';
 
 import { Chat, ChatMap, Message, UserMap } from '../../../types';
+import { MessageSchema, UserSchema } from '../../models';
 import { assertExists } from '../../utils/assert';
 import { ChatSchema } from '../../models/chat';
-import { MessageSchema, UserSchema } from '../../models';
 
 export class ChatService {
   static sse = SSEChatService;
