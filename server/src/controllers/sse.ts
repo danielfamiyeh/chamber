@@ -6,12 +6,13 @@ import { ChatService } from '../services/chat';
 export const listenSSE = async (req: Request, res: Response) => {
   const { userId } = (<{ query: { userId: string } }>(<unknown>req)).query;
 
-  if (!userId) return res.json({ error: 'User ID must be provided' });
-  if (!ChatService.users[userId])
-    return res.json({ error: 'User does not exist' });
+  const user = ChatService.users[userId];
+  const client = ChatService.sse.clients[userId];
 
-  if (ChatService.sse.clients[userId])
-    return res.json({ messages: 'Already listening for events' });
+  if (!userId) return res.json({ error: 'User ID must be provided' });
+  if (!user) return res.json({ error: 'User does not exist' });
+
+  if (client) return res.json({ messages: 'Already listening for events' });
 
   ChatService.sse.clients[userId] = { req, res };
 
@@ -28,14 +29,19 @@ export const listenSSE = async (req: Request, res: Response) => {
     // Inform other users of disconnection
   });
 
-  res.write('\n');
+  user.chatIds.forEach((chatId) =>
+    ChatService.chats[chatId]?.messages?.forEach((message) => {
+      res.write(JSON.stringify(message));
+      res.write('\n');
+    })
+  );
 };
 
 export const sendMessageSSE = async (req: CreateSSERequest, res: Response) => {
-  const { chatId, senderId, content } = req.body;
+  const { chatId, sender, content } = req.body;
 
   try {
-    ChatService.sendMessage(chatId, senderId, content);
+    ChatService.sendMessage(chatId, sender, content);
     return res.json({ success: true });
   } catch (error) {
     return res.json({ error: error.message });
