@@ -51,3 +51,16 @@ export interface CreateSSERequest extends Request {
     chatId: string;
   };
 }
+
+export interface ListenSSERequest extends Request {
+  query: {
+    userId: string;
+  };
+}
+
+export type GetUserRequest = {
+  query: {
+    userId?: string;
+    username: string;
+  };
+};
