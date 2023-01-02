@@ -1,7 +1,7 @@
 export type Message = {
-  recipientId: string;
   senderId: string;
   content: string;
+  createdAt: Date;
   id: string;
 };
 
@@ -25,7 +25,8 @@ export type SchemaField = {
     | typeof Number
     | typeof Array<String>
     | typeof Array<Number>
-    | typeof Array<Message>;
+    | typeof Array<Message>
+    | typeof Date;
 };
 
 export type ChatMap = Record<string, Chat>;
