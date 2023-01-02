@@ -1,4 +1,4 @@
 import { Router } from 'express';
-import { getSSE } from '../controllers/sse';
+import { listenSSE, sendMessageSSE } from '../controllers/sse';
 
-export const sseRouter = Router().get('/', getSSE);
+export const sseRouter = Router().get('/', listenSSE).put('/', sendMessageSSE);

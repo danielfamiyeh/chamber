@@ -1,8 +1,8 @@
 import { Router } from 'express';
 
 import { sseRouter } from './sse';
-import { socketRouter } from './websocket';
+import { userRouter } from './user';
 
 export const apiRouter = Router()
   .use('/sse', sseRouter)
-  .use('/socket', socketRouter);
+  .use('/user', userRouter);

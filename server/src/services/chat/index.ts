@@ -1,5 +1,4 @@
-import { SSEChatService } from './sse';
-import { WebsocketChatService } from './websocket';
+import { SSE } from './sse';
 
 import { Chat, ChatMap, Message, UserMap } from '../../../types';
 import { MessageSchema, UserSchema } from '../../models';
@@ -7,15 +6,14 @@ import { assertExists } from '../../utils/assert';
 import { ChatSchema } from '../../models/chat';
 
 export class ChatService {
-  static sse = SSEChatService;
-  static socket = WebsocketChatService;
+  static sse = SSE;
 
   static users: UserMap = {};
   static chats: ChatMap = {};
 
   static createUser(username: string) {
     if (this.users[username])
-      throw new Error(`User with username: ${username} already exists.`);
+      throw new Error(`User with username '${username}' already exists.`);
 
     const user = { ...UserSchema.model, username };
 
@@ -54,7 +52,13 @@ export class ChatService {
 
     assertExists({ sender }) && assertExists({ chat });
 
+    const isUser1 = chat.userId1 === senderId;
     const message = { ...MessageSchema.model, content, senderId };
+    const recipient = users[chat[isUser1 ? 'userId2' : 'userId1']];
+
+    const recipientClient = ChatService.sse.clients[recipient.username];
+
+    recipientClient?.res?.write(JSON.stringify(message));
     chat.messages.push(message);
 
     return message;
