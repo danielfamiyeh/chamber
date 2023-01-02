@@ -1,3 +1,5 @@
+import { Request, Response } from 'express';
+
 export type Message = {
   senderId: string;
   content: string;
@@ -34,3 +36,17 @@ export type ChatMap = Record<string, Chat>;
 export type UserMap = Record<string, User>;
 
 export type LogLevel = 'info' | 'warning' | 'error';
+
+export interface CreateUserRequest extends Request {
+  query: {
+    username: string;
+  };
+}
+
+export interface CreateSSERequest extends Request {
+  body: {
+    senderId: string;
+    content: string;
+    chatId: string;
+  };
+}
