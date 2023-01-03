@@ -1,16 +1,14 @@
-import { Request, Response } from 'express';
-
 import { assertExists } from '../../utils/assert';
 import { Chat, ChatMap, Message } from '../../../types';
 import { ChatSchema } from '../../models/chat';
 import { MessageSchema } from '../../models';
 import { UserService } from '../user/UserService';
+import { clientStore } from '../../store/client';
 
 const { users } = UserService;
 
 export class ChatService {
   static chats: ChatMap = {};
-  static clients: Record<string, { req: Request; res: Response }> = {};
 
   static createChat(username1: string, username2: string): Chat {
     const { chats } = this;
@@ -50,7 +48,7 @@ export class ChatService {
       throw new Error(`${recipient.username} is not in your friends list`);
     }
 
-    const recipientClient = ChatService.clients[recipient.username];
+    const recipientClient = clientStore[recipient.username];
 
     const message = {
       ...MessageSchema.model,
