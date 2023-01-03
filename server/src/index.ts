@@ -13,10 +13,12 @@ const PORT = Number(process.env.PORT ?? 4000);
 ChatService.createUser('user1');
 ChatService.createUser('user2');
 
-const { id: chatId } = ChatService.createChat('user1', 'user2');
+ChatService.sendMessage(
+  ChatService.createChat('user1', 'user2').id,
+  'user1',
+  'hello'
+);
 
-const { id: messageId } = ChatService.sendMessage(chatId, 'user1', 'hello');
-console.log({ messageId, chatId });
 export default express()
   .use(cors())
   .use(bodyParser.json())
