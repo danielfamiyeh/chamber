@@ -40,7 +40,13 @@ export interface ButtonTextProps {
   style?: object;
 }
 
-export interface ButtonProps {
+export type ColorVariant = 'info' | 'success' | 'warning' | 'error';
+
+export interface ThemeableComponentProps {
+  colorVariant?: ColorVariant;
+}
+
+export interface ButtonProps extends ThemeableComponentProps {
   onPress: GestureEventHandler;
   text?: ButtonTextProps;
   children?: ReactNode;

@@ -8,10 +8,13 @@ const CreateUserView = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.form}>
-        <TextInput style={styles.textInput} />
+        <TextInput style={styles.textInput} placeholder="Enter a username..." />
         <Button
           style={styles.button}
-          text={{ content: 'Continue' }}
+          text={{
+            content: 'Continue'.toLocaleUpperCase(),
+            style: styles.buttonText,
+          }}
           onPress={() => {}}
         />
       </View>
