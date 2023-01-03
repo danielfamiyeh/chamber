@@ -3,7 +3,8 @@ import { Response } from 'express';
 import { createToken } from '../utils/auth';
 import { UserService } from '../services/user/UserService';
 import { CreateUserRequest, GetUserRequest } from '../../types';
-import { userServiceStore as users } from '../services/user/UserService.store';
+
+const { users } = UserService;
 
 export const createUser = (req: CreateUserRequest, res: Response) => {
   const { username } = req.body;
