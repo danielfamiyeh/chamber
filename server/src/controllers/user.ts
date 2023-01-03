@@ -1,12 +1,16 @@
 import { Response } from 'express';
 
+import { createToken } from '../utils/auth';
 import { ChatService } from '../services/chat';
 import { CreateUserRequest, GetUserRequest } from '../../types';
 
 export const createUser = (req: CreateUserRequest, res: Response) => {
-  const { username } = req.query;
+  const { username } = req.body;
+  const user = ChatService.createUser(username);
+  const token = createToken(user);
+
   try {
-    return res.json(ChatService.createUser(username));
+    return res.json({ user, session: { id: user.id, token } });
   } catch (error) {
     return res.json({ error: error.message });
   }

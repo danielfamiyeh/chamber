@@ -1,11 +1,16 @@
 import React, { createContext, useContext } from 'react';
 
 import useLocalStorage from '../../../utils/hooks/useLocalStorage';
-import { signIn, signOut } from './utils/methods';
+import { IUserContext, User } from '../../../../types';
+import { signUp, signOut } from './utils/methods';
 import { UserSchema } from '../../../models';
-import { User } from '../../../../types';
 
-const UserContext = createContext<User>(UserSchema.model);
+const UserContext = createContext<IUserContext>({
+  user: UserSchema.model,
+  setUser: () => {},
+  signOut: () => {},
+  signUp: () => {},
+});
 
 export const UserProvider = (props: any) => {
   const { val: user, setVal: setUser } = useLocalStorage<User>(
@@ -15,7 +20,7 @@ export const UserProvider = (props: any) => {
   return (
     <UserContext.Provider
       {...props}
-      value={{ user, setUser, signIn, signOut }}
+      value={{ user, setUser, signUp, signOut }}
     />
   );
 };

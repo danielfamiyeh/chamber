@@ -1,6 +1,16 @@
 import { ReactNode } from 'react';
 import { GestureResponderEvent } from 'react-native';
 
+export type ColorVariant = 'info' | 'success' | 'warning' | 'error';
+
+export type ThemeableProps = 'border' | 'background';
+
+export interface ThemeableComponentProps {
+  colorVariant?: ColorVariant;
+}
+
+export type Theme = Record<ColorVariant | ThemeableProps, string>;
+
 export type Message = {
   sender: string;
   createdAt: Date;
@@ -22,6 +32,11 @@ export type Chat = {
   messages: Message[];
 };
 
+export type Session = {
+  id: string;
+  token: string;
+};
+
 export type SchemaField = {
   key: string;
   type:
@@ -40,12 +55,6 @@ export interface ButtonTextProps {
   style?: object;
 }
 
-export type ColorVariant = 'info' | 'success' | 'warning' | 'error';
-
-export interface ThemeableComponentProps {
-  colorVariant?: ColorVariant;
-}
-
 export interface ButtonProps extends ThemeableComponentProps {
   onPress: GestureEventHandler;
   text?: ButtonTextProps;
@@ -59,4 +68,20 @@ export type ServerRequestReturnType = 'json' | 'blob' | 'text' | 'arrayBuffer';
 export interface Session {
   id: string;
   token: string;
+}
+
+export interface IUserContext {
+  user: User;
+  setUser: (setterOrUser: ((oldUser: User) => void) | User) => void;
+  signUp: (username: string) => Promise<{ user: User; session: Session }>;
+  signOut: () => void;
+}
+
+export type ToastType = 'info' | 'success' | 'warning' | 'error';
+
+export interface ISessionContext {
+  session: Session;
+  setSession: (
+    setterOrSession: ((oldSession: Session) => void) | Session
+  ) => void;
 }

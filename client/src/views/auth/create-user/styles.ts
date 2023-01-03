@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
-import { scaleX, scaleY } from '../../../utils/methods/scaleable-units';
+
 import ThemeManager from '../../../utils/ui/ThemeManger';
+import { scaleX, scaleY } from '../../../utils/methods/scaleable-units';
 
 const createUserStyles = StyleSheet.create({
   container: {
@@ -26,6 +27,7 @@ const createUserStyles = StyleSheet.create({
     paddingVertical: scaleY(10),
     paddingHorizontal: scaleX(16),
     borderColor: ThemeManager.theme.border,
+    backgroundColor: 'white',
   },
 
   button: {
