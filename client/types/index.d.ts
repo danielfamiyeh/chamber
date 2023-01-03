@@ -1,6 +1,16 @@
 import { ReactNode } from 'react';
 import { GestureResponderEvent } from 'react-native';
 
+export type ColorVariant = 'info' | 'success' | 'warning' | 'error';
+
+export type ThemeableProps = 'border' | 'background';
+
+export interface ThemeableComponentProps {
+  colorVariant?: ColorVariant;
+}
+
+export type Theme = Record<ColorVariant | ThemeableProps, string>;
+
 export type Message = {
   sender: string;
   createdAt: Date;
@@ -40,12 +50,6 @@ export interface ButtonTextProps {
   style?: object;
 }
 
-export type ColorVariant = 'info' | 'success' | 'warning' | 'error';
-
-export interface ThemeableComponentProps {
-  colorVariant?: ColorVariant;
-}
-
 export interface ButtonProps extends ThemeableComponentProps {
   onPress: GestureEventHandler;
   text?: ButtonTextProps;
@@ -59,4 +63,11 @@ export type ServerRequestReturnType = 'json' | 'blob' | 'text' | 'arrayBuffer';
 export interface Session {
   id: string;
   token: string;
+}
+
+export interface IUserContext {
+  user: User;
+  setUser: (setterOrUser: ((oldUser: User) => void) | User) => void;
+  signIn: (username: string) => void;
+  signOut: () => void;
 }
