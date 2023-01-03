@@ -32,6 +32,11 @@ export type Chat = {
   messages: Message[];
 };
 
+export type Session = {
+  id: string;
+  token: string;
+};
+
 export type SchemaField = {
   key: string;
   type:
@@ -73,3 +78,8 @@ export interface IUserContext {
 }
 
 export type ToastType = 'info' | 'success' | 'warning' | 'error';
+
+export interface ISessionContext {
+  session: Session;
+  setSession: (setterOrSession: ((oldSession: Session) => void) | User) => void;
+}
