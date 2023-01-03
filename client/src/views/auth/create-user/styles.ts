@@ -26,6 +26,7 @@ const createUserStyles = StyleSheet.create({
     paddingVertical: scaleY(10),
     paddingHorizontal: scaleX(16),
     borderColor: ThemeManager.theme.border,
+    backgroundColor: 'white',
   },
 
   button: {
