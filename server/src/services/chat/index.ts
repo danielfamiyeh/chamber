@@ -1,29 +1,18 @@
-import { Chat, ChatMap, Message, User, UserMap } from '../../../types';
-import { MessageSchema, UserSchema } from '../../models';
+import { Request, Response } from 'express';
+
+import { Chat, ChatMap, Message } from '../../../types';
 import { assertExists } from '../../utils/assert';
 import { ChatSchema } from '../../models/chat';
-import { SSE } from './sse';
+import { MessageSchema } from '../../models';
+import { UserService } from '../user';
 
+const { users } = UserService;
 export class ChatService {
-  static sse = SSE;
-
-  static users: UserMap = {};
   static chats: ChatMap = {};
-
-  static createUser(username: string) {
-    if (this.users[username])
-      throw new Error(`User with username '${username}' already exists.`);
-
-    const user = { ...UserSchema.model, username };
-
-    this.users[username] = user;
-    return user;
-  }
-
-  static createToken(user: User) {}
+  static clients: Record<string, { req: Request; res: Response }> = {};
 
   static createChat(username1: string, username2: string): Chat {
-    const { chats, users } = this;
+    const { chats } = this;
     const [user1, user2] = [users[username1], users[username2]];
 
     assertExists({ user1 }) && assertExists({ user2 });
@@ -48,21 +37,21 @@ export class ChatService {
     senderName: string,
     content: string
   ): Message {
-    const { users, chats } = this;
+    const { chats } = this;
     const [sender, chat] = [users[senderName], chats[chatId]];
 
     assertExists({ sender }) && assertExists({ chat });
 
     const isUser1 = chat.user1 === senderName;
+    const recipient = users[chat[isUser1 ? 'user2' : 'user1']];
+    const recipientClient = ChatService.clients[recipient.username];
+
     const message = {
       ...MessageSchema.model,
       content,
       sender: senderName,
       chatId,
     };
-    const recipient = users[chat[isUser1 ? 'user2' : 'user1']];
-
-    const recipientClient = ChatService.sse.clients[recipient.username];
 
     recipientClient?.res?.write(JSON.stringify(message));
     chat.messages.push(message);
