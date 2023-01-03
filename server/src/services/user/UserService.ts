@@ -21,7 +21,7 @@ export class UserService {
   }
 
   static addFriend(requesterUsername: string, requestedUsername: string) {
-    const { users } = this;
+    const { clients, users } = this;
 
     const requester = users[requesterUsername];
     const requestedUser = users[requestedUsername];
@@ -32,9 +32,16 @@ export class UserService {
       ...FriendRequestSchema.model,
       username: requestedUsername,
     });
-    requestedUser.incomingFriendRequests.push({
+
+    const outgoingRequest = {
       ...FriendRequestSchema.model,
       username: requestedUsername,
-    });
+    };
+
+    requestedUser.incomingFriendRequests.push(outgoingRequest);
+
+    clients[requestedUsername]?.res?.write(
+      JSON.stringify({ friendRequest: outgoingRequest })
+    );
   }
 }

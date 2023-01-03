@@ -74,3 +74,9 @@ export type GetUserRequest = {
     username: string;
   };
 };
+
+export interface AddFriendRequest extends Request {
+  body: {
+    username: string;
+  };
+}
