@@ -8,7 +8,15 @@ export type Message = {
   id: string;
 };
 
+export type FriendRequest = {
+  id: string;
+  username: string;
+  createdAt: Date;
+};
+
 export type User = {
+  incomingFriendRequests: FriendRequest[];
+  outgoingFriendRequests: FriendRequest[];
   chatIds: string[];
   username: string;
   id: string;
@@ -29,6 +37,7 @@ export type SchemaField = {
     | typeof Array<String>
     | typeof Array<Number>
     | typeof Array<Message>
+    | typeof Array<FriendRequest>
     | typeof Date;
 };
 

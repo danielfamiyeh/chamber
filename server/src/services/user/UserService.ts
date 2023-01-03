@@ -1,6 +1,6 @@
-import { UserSchema } from '../../models';
-
 import { userServiceStore as users } from './UserService.store';
+import { assertExists } from '../../utils/assert';
+import { UserSchema } from '../../models';
 
 export class UserService {
   static createUser(username: string) {
@@ -13,5 +13,10 @@ export class UserService {
     return user;
   }
 
-  static addFriend(username: string, requestedUsername: string) {}
+  static addFriend(requesterUsername: string, requestedUsername: string) {
+    const requesterUser = users[requesterUsername];
+    const requestedUser = users[requestedUsername];
+
+    assertExists({ requesterUser }) && assertExists({ requestedUser });
+  }
 }

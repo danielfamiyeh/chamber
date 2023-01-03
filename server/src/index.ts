@@ -14,11 +14,13 @@ const PORT = Number(process.env.PORT ?? 4000);
 UserService.createUser('user1');
 UserService.createUser('user2');
 
-ChatService.sendMessage(
-  ChatService.createChat('user1', 'user2').id,
-  'user1',
-  'hello'
-);
+UserService.addFriend('user1', 'user2');
+
+// ChatService.sendMessage(
+//   ChatService.createChat('user1', 'user2').id,
+//   'user1',
+//   'hello'
+// );
 
 export default express()
   .use(cors())
