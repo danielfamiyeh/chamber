@@ -1,9 +1,11 @@
 import { Response } from 'express';
 
-import { chatServiceStore as chats } from '../services/chat/ChatService.store';
-import { userServiceStore as users } from '../services/user/UserService.store';
 import { CreateSSERequest, ListenSSERequest } from '../../types';
 import { ChatService } from '../services/chat/ChatService';
+import { UserService } from '../services/user/UserService';
+
+const { users } = UserService;
+const { chats } = ChatService;
 
 export const listenSSE = async (req: ListenSSERequest, res: Response) => {
   const { userId } = req.query;

@@ -1,9 +1,13 @@
-import { userServiceStore as users } from './UserService.store';
 import { assertExists } from '../../utils/assert';
 import { UserSchema } from '../../models';
+import { UserMap } from '../../../types';
+import { FriendRequestSchema } from '../../models/request';
 
 export class UserService {
+  static users: UserMap = {};
+
   static createUser(username: string) {
+    const { users } = this;
     if (users[username])
       throw new Error(`User with username '${username}' already exists.`);
 
@@ -14,9 +18,20 @@ export class UserService {
   }
 
   static addFriend(requesterUsername: string, requestedUsername: string) {
-    const requesterUser = users[requesterUsername];
+    const { users } = this;
+
+    const requester = users[requesterUsername];
     const requestedUser = users[requestedUsername];
 
-    assertExists({ requesterUser }) && assertExists({ requestedUser });
+    assertExists({ requester }) && assertExists({ requestedUser });
+
+    requester.outgoingFriendRequests.push({
+      ...FriendRequestSchema.model,
+      username: requestedUsername,
+    });
+    requestedUser.incomingFriendRequests.push({
+      ...FriendRequestSchema.model,
+      username: requestedUsername,
+    });
   }
 }

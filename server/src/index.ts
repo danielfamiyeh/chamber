@@ -16,6 +16,7 @@ UserService.createUser('user2');
 
 UserService.addFriend('user1', 'user2');
 
+console.log(UserService.users);
 // ChatService.sendMessage(
 //   ChatService.createChat('user1', 'user2').id,
 //   'user1',

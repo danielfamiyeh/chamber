@@ -1,16 +1,19 @@
 import { Request, Response } from 'express';
 
-import { userServiceStore as users } from '../user/UserService.store';
-import { chatServiceStore as chats } from './ChatService.store';
 import { assertExists } from '../../utils/assert';
-import { Chat, Message } from '../../../types';
+import { Chat, ChatMap, Message } from '../../../types';
 import { ChatSchema } from '../../models/chat';
 import { MessageSchema } from '../../models';
+import { UserService } from '../user/UserService';
+
+const { users } = UserService;
 
 export class ChatService {
+  static chats: ChatMap = {};
   static clients: Record<string, { req: Request; res: Response }> = {};
 
   static createChat(username1: string, username2: string): Chat {
+    const { chats } = this;
     const [user1, user2] = [users[username1], users[username2]];
 
     assertExists({ user1 }) && assertExists({ user2 });
@@ -35,12 +38,18 @@ export class ChatService {
     senderName: string,
     content: string
   ): Message {
+    const { chats } = this;
     const [sender, chat] = [users[senderName], chats[chatId]];
 
     assertExists({ sender }) && assertExists({ chat });
 
     const isUser1 = chat.user1 === senderName;
     const recipient = users[chat[isUser1 ? 'user2' : 'user1']];
+
+    if (!sender.friends.includes(recipient.username)) {
+      throw new Error(`${recipient.username} is not in your friends list`);
+    }
+
     const recipientClient = ChatService.clients[recipient.username];
 
     const message = {
@@ -57,6 +66,7 @@ export class ChatService {
   }
 
   static getMessages(chatId: string, startIdx = 0, endIdx = 20): Message[] {
+    const { chats } = this;
     return (chats[chatId]?.messages ?? []).slice(startIdx, endIdx);
   }
 }
