@@ -1,16 +1,15 @@
-import { UserMap } from '../../../types';
 import { UserSchema } from '../../models';
 
-export class UserService {
-  static users: UserMap = {};
+import { userServiceStore as users } from './UserService.store';
 
+export class UserService {
   static createUser(username: string) {
-    if (this.users[username])
+    if (users[username])
       throw new Error(`User with username '${username}' already exists.`);
 
     const user = { ...UserSchema.model, username };
 
-    this.users[username] = user;
+    users[username] = user;
     return user;
   }
 

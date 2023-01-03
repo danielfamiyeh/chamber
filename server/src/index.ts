@@ -4,8 +4,8 @@ import cors from 'cors';
 import express from 'express';
 import bodyParser from 'body-parser';
 
-import { ChatService } from './services/chat';
-import { UserService } from './services/user';
+import { ChatService } from './services/chat/ChatService';
+import { UserService } from './services/user/UserService';
 import { apiRouter } from './routes';
 import { log } from './utils/logger';
 
@@ -20,7 +20,6 @@ ChatService.sendMessage(
   'hello'
 );
 
-console.log(ChatService);
 export default express()
   .use(cors())
   .use(bodyParser.json())

@@ -1,8 +1,9 @@
 import { Response } from 'express';
 
 import { createToken } from '../utils/auth';
-import { UserService } from '../services/user';
+import { UserService } from '../services/user/UserService';
 import { CreateUserRequest, GetUserRequest } from '../../types';
+import { userServiceStore as users } from '../services/user/UserService.store';
 
 export const createUser = (req: CreateUserRequest, res: Response) => {
   const { username } = req.body;
@@ -27,10 +28,8 @@ export const getUser = (req: GetUserRequest, res: Response) => {
     return res.json({
       user:
         (username
-          ? UserService.users[username]
-          : Object.values(UserService.users).find(
-              (user) => user.id === userId
-            )) ?? null,
+          ? users[username]
+          : Object.values(users).find((user) => user.id === userId)) ?? null,
     });
   } catch (error) {
     return res.json({ error: error.message });

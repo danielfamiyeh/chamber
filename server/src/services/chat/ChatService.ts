@@ -1,18 +1,16 @@
 import { Request, Response } from 'express';
 
-import { Chat, ChatMap, Message } from '../../../types';
+import { userServiceStore as users } from '../user/UserService.store';
+import { chatServiceStore as chats } from './ChatService.store';
 import { assertExists } from '../../utils/assert';
+import { Chat, Message } from '../../../types';
 import { ChatSchema } from '../../models/chat';
 import { MessageSchema } from '../../models';
-import { UserService } from '../user';
 
-const { users } = UserService;
 export class ChatService {
-  static chats: ChatMap = {};
   static clients: Record<string, { req: Request; res: Response }> = {};
 
   static createChat(username1: string, username2: string): Chat {
-    const { chats } = this;
     const [user1, user2] = [users[username1], users[username2]];
 
     assertExists({ user1 }) && assertExists({ user2 });
@@ -37,7 +35,6 @@ export class ChatService {
     senderName: string,
     content: string
   ): Message {
-    const { chats } = this;
     const [sender, chat] = [users[senderName], chats[chatId]];
 
     assertExists({ sender }) && assertExists({ chat });
@@ -60,6 +57,6 @@ export class ChatService {
   }
 
   static getMessages(chatId: string, startIdx = 0, endIdx = 20): Message[] {
-    return (this.chats[chatId]?.messages ?? []).slice(startIdx, endIdx);
+    return (chats[chatId]?.messages ?? []).slice(startIdx, endIdx);
   }
 }
