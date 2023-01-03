@@ -10,9 +10,9 @@ const Stack = createStackNavigator();
 const StackNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Sign In" component={CreateUserView} />
-      <Stack.Screen name="Chat Window" component={ChatWindowView} />
-      <Stack.Screen name="Chat List" component={ChatListView} />
+      <Stack.Screen name="Sign Up" component={CreateUserView} />
+      <Stack.Screen name="Messages" component={ChatWindowView} />
+      <Stack.Screen name="Chats" component={ChatListView} />
     </Stack.Navigator>
   );
 };
