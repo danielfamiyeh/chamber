@@ -4,18 +4,28 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import FriendsView from '../../../views/friends';
 import MessageFlow from '../stack/flows/message';
+import AccountView from '../../../views/account';
+import { scaleY } from '../../../utils/methods/scaleable-units';
 
 const Tab = createBottomTabNavigator();
 
 const screens = [
-  { name: 'Friends', Component: FriendsView, iconName: 'users' },
   {
-    name: 'Messages',
+    name: 'MessageFlow',
     Component: MessageFlow,
     iconName: 'wechat',
     options: {
       headerShown: false,
+      tabBarLabel: 'Messages',
     },
+  },
+
+  { name: 'Friends', Component: FriendsView, iconName: 'users' },
+
+  {
+    name: 'Account',
+    Component: AccountView,
+    iconName: 'user-circle-o',
   },
 ];
 
@@ -30,8 +40,11 @@ const TabNavigator = () => {
             component={Component}
             options={() => ({
               tabBarIcon: ({ color }) => (
-                <Icon size={24} name={iconName} color={color} />
+                <Icon size={24} name={iconName} color={color} style={{}} />
               ),
+              tabBarStyle: {
+                height: scaleY(48),
+              },
               ...options,
             })}
           />

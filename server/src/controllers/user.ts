@@ -1,12 +1,13 @@
 import { Response } from 'express';
 
 import { createToken } from '../utils/auth';
-import { ChatService } from '../services/chat';
+import { UserService } from '../services/user/UserService';
 import { CreateUserRequest, GetUserRequest } from '../../types';
+import { userServiceStore as users } from '../services/user/UserService.store';
 
 export const createUser = (req: CreateUserRequest, res: Response) => {
   const { username } = req.body;
-  const user = ChatService.createUser(username);
+  const user = UserService.createUser(username);
   const token = createToken(user);
 
   try {
@@ -27,10 +28,8 @@ export const getUser = (req: GetUserRequest, res: Response) => {
     return res.json({
       user:
         (username
-          ? ChatService.users[username]
-          : Object.values(ChatService.users).find(
-              (user) => user.id === userId
-            )) ?? null,
+          ? users[username]
+          : Object.values(users).find((user) => user.id === userId)) ?? null,
     });
   } catch (error) {
     return res.json({ error: error.message });
