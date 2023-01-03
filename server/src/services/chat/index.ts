@@ -1,4 +1,4 @@
-import { Chat, ChatMap, Message, UserMap } from '../../../types';
+import { Chat, ChatMap, Message, User, UserMap } from '../../../types';
 import { MessageSchema, UserSchema } from '../../models';
 import { assertExists } from '../../utils/assert';
 import { ChatSchema } from '../../models/chat';
@@ -19,6 +19,8 @@ export class ChatService {
     this.users[username] = user;
     return user;
   }
+
+  static createToken(user: User) {}
 
   static createChat(username1: string, username2: string): Chat {
     const { chats, users } = this;
