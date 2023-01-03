@@ -73,7 +73,7 @@ export interface Session {
 export interface IUserContext {
   user: User;
   setUser: (setterOrUser: ((oldUser: User) => void) | User) => void;
-  signIn: (username: string) => void;
+  signUp: (username: string) => Promise<{ user: User; session: Session }>;
   signOut: () => void;
 }
 
@@ -81,5 +81,7 @@ export type ToastType = 'info' | 'success' | 'warning' | 'error';
 
 export interface ISessionContext {
   session: Session;
-  setSession: (setterOrSession: ((oldSession: Session) => void) | User) => void;
+  setSession: (
+    setterOrSession: ((oldSession: Session) => void) | Session
+  ) => void;
 }

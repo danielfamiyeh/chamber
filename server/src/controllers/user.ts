@@ -10,7 +10,7 @@ export const createUser = (req: CreateUserRequest, res: Response) => {
   const token = createToken(user);
 
   try {
-    return res.json({ user, token });
+    return res.json({ user, session: { id: user.id, token } });
   } catch (error) {
     return res.json({ error: error.message });
   }

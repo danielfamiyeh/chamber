@@ -2,7 +2,7 @@ import { Session, User } from '../../../../../types';
 import { toast } from '../../../../utils/methods/toast';
 import { serverRequest } from '../../../../utils/methods/network';
 
-export const signIn = async (
+export const signUp = async (
   username: string
 ): Promise<{ user: User; session: Session } | void> => {
   if (!username) {
