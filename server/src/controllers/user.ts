@@ -1,8 +1,8 @@
 import { Response } from 'express';
 
+import { createToken } from '../utils/auth';
 import { ChatService } from '../services/chat';
 import { CreateUserRequest, GetUserRequest } from '../../types';
-import { createToken } from '../utils/auth';
 
 export const createUser = (req: CreateUserRequest, res: Response) => {
   const { username } = req.body;
