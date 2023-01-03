@@ -31,10 +31,11 @@ const createUserStyles = StyleSheet.create({
   button: {
     width: '100%',
     alignSelf: 'center',
+    backgroundColor: ThemeManager.theme.info,
     paddingHorizontal: scaleX(8),
     paddingVertical: scaleY(8),
     borderRadius: scaleX(16),
-    backgroundColor: ThemeManager.theme.info,
+    borderWidth: 0,
   },
 
   buttonText: {
