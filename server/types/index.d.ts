@@ -18,6 +18,7 @@ export type User = {
   incomingFriendRequests: FriendRequest[];
   outgoingFriendRequests: FriendRequest[];
   chatIds: string[];
+  friends: string[];
   username: string;
   id: string;
 };
