@@ -1,8 +1,10 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native';
-import AppProvider from './components/context';
+import Toast from 'react-native-toast-message';
 
 import Navigator from './components/navigation';
+import AppProvider from './components/context';
+
 import appStyles from './styles';
 
 const App = () => {
@@ -11,6 +13,7 @@ const App = () => {
       <AppProvider>
         <Navigator />
       </AppProvider>
+      <Toast />
     </SafeAreaView>
   );
 };

@@ -71,3 +71,5 @@ export interface IUserContext {
   signIn: (username: string) => void;
   signOut: () => void;
 }
+
+export type ToastType = 'info' | 'success' | 'warning' | 'error';

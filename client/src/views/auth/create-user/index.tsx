@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { View, TextInput } from 'react-native';
 import { useUser } from '../../../components/context/user';
 import Button from '../../../components/input/button/Button';
@@ -7,7 +7,7 @@ import styles from './styles';
 
 const CreateUserView = ({ navigation }) => {
   const { signIn } = useUser();
-  const usernameRef = useRef('');
+  const [username, setUsername] = React.useState('');
 
   return (
     <View style={styles.container}>
@@ -15,7 +15,7 @@ const CreateUserView = ({ navigation }) => {
         <TextInput
           style={styles.textInput}
           placeholder="Enter a username..."
-          onChangeText={(val) => (usernameRef.current = val)}
+          onChangeText={setUsername}
         />
         <Button
           style={styles.button}
@@ -23,7 +23,7 @@ const CreateUserView = ({ navigation }) => {
             content: 'Continue'.toLocaleUpperCase(),
             style: styles.buttonText,
           }}
-          onPress={() => signIn(usernameRef.current)}
+          onPress={() => signIn(username)}
         />
       </View>
     </View>

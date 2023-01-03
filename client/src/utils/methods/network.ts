@@ -1,15 +1,15 @@
-import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { ServerRequestReturnType } from '../../../types';
 import { apiUrl } from '../config';
+import { toast } from './toast';
 
-export const serverRequest = async (
+export const serverRequest = async <T>(
   path: string,
   options: RequestInit = {},
   returnType: ServerRequestReturnType = 'json',
   withAuth = false
-) => {
+): Promise<T> => {
   let authHeader;
   try {
     if (withAuth) {
@@ -37,8 +37,6 @@ export const serverRequest = async (
     return res;
   } catch (error: any) {
     const message = `${options.method} request error to api endpoint ${path}\n${error.message}`;
-
-    Alert.alert(message);
-    console.log(message);
+    return toast.error('', message);
   }
 };
