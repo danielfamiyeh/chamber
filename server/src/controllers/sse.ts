@@ -19,6 +19,7 @@ export const listenSSE = async (req: ListenSSERequest, res: Response) => {
   if (client) return res.json({ messages: 'Already listening for events' });
 
   ChatService.clients[userId] = { req, res };
+  UserService.clients[userId] = { req, res };
 
   res.set({
     'Cache-Control': 'no-cache',

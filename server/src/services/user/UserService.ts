@@ -1,10 +1,13 @@
+import { Request, Response } from 'express';
+
+import { FriendRequestSchema } from '../../models/request';
 import { assertExists } from '../../utils/assert';
 import { UserSchema } from '../../models';
 import { UserMap } from '../../../types';
-import { FriendRequestSchema } from '../../models/request';
 
 export class UserService {
   static users: UserMap = {};
+  static clients: Record<string, { req: Request; res: Response }> = {};
 
   static createUser(username: string) {
     const { users } = this;
