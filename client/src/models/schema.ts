@@ -1,4 +1,4 @@
-import { v4 as uuid } from 'uuid';
+import uuid from 'react-native-uuid';
 import { SchemaField } from '../../types';
 
 export class Schema<T> {
@@ -14,7 +14,7 @@ export class Schema<T> {
             : (<StringConstructor | NumberConstructor>type)();
 
         if (key === 'id') {
-          value = uuid();
+          value = uuid.v4();
         }
 
         return {

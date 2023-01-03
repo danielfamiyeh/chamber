@@ -1,3 +1,6 @@
+import { ReactNode } from 'react';
+import { GestureResponderEvent } from 'react-native';
+
 export type Message = {
   sender: string;
   createdAt: Date;
@@ -29,3 +32,25 @@ export type SchemaField = {
     | typeof Array<Message>
     | typeof Date;
 };
+
+export type GestureEventHandler = (evt: GestureResponderEvent) => void;
+
+export interface ButtonTextProps {
+  content: string;
+  style?: object;
+}
+
+export interface ButtonProps {
+  onPress: GestureEventHandler;
+  text?: ButtonTextProps;
+  children?: ReactNode;
+  disabled?: boolean;
+  style?: object;
+}
+
+export type ServerRequestReturnType = 'json' | 'blob' | 'text' | 'arrayBuffer';
+
+export interface Session {
+  id: string;
+  token: string;
+}
