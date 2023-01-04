@@ -4,7 +4,7 @@ import { models } from '../../models';
 export async function sendFriendRequest(username1: string, username2: string) {
   const requester = await models.User.findOne({ username: username1 })
     .populate('friends')
-    .populate('friendRequests')
+    .populate('outgoingFriendRequests')
     .exec();
 
   const requested = await models.User.findOne({ username: username2 });
@@ -14,7 +14,7 @@ export async function sendFriendRequest(username1: string, username2: string) {
   }
 
   if (
-    (requester.friendRequests.outgoing as unknown as FriendRequest[]).find(
+    (requester.outgoingFriendRequests as unknown as FriendRequest[]).find(
       ({ to }) => to === username2
     )
   ) {

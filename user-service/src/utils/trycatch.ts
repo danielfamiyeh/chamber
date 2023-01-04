@@ -7,3 +7,11 @@ export const trycatch = (res: Response, fn: Function) => {
     return res.json({ error: error.message });
   }
 };
+
+export const trycatchAsync = async (res: Response, fn: Function) => {
+  try {
+    await fn();
+  } catch (error) {
+    return res.json({ error: error.message });
+  }
+};

@@ -4,7 +4,6 @@ const UserSchema = new Schema(
   {
     username: {
       type: String,
-      unique: true,
       required: true,
     },
 
@@ -20,16 +19,13 @@ const UserSchema = new Schema(
       defaultValue: [],
     },
 
-    friendRequests: {
-      type: {
-        incoming: [
-          { type: Schema.Types.ObjectId, ref: 'FriendRequest', unique: true },
-        ],
-        outgoing: [
-          { type: Schema.Types.ObjectId, ref: 'FriendRequest', unique: true },
-        ],
-      },
-    },
+    incomingFriendRequests: [
+      { type: Schema.Types.ObjectId, ref: 'FriendRequest' },
+    ],
+
+    outgoingFriendRequests: [
+      { type: Schema.Types.ObjectId, ref: 'FriendRequest' },
+    ],
   },
   { timestamps: true }
 );
