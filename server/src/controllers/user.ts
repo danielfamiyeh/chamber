@@ -1,7 +1,7 @@
 import { Response } from 'express';
 
 import { createToken } from '../utils/auth';
-import { userStore as users } from '../store';
+import { users } from '../store';
 import { UserService } from '../services/user/UserService';
 import { CreateUserRequest, GetUserRequest } from '../../types';
 

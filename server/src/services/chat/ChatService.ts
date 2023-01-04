@@ -1,9 +1,9 @@
 import { Chat, ChatMap, Message } from '../../../types';
 import { assertExists } from '../../utils/assert';
-import { userStore as users } from '../../store';
+import { users } from '../../store';
 import { ChatSchema } from '../../models/chat';
 import { MessageSchema } from '../../models';
-import { clientStore } from '../../store';
+import { clients } from '../../store';
 
 export class ChatService {
   static chats: ChatMap = {};
@@ -46,7 +46,7 @@ export class ChatService {
       throw new Error(`${recipient.username} is not in your friends list`);
     }
 
-    const recipientClient = clientStore[recipient.username];
+    const recipientClient = clients[recipient.username];
 
     const message = {
       ...MessageSchema.model,
