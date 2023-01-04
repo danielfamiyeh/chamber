@@ -7,7 +7,7 @@ import bodyParser from 'body-parser';
 import { apiRouter } from './routes';
 import { log } from './utils/logger';
 
-const PORT = Number(process.env.PORT ?? 4000);
+const PORT = Number(process.env.PORT ?? 3000);
 
 export default express()
   .use(cors())
