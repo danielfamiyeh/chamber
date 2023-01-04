@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongoose';
 import { FriendRequest } from '../../../types';
 import { models } from '../../models';
 import { db } from '../../utils/db';
@@ -16,7 +17,7 @@ export async function sendFriendRequest(username1: string, username2: string) {
 
   if (
     (requester.outgoingFriendRequests as unknown as FriendRequest[]).find(
-      ({ to }) => to === username2
+      ({ to }) => to.toString() === requested._id.toString()
     )
   ) {
     throw new Error(`Already sent a request to ${username2}`);
@@ -26,6 +27,24 @@ export async function sendFriendRequest(username1: string, username2: string) {
     from: requester._id,
     to: requested._id,
   });
+
+  await models.User.findOneAndUpdate(
+    { username: username1 },
+    {
+      $push: {
+        outgoingFriendRequests: doc._id,
+      },
+    }
+  );
+
+  await models.User.findOneAndUpdate(
+    { username: username2 },
+    {
+      $push: {
+        incomingFriendRequests: doc._id,
+      },
+    }
+  );
 
   return doc;
 }

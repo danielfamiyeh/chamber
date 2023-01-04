@@ -20,11 +20,16 @@ export async function rejectFriendRequest(
 
   if (
     !(requested?.incomingFriendRequests as unknown as FriendRequest[]).find(
-      ({ from }) => from === username1
+      ({ from }) => from.toString() === requester._id.toString()
     )
   ) {
     throw new Error("Friend request doesn't exist");
   }
+
+  await models.FriendRequest.deleteMany({
+    from: requester._id,
+    to: requested._id,
+  });
 
   await models.User.findOneAndUpdate(
     { username: username1 },
@@ -32,7 +37,7 @@ export async function rejectFriendRequest(
       $set: {
         outgoingFriendRequests: (
           requester.outgoingFriendRequests as unknown as FriendRequest[]
-        ).filter(({ to }) => to !== username2),
+        ).filter(({ to }) => to.toString() !== requested._id.toString()),
       },
     }
   );
@@ -43,7 +48,7 @@ export async function rejectFriendRequest(
       $set: {
         incomingFriendRequests: (
           requested.incomingFriendRequests as unknown as FriendRequest[]
-        ).filter(({ to }) => to !== username1),
+        ).filter(({ from }) => from.toString() !== requester._id.toString()),
       },
     }
   );
