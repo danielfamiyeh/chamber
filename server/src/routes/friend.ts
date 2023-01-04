@@ -6,7 +6,10 @@ import {
   rejectFriendRequest,
 } from '../controllers/friend';
 
+const friendRequestRouter = Router()
+  .post('/', acceptFriendRequest)
+  .delete('/', rejectFriendRequest);
+
 export const friendRouter = Router()
-  .put('/request', addFriend)
-  .post('/request', acceptFriendRequest)
-  .delete('/request', rejectFriendRequest);
+  .put('/', addFriend)
+  .use('/request', friendRequestRouter);
