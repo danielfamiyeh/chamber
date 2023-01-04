@@ -14,6 +14,14 @@ export class FriendService {
       throw new Error(`${requestedUsername} is already your friend`);
     }
 
+    if (
+      requester.outgoingFriendRequests.find(
+        ({ to }) => to === requestedUsername
+      )
+    ) {
+      throw new Error(`Already sent a request to ${requestedUsername}`);
+    }
+
     const friendRequest = {
       ...FriendRequestSchema.model,
       from: requesterUsername,
