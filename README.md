@@ -14,8 +14,9 @@
 
 #### Server
 
-- Model-View-Controller design pattern (with the RN application forming the View)
-- Controller methods contained within services, data persisted using in-memory stores so that in be accessed across services
+- Model-View-Controller design pattern
+- Controller methods contained within service classes
+- Data persisted using in-memory data stores
 
 | Service       | Description                                                                                                                                              |
 | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
