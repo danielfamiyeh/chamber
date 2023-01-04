@@ -1,15 +1,12 @@
-import { Chat, ChatMap, Message } from '../../../types';
 import { assertExists } from '../../utils/assert';
-import { users } from '../../store';
+import { Chat, Message } from '../../../types';
 import { ChatSchema } from '../../models/chat';
 import { MessageSchema } from '../../models';
+import { chats, users } from '../../store';
 import { clients } from '../../store';
 
 export class ChatService {
-  static chats: ChatMap = {};
-
   static createChat(username1: string, username2: string): Chat {
-    const { chats } = this;
     const [user1, user2] = [users[username1], users[username2]];
 
     assertExists({ user1 }) && assertExists({ user2 });
@@ -34,7 +31,6 @@ export class ChatService {
     senderName: string,
     content: string
   ): Message {
-    const { chats } = this;
     const [sender, chat] = [users[senderName], chats[chatId]];
 
     assertExists({ sender }) && assertExists({ chat });
@@ -62,7 +58,6 @@ export class ChatService {
   }
 
   static getMessages(chatId: string, startIdx = 0, endIdx = 20): Message[] {
-    const { chats } = this;
     return (chats[chatId]?.messages ?? []).slice(startIdx, endIdx);
   }
 }
