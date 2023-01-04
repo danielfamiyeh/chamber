@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request } from 'express';
 
 export type LogLevel = 'info' | 'warning' | 'error';
 
@@ -14,6 +14,8 @@ export type Registry = Record<ServiceName, ServiceMap>;
 
 export interface GetServiceRequest extends Request {
   params: {
-    service: string;
+    service: ServiceName;
   };
 }
+
+export type PutServiceRequest = GetServiceRequest;

@@ -1,9 +1,15 @@
-import { serviceMap, loadBalancer } from './constants';
-import { Registry, ServiceName } from '../../types';
+import { ServiceMap, ServiceName } from '../../types';
+
 import { log } from './logger';
 
 export class ServiceRegistry {
-  static services: Registry = new Proxy(serviceMap, loadBalancer);
+  private static services: Record<ServiceName, ServiceMap> = {
+    api: {},
+    chat: {},
+    friend: {},
+    notify: {},
+    user: {},
+  };
 
   static key(serviceName: string, ip: string, port: number) {
     return `${serviceName}-${ip}-${port}`;
@@ -14,11 +20,16 @@ export class ServiceRegistry {
     const key = ServiceRegistry.key(serviceName, ip, port);
     const now = Date.now();
 
-    if (services[key]) {
+    if (services && services[key]) {
       services[key].lastHeartbeat = now;
       log('info', `${key} service heartbeat`);
     } else {
-      services[key] = { ip, port, createdAt: now, lastHeartbeat: now };
+      ServiceRegistry.services[serviceName][key] = {
+        ip,
+        port,
+        createdAt: now,
+        lastHeartbeat: now,
+      };
       log('info', `${key} service added }`);
     }
 
@@ -30,5 +41,17 @@ export class ServiceRegistry {
     const key = ServiceRegistry.key(serviceName, ip, port);
 
     delete services[key];
+  }
+
+  static getService(serviceName: ServiceName) {
+    if (!(serviceName && ServiceRegistry.services[serviceName])) {
+      throw new Error(`Service ${serviceName} does not exists`);
+    }
+
+    const services = Object.entries(ServiceRegistry.services[serviceName]);
+    const serviceIdx = Math.floor(Math.random() * services.length);
+    const [key] = services[serviceIdx];
+
+    return key;
   }
 }
