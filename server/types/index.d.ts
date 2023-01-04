@@ -10,7 +10,8 @@ export type Message = {
 
 export type FriendRequest = {
   id: string;
-  username: string;
+  to: string;
+  from: string;
   createdAt: Date;
 };
 

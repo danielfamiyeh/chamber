@@ -4,7 +4,7 @@ import cors from 'cors';
 import express from 'express';
 import bodyParser from 'body-parser';
 
-import { userStore } from './store';
+import { users } from './store';
 import { apiRouter } from './routes';
 import { log } from './utils/logger';
 import { UserService } from './services/user/UserService';
@@ -18,7 +18,9 @@ UserService.createUser('user2');
 
 FriendService.addFriend('user1', 'user2');
 
-console.log(userStore);
+FriendService.acceptRequest('user1', 'user2');
+
+console.log(users.user2);
 // ChatService.sendMessage(
 //   ChatService.createChat('user1', 'user2').id,
 //   'user1',

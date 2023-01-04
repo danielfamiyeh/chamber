@@ -1,5 +1,5 @@
 import { UserSchema } from '../../models';
-import { userStore as users } from '../../store';
+import { users } from '../../store';
 
 export class UserService {
   static createUser(username: string) {

@@ -1,7 +1,7 @@
 import { FriendRequestSchema } from '../../models/request';
-import { clientStore as clients } from '../../store';
 import { assertExists } from '../../utils/assert';
-import { userStore as users } from '../../store';
+import { clients } from '../../store';
+import { users } from '../../store';
 
 export class FriendService {
   static addFriend(requesterUsername: string, requestedUsername: string) {
@@ -14,20 +14,52 @@ export class FriendService {
       throw new Error(`${requestedUsername} is already your friend`);
     }
 
-    requester.outgoingFriendRequests.push({
+    const friendRequest = {
       ...FriendRequestSchema.model,
-      username: requestedUsername,
-    });
-
-    const outgoingRequest = {
-      ...FriendRequestSchema.model,
-      username: requestedUsername,
+      from: requesterUsername,
+      to: requestedUsername,
     };
 
-    requestedUser.incomingFriendRequests.push(outgoingRequest);
+    requester.outgoingFriendRequests.push(friendRequest);
+    requestedUser.incomingFriendRequests.push(friendRequest);
 
-    clients[requestedUsername]?.res?.write(
-      JSON.stringify({ friendRequest: outgoingRequest })
-    );
+    clients[requestedUsername]?.res?.write(JSON.stringify({ friendRequest }));
   }
+
+  static acceptRequest(requesterUsername: string, requestedUsername: string) {
+    const requester = users[requesterUsername];
+    const requestedUser = users[requestedUsername];
+
+    assertExists({ requester }) && assertExists({ requestedUser });
+
+    if (
+      !requestedUser?.incomingFriendRequests.find(
+        ({ from }) => from === requesterUsername
+      )
+    ) {
+      throw new Error("Friend request doesn't exist");
+    }
+
+    // Add friends in each user's list
+    requester.friends.push(requestedUsername);
+    requestedUser.friends.push(requesterUsername);
+
+    // Remove requests
+    requester.outgoingFriendRequests.splice(
+      requester.outgoingFriendRequests.findIndex(
+        ({ to }) => to === requestedUsername
+      ),
+      1
+    );
+    requestedUser.incomingFriendRequests.splice(
+      requestedUser.incomingFriendRequests.findIndex(
+        ({ from }) => from === requesterUsername
+      ),
+      1
+    );
+
+    // Notify requester and requested
+  }
+
+  static rejectRequest(requesterUsername: string, requestedUsername: string) {}
 }
