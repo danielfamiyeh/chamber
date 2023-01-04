@@ -3,8 +3,8 @@ import { Request } from 'express';
 export type LogLevel = 'info' | 'warning' | 'error';
 
 export type ServiceObj = {
-  ip: string;
   port: number;
+  hostname: string;
   createdAt: number;
   lastHeartbeat: number;
 };
@@ -19,3 +19,5 @@ export interface GetServiceRequest extends Request {
 }
 
 export type PutServiceRequest = GetServiceRequest;
+
+export type DeleteServiceRequest = GetServiceRequest;

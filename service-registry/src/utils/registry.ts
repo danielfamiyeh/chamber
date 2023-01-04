@@ -1,5 +1,4 @@
 import { ServiceMap, ServiceName } from '../../types';
-
 import { log } from './logger';
 
 export class ServiceRegistry {
@@ -15,9 +14,9 @@ export class ServiceRegistry {
     return `${serviceName}@${ip}:${port}`;
   }
 
-  static register(serviceName: ServiceName, ip: string, port: number) {
+  static register(serviceName: ServiceName, hostname: string, port: number) {
     const services = ServiceRegistry.services[serviceName];
-    const key = ServiceRegistry.key(serviceName, ip, port);
+    const key = ServiceRegistry.key(serviceName, hostname, port);
     const now = Date.now();
 
     if (services && services[key]) {
@@ -25,7 +24,7 @@ export class ServiceRegistry {
       log('info', `${key} heartbeat`);
     } else {
       ServiceRegistry.services[serviceName][key] = {
-        ip,
+        hostname,
         port,
         createdAt: now,
         lastHeartbeat: now,
@@ -36,11 +35,13 @@ export class ServiceRegistry {
     return key;
   }
 
-  static unregister(serviceName: ServiceName, ip: string, port: number) {
+  static unregister(serviceName: ServiceName, hostname: string, port: number) {
     const services = ServiceRegistry.services[serviceName];
-    const key = ServiceRegistry.key(serviceName, ip, port);
+    const key = ServiceRegistry.key(serviceName, hostname, port);
 
     delete services[key];
+
+    return key;
   }
 
   static getService(serviceName: ServiceName) {

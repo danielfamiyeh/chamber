@@ -1,6 +1,10 @@
 import { Router } from 'express';
 
-import { GetServiceRequest, PutServiceRequest } from '../types';
+import {
+  DeleteServiceRequest,
+  GetServiceRequest,
+  PutServiceRequest,
+} from '../types';
 import { ServiceRegistry } from './utils/registry';
 import { trycatch } from './utils/trycatch';
 
@@ -25,4 +29,12 @@ export const router = Router()
       });
     })
   )
-  .delete('/:service', (req, res) => trycatch(res, () => {}));
+  .delete('/:service', (req: DeleteServiceRequest, res) =>
+    trycatch(res, () => {
+      const { service } = req.params;
+      const [hostname, port] = req.headers.host.split(':');
+
+      const key = ServiceRegistry.unregister(service, hostname, Number(port));
+      return res.json({ service: key });
+    })
+  );
