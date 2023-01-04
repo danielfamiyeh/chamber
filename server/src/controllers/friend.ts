@@ -21,7 +21,23 @@ export const acceptFriendRequest = async (
 ) => {
   try {
     const { username } = await getCurrentUser(req, res);
-    const { request } = req.body;
+    const { username: requestedUsername } = req.body;
+
+    FriendService.acceptRequest(username, requestedUsername);
+  } catch (error) {
+    return res.json({ error: error.message });
+  }
+};
+
+export const rejectFriendRequest = async (
+  req: AcceptFriendRequest,
+  res: Response
+) => {
+  try {
+    const { username } = await getCurrentUser(req, res);
+    const { username: requestedUsername } = req.body;
+
+    FriendService.rejectRequest(username, requestedUsername);
   } catch (error) {
     return res.json({ error: error.message });
   }

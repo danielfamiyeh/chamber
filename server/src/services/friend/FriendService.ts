@@ -30,4 +30,8 @@ export class FriendService {
       JSON.stringify({ friendRequest: outgoingRequest })
     );
   }
+
+  static acceptRequest(requesterUsername: string, requestedUsername: string) {}
+
+  static rejectRequest(requesterUsername: string, requestedUsername: string) {}
 }
