@@ -12,7 +12,7 @@ export class ServiceRegistry {
   };
 
   static key(serviceName: string, ip: string, port: number) {
-    return `${serviceName}-${ip}-${port}`;
+    return `${serviceName}@${ip}:${port}`;
   }
 
   static register(serviceName: ServiceName, ip: string, port: number) {
@@ -22,7 +22,7 @@ export class ServiceRegistry {
 
     if (services && services[key]) {
       services[key].lastHeartbeat = now;
-      log('info', `${key} service heartbeat`);
+      log('info', `${key} heartbeat`);
     } else {
       ServiceRegistry.services[serviceName][key] = {
         ip,
@@ -30,7 +30,7 @@ export class ServiceRegistry {
         createdAt: now,
         lastHeartbeat: now,
       };
-      log('info', `${key} service added }`);
+      log('info', `${key} added to registry`);
     }
 
     return key;
@@ -49,6 +49,9 @@ export class ServiceRegistry {
     }
 
     const services = Object.entries(ServiceRegistry.services[serviceName]);
+    if (!services.length) {
+      throw new Error(`No ${serviceName} services available`);
+    }
     const serviceIdx = Math.floor(Math.random() * services.length);
     const [key] = services[serviceIdx];
 
