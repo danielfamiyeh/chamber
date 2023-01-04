@@ -1,12 +1,14 @@
 # RN Social ![example workflow](https://github.com/danielfamiyeh/rn-social/actions/workflows/node.js.yml/badge.svg)
 
-## Cross-platform social network using Express and React Native
+<i>Cross-platform social network using Express and React Native</i>
 
 ### Core Features
 
 - Friends
 - Chats
 - User Feed
+
+### Architecture
 
 <!-- #### Client -->
 
