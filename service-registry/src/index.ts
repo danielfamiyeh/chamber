@@ -4,15 +4,15 @@ import cors from 'cors';
 import express from 'express';
 import bodyParser from 'body-parser';
 
-import { apiRouter } from './routes';
 import { log } from './utils/logger';
+import { router } from './routes';
 
-const PORT = Number(process.env.PORT ?? 3000);
+const PORT = Number(process.env.PORT);
 
 export default express()
   .use(cors())
   .use(bodyParser.json())
-  .use('/api', apiRouter)
+  .use('/api', router)
   .listen(PORT, () =>
-    log('info', `Messenger Ultra server listening on port: ${PORT}`)
+    log('info', `Chamber (Service Registry) listening on port: ${PORT}`)
   );
