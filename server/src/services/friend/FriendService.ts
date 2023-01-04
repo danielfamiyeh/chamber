@@ -61,5 +61,32 @@ export class FriendService {
     // Notify requester and requested
   }
 
-  static rejectRequest(requesterUsername: string, requestedUsername: string) {}
+  static rejectRequest(requesterUsername: string, requestedUsername: string) {
+    const requester = users[requesterUsername];
+    const requestedUser = users[requestedUsername];
+
+    assertExists({ requester }) && assertExists({ requestedUser });
+
+    if (
+      !requestedUser?.incomingFriendRequests.find(
+        ({ from }) => from === requesterUsername
+      )
+    ) {
+      throw new Error("Friend request doesn't exist");
+    }
+
+    // Remove requests
+    requester.outgoingFriendRequests.splice(
+      requester.outgoingFriendRequests.findIndex(
+        ({ to }) => to === requestedUsername
+      ),
+      1
+    );
+    requestedUser.incomingFriendRequests.splice(
+      requestedUser.incomingFriendRequests.findIndex(
+        ({ from }) => from === requesterUsername
+      ),
+      1
+    );
+  }
 }
