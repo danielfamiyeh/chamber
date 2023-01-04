@@ -1,11 +1,9 @@
-import { assertExists } from '../../utils/assert';
 import { Chat, ChatMap, Message } from '../../../types';
+import { assertExists } from '../../utils/assert';
+import { userStore as users } from '../../store';
 import { ChatSchema } from '../../models/chat';
 import { MessageSchema } from '../../models';
-import { UserService } from '../user/UserService';
-import { clientStore } from '../../store/client';
-
-const { users } = UserService;
+import { clientStore } from '../../store';
 
 export class ChatService {
   static chats: ChatMap = {};

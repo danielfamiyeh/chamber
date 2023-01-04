@@ -1,4 +1,4 @@
-import { Request } from 'express';
+import { Request, Response } from 'express';
 
 export type Message = {
   sender: string;
@@ -15,12 +15,12 @@ export type FriendRequest = {
 };
 
 export type User = {
-  incomingFriendRequests: FriendRequest[];
-  outgoingFriendRequests: FriendRequest[];
+  id: string;
+  username: string;
   chatIds: string[];
   friends: string[];
-  username: string;
-  id: string;
+  incomingFriendRequests: FriendRequest[];
+  outgoingFriendRequests: FriendRequest[];
 };
 
 export type Chat = {
@@ -74,3 +74,19 @@ export type GetUserRequest = {
     username: string;
   };
 };
+
+export interface AddFriendRequest extends Request {
+  body: {
+    username: string;
+  };
+}
+
+export interface AcceptFriendRequest extends Request {
+  request: FriendRequest;
+}
+
+export type RejectFriendRequest = AcceptFriendRequest;
+
+export type RequestMap = Record<string, FriendRequest>;
+
+export type ClientMap = Record<string, { req: Request; res: Response }>;

@@ -1,10 +1,9 @@
 import { Response } from 'express';
 
 import { createToken } from '../utils/auth';
+import { userStore as users } from '../store';
 import { UserService } from '../services/user/UserService';
 import { CreateUserRequest, GetUserRequest } from '../../types';
-
-const { users } = UserService;
 
 export const createUser = (req: CreateUserRequest, res: Response) => {
   const { username } = req.body;

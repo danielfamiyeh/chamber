@@ -1,11 +1,10 @@
 import { Response } from 'express';
 
-import { CreateSSERequest, ListenSSERequest } from '../../types';
 import { ChatService } from '../services/chat/ChatService';
-import { UserService } from '../services/user/UserService';
-import { clientStore } from '../store/client';
+import { ListenSSERequest } from '../../types';
+import { userStore as users } from '../store';
+import { clientStore } from '../store';
 
-const { users } = UserService;
 const { chats } = ChatService;
 
 export const listen = async (req: ListenSSERequest, res: Response) => {
