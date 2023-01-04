@@ -1,14 +1,9 @@
 import { Response } from 'express';
 
-import { createToken, getCurrentUser } from '../utils/auth';
+import { createToken } from '../utils/auth';
+import { userStore as users } from '../store';
 import { UserService } from '../services/user/UserService';
-import {
-  AddFriendRequest,
-  CreateUserRequest,
-  GetUserRequest,
-} from '../../types';
-
-const { users } = UserService;
+import { CreateUserRequest, GetUserRequest } from '../../types';
 
 export const createUser = (req: CreateUserRequest, res: Response) => {
   const { username } = req.body;
@@ -36,17 +31,6 @@ export const getUser = (req: GetUserRequest, res: Response) => {
           ? users[username]
           : Object.values(users).find((user) => user.id === userId)) ?? null,
     });
-  } catch (error) {
-    return res.json({ error: error.message });
-  }
-};
-
-export const addFriend = async (req: AddFriendRequest, res: Response) => {
-  try {
-    const { username } = await getCurrentUser(req, res);
-    UserService.addFriend(username, req.body.username);
-
-    return res.json({ success: true });
   } catch (error) {
     return res.json({ error: error.message });
   }
