@@ -2,7 +2,6 @@ import { model, Schema } from 'mongoose';
 
 const FriendRequestSchema = new Schema(
   {
-    _id: Schema.Types.ObjectId,
     from: {
       type: Schema.Types.ObjectId,
       required: true,

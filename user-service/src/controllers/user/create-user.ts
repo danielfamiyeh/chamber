@@ -5,12 +5,9 @@ export async function createUser(username: string) {
   const usernameTaken = await db.collection('users').findOne({ username });
   if (usernameTaken) throw new Error('Username taken');
 
-  const user = new models.User({
+  const doc = await models.User.create({
     username,
   });
 
-  await user.validate();
-  await db.collection('users').insertOne(user);
-
-  return user;
+  return doc;
 }

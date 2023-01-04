@@ -2,7 +2,6 @@ import { model, Schema } from 'mongoose';
 
 const MessageSchema = new Schema(
   {
-    _id: Schema.Types.ObjectId,
     content: {
       type: {
         type: String,
