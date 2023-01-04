@@ -4,6 +4,10 @@ import { SchemaField } from '../../types';
 export class Schema<T> {
   constructor(private _fields: SchemaField[] = []) {}
 
+  omit(...keys: string[]) {
+    return new Schema(this._fields.filter(({ key }) => !keys.includes(key)));
+  }
+
   get model(): T {
     return Object.assign(
       {},
