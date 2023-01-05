@@ -4,32 +4,37 @@ export type LogLevel = 'info' | 'warning' | 'error';
 
 export type FriendRequest = {
   _id: string;
-  to: string;
-  from: string;
+  to: User | string;
+  from: User | string;
   createdAt: Date;
 };
 
 export type Chat = {
-  recipients: User[];
-  messages: Message[];
+  recipients: (User | string)[];
+  messages: (Message | string)[];
   createdAt: Date;
   updatedAt: Date;
 };
 
 export type User = {
-  _id: string;
+  _id: string | User;
   username: string;
-  chats: Chat[];
-  friends: User[];
-  incomingFriendRequests: FriendRequest[];
-  outgoingFriendRequests: FriendRequest[];
+  chats: (Chat | string)[];
+  friends: (User | string)[];
+  incomingFriendRequests: (FriendRequest | string)[];
+  outgoingFriendRequests: (FriendRequest | string)[];
 };
 
+export type MessageContentType = 'image' | 'text';
+
 export type Message = {
-  sender: string;
+  sender: User | string;
   createdAt: Date;
-  content: string;
-  chat_Id: string;
+  content: {
+    type: MessageContentType;
+    value: string;
+  };
+  chatId: string;
   _id: string;
 };
 
