@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 import cors from 'cors';
+import axios from 'axios';
 import express from 'express';
 import bodyParser from 'body-parser';
 
@@ -12,8 +13,6 @@ export default express()
   .use(bodyParser.json())
   .use('/api', router)
   .listen(process.env.PORT, () => {
-    log(
-      'info',
-      `Chamber (User Service) listening on port: ${process.env.PORT}`
-    );
+    log('info', `Listening on port: ${process.env.PORT}`);
+    axios.put(`${process.env.REGISTRY_URL}/${process.env.SERVICE_NAME}`);
   });
