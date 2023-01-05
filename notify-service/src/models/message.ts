@@ -2,6 +2,10 @@ import { model, Schema } from 'mongoose';
 
 const MessageSchema = new Schema(
   {
+    chat: {
+      type: Schema.Types.ObjectId,
+      ref: 'Chat',
+    },
     content: {
       type: {
         type: String,

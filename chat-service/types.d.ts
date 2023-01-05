@@ -65,7 +65,7 @@ export interface GetMessageRequest extends Request {
 export interface CreateChatRequest extends Request {
   body: {
     userId: string;
-    recipients: string;
+    recipients: string[];
     initialMessage?: string;
   };
 }
