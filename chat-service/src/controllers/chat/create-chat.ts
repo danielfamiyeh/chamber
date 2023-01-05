@@ -28,10 +28,13 @@ export const createChat = async (
 
   const chat = await models.Chat.create({
     recipients: [...userId, ...recipients],
+    createdBy: userId,
+    admins: [userId],
   });
 
   if (initialMessage) {
     const _initialMessage = await models.Message.create({
+      user: userId,
       chat: chat._id,
       content: {
         type: 'text',

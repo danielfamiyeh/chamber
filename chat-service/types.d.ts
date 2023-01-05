@@ -47,8 +47,8 @@ export type SchemaField = {
 
 export interface SendMessageRequest extends Request {
   body: {
+    contentValue: string;
     contentType: string;
-    content: string;
     userId: string;
     chatId: string;
   };
