@@ -14,10 +14,7 @@ const UserSchema = new Schema(
       },
     ],
 
-    friends: {
-      type: Array<Schema.Types.ObjectId>,
-      defaultValue: [],
-    },
+    friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 
     incomingFriendRequests: [
       { type: Schema.Types.ObjectId, ref: 'FriendRequest' },
