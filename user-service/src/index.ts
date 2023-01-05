@@ -1,7 +1,6 @@
 require('dotenv').config();
 
 import cors from 'cors';
-import axios from 'axios';
 import express from 'express';
 import bodyParser from 'body-parser';
 
@@ -17,5 +16,4 @@ export default express()
       'info',
       `Chamber (User Service) listening on port: ${process.env.PORT}`
     );
-    axios.put(`${process.env.REGISTRY_URL}/user`);
   });
