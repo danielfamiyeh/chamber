@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request } from 'express';
 
 export type LogLevel = 'info' | 'warning' | 'error';
 
@@ -45,9 +45,34 @@ export type SchemaField = {
     | typeof Date;
 };
 
-export interface ListenSSERequest extends Request {
-  query: {
+export interface SendMessageRequest extends Request {
+  body: {
+    contentType: string;
+    content: string;
     userId: string;
+    chatId: string;
   };
 }
-export type ClientMap = Record<string, { req: Request; res: Response }>;
+
+export interface GetMessageRequest extends Request {
+  body: {
+    chatId: string;
+    start?: number;
+    end?: number;
+  };
+}
+
+export interface CreateChatRequest extends Request {
+  body: {
+    userId: string;
+    recipients: string;
+    initialMessage?: string;
+  };
+}
+
+export interface GetChatRequest extends Request {
+  body: {
+    userId: string;
+    chatId: string;
+  };
+}

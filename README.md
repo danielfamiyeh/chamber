@@ -4,4 +4,4 @@
 
 ## Architecture
 
-![Architecture](https://drive.google.com/uc?export=view&id=1OQssyBDGjJvIER9_-fHpMZFBHnE3l1S0)
+![Architecture](./architecture.png)
