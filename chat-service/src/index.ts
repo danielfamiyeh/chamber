@@ -8,6 +8,8 @@ import bodyParser from 'body-parser';
 import { log } from './utils/logger';
 import { router } from './routes';
 
+import './utils/db';
+
 export default express()
   .use(cors())
   .use(bodyParser.json())
