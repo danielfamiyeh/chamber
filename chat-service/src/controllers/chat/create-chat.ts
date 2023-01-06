@@ -1,7 +1,7 @@
 import { Response } from 'express';
+import { models } from '@danielfamiyeh/chamber-common/src';
 
-import { models } from '../../models';
-import { CreateChatRequest, Message } from '../../../types';
+import { CreateChatRequest } from '../../../types';
 
 /**
  * Create a chat
