@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@danielfamiyeh/chamber-common": "^1.0.2",
+    "@danielfamiyeh/chamber-common": "^1.0.3",
     "assert": "^2.0.0",
     "body-parser": "^1.20.1",
     "cors": "^2.8.5",
