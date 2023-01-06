@@ -1,5 +1,5 @@
-import { FriendRequest } from '../../../types';
-import { models } from '../../models';
+import { FriendRequest } from '@danielfamiyeh/chamber-common/types';
+import { models } from '@danielfamiyeh/chamber-common/src';;
 
 export async function acceptFriendRequest(
   username1: string,

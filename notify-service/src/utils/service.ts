@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
-import { ClientMap, User } from '../../types';
+import { User } from '@danielfamiyeh/chamber-common/types';
+
+import { ClientMap } from '../../types';
 
 export class NotifyService {
   static clients: ClientMap = {};

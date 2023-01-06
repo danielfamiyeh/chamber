@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongoose';
-import { FriendRequest } from '../../../types';
-import { models } from '../../models';
+import { FriendRequest } from '@danielfamiyeh/chamber-common/types';
+import { models } from '@danielfamiyeh/chamber-common/src';
 import { db } from '../../utils/db';
 
 export async function sendFriendRequest(username1: string, username2: string) {

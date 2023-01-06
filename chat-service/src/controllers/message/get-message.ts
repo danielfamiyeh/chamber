@@ -1,6 +1,6 @@
 import { Response } from 'express';
+import { models } from '@danielfamiyeh/chamber-common/src';
 
-import { models } from '../../models';
 import { GetMessageRequest } from '../../../types';
 
 export const getMessage = async (req: GetMessageRequest, res: Response) => {

@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { trycatch } from '@danielfamiyeh/chamber-common/src';
 
 import {
   DeleteServiceRequest,
@@ -6,7 +7,6 @@ import {
   PutServiceRequest,
 } from '../types';
 import { ServiceRegistry } from './utils/registry';
-import { trycatch } from './utils/trycatch';
 
 export const router = Router()
   .get('/:service', (req: GetServiceRequest, res) =>

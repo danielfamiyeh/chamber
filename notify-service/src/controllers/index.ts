@@ -1,8 +1,9 @@
 import { Response } from 'express';
+import { User } from '@danielfamiyeh/chamber-common/types';
+import { models } from '@danielfamiyeh/chamber-common/src';
 
-import { ListenSSERequest, User } from '../../types';
 import { NotifyService } from '../utils/service';
-import { models } from '../models';
+import { ListenSSERequest } from '../../types';
 
 export const subscribe = async (req: ListenSSERequest, res: Response) => {
   const { userId } = req.query;

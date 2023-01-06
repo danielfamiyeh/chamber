@@ -1,8 +1,7 @@
-import { models } from '../../models';
-import { db } from '../../utils/db';
+import { models } from '@danielfamiyeh/chamber-common/src';
 
 export async function createUser(username: string) {
-  const usernameTaken = await db.collection('users').findOne({ username });
+  const usernameTaken = await models.User.findOne({ username });
   if (usernameTaken) throw new Error('Username taken');
 
   const doc = await models.User.create({

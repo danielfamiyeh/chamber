@@ -1,8 +1,2 @@
-import { LogLevel } from '../../types';
-
-export const log = (level: LogLevel, message: string) =>
-  console.log(
-    `[${
-      process.env.SERVICE_NAME
-    } (server) - ${level} - ${new Date().toString()}]: ${message}`
-  );
+import { log as commonLog } from '@danielfamiyeh/chamber-common/src/utils';
+export const log = commonLog(process.env.SERVICE_NAME);
