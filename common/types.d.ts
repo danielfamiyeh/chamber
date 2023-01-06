@@ -15,7 +15,7 @@ export type Chat = {
 };
 
 export type User = {
-  _id: string | User;
+  _id: string;
   username: string;
   chats: (Chat | string)[];
   friends: (User | string)[];
