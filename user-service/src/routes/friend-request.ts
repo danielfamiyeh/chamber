@@ -3,7 +3,7 @@ import { Router } from 'express';
 import { acceptFriendRequest } from '../controllers/friend-request/accept-request';
 import { rejectFriendRequest } from '../controllers/friend-request/reject-request';
 import { sendFriendRequest } from '../controllers/friend-request/send-request';
-import { trycatchAsync } from '../utils/trycatch';
+import { trycatchAsync } from '@danielfamiyeh/chamber-common/src/utils';
 
 export const friendRequestRouter = Router()
   .put('/', (req, res) =>

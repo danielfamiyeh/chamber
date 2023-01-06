@@ -1,6 +1,5 @@
 import { Router } from 'express';
 
-import { db } from '../utils/db';
 import { userRouter } from './user';
 import { friendRequestRouter } from './friend-request';
 
