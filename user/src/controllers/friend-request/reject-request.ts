@@ -1,7 +1,7 @@
-import { FriendRequest } from '@danielfamiyeh/chamber-common/types';
 import { models } from '@danielfamiyeh/chamber-common';
+import { FriendRequest } from '@danielfamiyeh/chamber-common';
 
-export async function acceptFriendRequest(
+export async function rejectFriendRequest(
   username1: string,
   username2: string
 ) {
@@ -34,9 +34,6 @@ export async function acceptFriendRequest(
   await models.User.findOneAndUpdate(
     { username: username1 },
     {
-      $push: {
-        friends: requester._id,
-      },
       $set: {
         outgoingFriendRequests: (
           requester.outgoingFriendRequests as unknown as FriendRequest[]
@@ -48,9 +45,6 @@ export async function acceptFriendRequest(
   await models.User.findOneAndUpdate(
     { username: username2 },
     {
-      $push: {
-        friends: requested._id,
-      },
       $set: {
         incomingFriendRequests: (
           requested.incomingFriendRequests as unknown as FriendRequest[]
