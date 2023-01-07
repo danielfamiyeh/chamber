@@ -1,3 +1,5 @@
+export { log, models, trycatch, trycatchAsync } from './src';
+
 export type LogLevel = 'info' | 'warning' | 'error';
 
 export type FriendRequest = {
