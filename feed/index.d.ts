@@ -2,15 +2,21 @@ import { Request } from 'express';
 import { Post } from '@danielfamiyeh/chamber-common';
 
 export interface GetPostRequest extends Request {
-  query: {
+  body: {
     postId: string;
+    userId: string;
   };
 }
 
 export interface CreatePostRequest extends Request {
-  body: Omit<Post, '_id'>;
+  body: { post: Omit<Post, '_id'>; userId: string };
 }
 
-export interface UpdatePostRequest extends Request {}
+export interface UpdatePostRequest extends Request {
+  body: {
+    post: Post;
+    userId: string;
+  };
+}
 
 export type DeletePostRequest = GetPostRequest;
