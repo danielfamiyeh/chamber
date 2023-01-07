@@ -37,3 +37,24 @@ export type Message = {
   chatId: string;
   _id: string;
 };
+
+export type RelatedCollection = 'post' | 'chat';
+
+export type ContentType = 'text' | 'image';
+
+export type Content<T> = {
+  relatedCollection: RelatedCollection;
+  relatedId: string | T;
+  type: ContentType;
+  value: string;
+  createdBy: string | User;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type Post = {
+  content: Content<Post>[];
+  createdBy: string | User;
+  createdAt: Date;
+  updatedAt: Date;
+};
