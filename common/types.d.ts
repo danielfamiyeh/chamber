@@ -43,6 +43,7 @@ export type RelatedCollection = 'post' | 'chat';
 export type ContentType = 'text' | 'image';
 
 export type Content<T> = {
+  _id: string;
   relatedCollection: RelatedCollection;
   relatedId: string | T;
   type: ContentType;
@@ -53,7 +54,8 @@ export type Content<T> = {
 };
 
 export type Post = {
-  content: Content<Post>[];
+  _id: string;
+  content: (string | Content<Post>)[];
   createdBy: string | User;
   createdAt: Date;
   updatedAt: Date;

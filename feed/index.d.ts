@@ -1,4 +1,5 @@
 import { Request } from 'express';
+import { Post } from '@danielfamiyeh/chamber-common';
 
 export interface GetPostRequest extends Request {
   query: {
@@ -6,8 +7,10 @@ export interface GetPostRequest extends Request {
   };
 }
 
-// export interface CreatePostRequest extends Request {
-//   body:
-// }
+export interface CreatePostRequest extends Request {
+  body: Omit<Post, '_id'>;
+}
+
+export interface UpdatePostRequest extends Request {}
 
 export type DeletePostRequest = GetPostRequest;
