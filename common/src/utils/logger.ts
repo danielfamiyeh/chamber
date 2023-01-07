@@ -1,4 +1,4 @@
-import { LogLevel } from '@danielfamiyeh/chamber-common/types';
+import { LogLevel } from '../../types';
 
 export const log =
   (serviceName: string) => (level: LogLevel, message: string) =>

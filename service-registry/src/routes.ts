@@ -22,6 +22,7 @@ export const router = Router()
     trycatch(res, () => {
       const { service } = req.params;
       const [hostname, port] = req.headers.host.split(':');
+      console.log('THE IP', req.ip);
       const key = ServiceRegistry.register(service, hostname, Number(port));
 
       return res.json({
