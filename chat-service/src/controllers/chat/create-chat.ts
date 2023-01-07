@@ -19,7 +19,11 @@ export const createChat = async (
   const creator = await models.User.findOne({ userId });
 
   recipients.forEach((recipientId) => {
-    if (!creator.friends.includes(recipientId)) {
+    if (
+      !creator.friends
+        .map((friendId) => friendId.toString())
+        .includes(recipientId)
+    ) {
       throw new Error(
         'Cannot create chat with someone you are not friends with'
       );
