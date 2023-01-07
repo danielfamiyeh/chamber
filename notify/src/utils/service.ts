@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { User } from '@danielfamiyeh/chamber-common/types';
+import { User } from '@danielfamiyeh/chamber-common';
 
 import { ClientMap } from '../../types';
 
