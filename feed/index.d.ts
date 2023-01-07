@@ -9,13 +9,17 @@ export interface GetPostRequest extends Request {
 }
 
 export interface CreatePostRequest extends Request {
-  body: { post: Omit<Post, '_id'>; userId: string };
+  body: {
+    post: Pick<Post, '_id' | 'content'>;
+    userId: string;
+  };
 }
 
 export interface UpdatePostRequest extends Request {
   body: {
-    post: Post;
+    postId: string;
     userId: string;
+    post: Partial<Post>;
   };
 }
 
