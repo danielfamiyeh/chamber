@@ -1,4 +1,4 @@
-import { models } from '@danielfamiyeh/chamber-common/src';
+import { models } from '@danielfamiyeh/chamber-common';
 import { FriendRequest } from '@danielfamiyeh/chamber-common/types';
 
 export async function rejectFriendRequest(

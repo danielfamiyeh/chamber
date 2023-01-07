@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { trycatch } from '@danielfamiyeh/chamber-common/src';
+import { trycatch } from '@danielfamiyeh/chamber-common';
 
 import {
   DeleteServiceRequest,

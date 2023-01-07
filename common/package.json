@@ -1,8 +1,9 @@
 {
   "name": "@danielfamiyeh/chamber-common",
-  "version": "1.0.4",
+  "version": "1.0.7",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "./types.d.ts",
   "scripts": {
     "test": "ts-mocha -p tsconfig.json tests/**/*.test.ts",
     "dev": "tsc-watch --onSuccess \"node dist/index.js\"",
