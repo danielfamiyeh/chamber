@@ -12,17 +12,16 @@ export const router = Router()
   .get('/:service', (req: GetServiceRequest, res) =>
     trycatch(res, () => {
       const { service } = req.params;
-      const _service = ServiceRegistry.getService(service);
+      const key = ServiceRegistry.getService(service);
 
-      if (!_service) throw new Error(`No ${service} services online`);
-      return res.json({ service: _service });
+      if (!key) throw new Error(`No ${service} services online`);
+      return res.json({ service: key });
     })
   )
   .put('/:service', (req: PutServiceRequest, res) =>
     trycatch(res, () => {
       const { service } = req.params;
       const [hostname, port] = req.headers.host.split(':');
-      console.log('THE IP', req.ip);
       const key = ServiceRegistry.register(service, hostname, Number(port));
 
       return res.json({
