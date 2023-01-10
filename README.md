@@ -1,6 +1,6 @@
 # Chamber
 
-<i>Scalable, cross-platform, mobile social network.</i>
+<i>Scalable, cross-platform, mobile social network</i>
 
 ## Architecture
 
