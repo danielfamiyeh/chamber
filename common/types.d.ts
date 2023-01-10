@@ -1,5 +1,4 @@
-export { log, trycatch, trycatchAsync, connectDb } from './src';
-export { models } from './src/models';
+export { models, log, trycatch, trycatchAsync, connectDb } from './src';
 
 export type LogLevel = 'info' | 'warning' | 'error';
 

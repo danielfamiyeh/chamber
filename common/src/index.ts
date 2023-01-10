@@ -1,2 +1,4 @@
-export { models } from './models';
-export { connectDb, log, trycatch, trycatchAsync } from './utils';
+import { models } from './models';
+import { connectDb, log, trycatch, trycatchAsync } from './utils';
+
+export { connectDb, log, trycatch, trycatchAsync, models };
