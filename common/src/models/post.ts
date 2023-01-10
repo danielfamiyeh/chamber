@@ -1,6 +1,7 @@
 import { model, Schema } from 'mongoose';
+import { Post as IPost } from '../../types';
 
-export const PostSchema = new Schema(
+export const PostSchema = new Schema<IPost>(
   {
     content: [{ type: Schema.Types.ObjectId, ref: 'Content' }],
     createdBy: {
@@ -12,4 +13,4 @@ export const PostSchema = new Schema(
   { timestamps: true }
 );
 
-export const Post = model('post', PostSchema);
+export const Post = model<IPost>('post', PostSchema);

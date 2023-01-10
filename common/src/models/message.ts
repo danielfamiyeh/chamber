@@ -1,8 +1,9 @@
 import { model, Schema } from 'mongoose';
+import { Message as IMessage } from '../../types';
 
-const MessageSchema = new Schema(
+const MessageSchema = new Schema<IMessage>(
   {
-    user: {
+    sender: {
       type: Schema.Types.ObjectId,
       ref: 'User',
     },
@@ -22,4 +23,4 @@ const MessageSchema = new Schema(
   { timestamps: true }
 );
 
-export const Message = model('Message', MessageSchema);
+export const Message = model<IMessage>('Message', MessageSchema);
