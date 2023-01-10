@@ -2,14 +2,25 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import AccountView from '../../../views/account';
 import FriendsView from '../../../views/friends';
 import MessageFlow from '../stack/flows/message';
-import AccountView from '../../../views/account';
+import FeedFlow from '../stack/flows/feed';
+
 import { scaleY } from '../../../utils/methods/scaleable-units';
 
 const Tab = createBottomTabNavigator();
 
 const screens = [
+  {
+    name: 'FeedFlow',
+    Component: FeedFlow,
+    iconName: 'home',
+    options: {
+      headerShown: false,
+      tabBarLabel: 'Feed',
+    },
+  },
   {
     name: 'MessageFlow',
     Component: MessageFlow,
