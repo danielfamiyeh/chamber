@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { createUser } from '../controllers/user/create-user';
 import { getUser } from '../controllers/user/get-user';
+import { createUser } from '../controllers/user/create-user';
 import { trycatchAsync } from '@danielfamiyeh/chamber-common';
 
 export const userRouter = Router()
