@@ -1,6 +1,7 @@
 import { model, Schema } from 'mongoose';
+import { FriendRequest as IFriendRequest } from '../../types';
 
-const FriendRequestSchema = new Schema(
+const FriendRequestSchema = new Schema<IFriendRequest>(
   {
     from: {
       type: Schema.Types.ObjectId,
@@ -17,4 +18,7 @@ const FriendRequestSchema = new Schema(
   { timestamps: true }
 );
 
-export const FriendRequest = model('FriendRequest', FriendRequestSchema);
+export const FriendRequest = model<IFriendRequest>(
+  'FriendRequest',
+  FriendRequestSchema
+);

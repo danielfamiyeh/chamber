@@ -1,6 +1,7 @@
 import { model, Schema } from 'mongoose';
+import { Content as IContent } from '../../types';
 
-export const ContentSchema = new Schema(
+export const ContentSchema = new Schema<IContent<any>>(
   {
     relatedCollection: {
       type: String,
@@ -29,4 +30,4 @@ export const ContentSchema = new Schema(
   { timestamps: true }
 );
 
-export const Content = model('content', ContentSchema);
+export const Content = model<IContent<any>>('content', ContentSchema);
