@@ -56,8 +56,8 @@ UserSchema.pre<IUser & { getUpdate: () => any }>(
   }
 );
 
-UserSchema.methods.validatePassword = async function (password: string) {
-  return await compare(password, this.password);
+UserSchema.methods.validatePassword = function (password: string) {
+  return compare(password, this.password);
 };
 
 export const User = model<IUser>('User', UserSchema);

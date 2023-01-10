@@ -1,6 +1,23 @@
 import { Response } from 'express';
-import { LoginRequest } from '../../types';
+import { models } from '@danielfamiyeh/chamber-common/dist/models';
 
-export const login = (req: LoginRequest, res: Response) => {
-  return res.json({});
+import { LoginRequest } from '../../types';
+import { createToken } from '../utils/methods';
+
+export const login = async (req: LoginRequest, res: Response) => {
+  const { username, password } = req.body;
+  const user = await models.User.findOne({ username });
+
+  if (!user) {
+    return res.json({ error: 'Incorrect username or password' });
+  }
+
+  const isValid = await user.validatePassword(password);
+
+  if (!isValid) {
+    return res.json({ error: 'Incorrect username or password' });
+  }
+
+  const session = { _id: user._id, token: createToken(user._id, user.email) };
+  return res.json(session);
 };
