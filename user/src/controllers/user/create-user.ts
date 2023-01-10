@@ -1,4 +1,4 @@
-import { models } from '@danielfamiyeh/chamber-common';
+import { models } from '@danielfamiyeh/chamber-common/dist/models';
 
 export async function createUser(username: string) {
   const usernameTaken = await models.User.findOne({ username });

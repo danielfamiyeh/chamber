@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import { models } from '@danielfamiyeh/chamber-common';
+import { models } from '@danielfamiyeh/chamber-common/dist/models';
 
 import { SendMessageRequest } from '../../../types';
 

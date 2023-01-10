@@ -1,5 +1,6 @@
 import { Response } from 'express';
-import { models, User } from '@danielfamiyeh/chamber-common';
+import { User } from '@danielfamiyeh/chamber-common';
+import { models } from '@danielfamiyeh/chamber-common/dist/models';
 
 import { NotifyService } from '../utils/service';
 import { ListenSSERequest } from '../../types';
