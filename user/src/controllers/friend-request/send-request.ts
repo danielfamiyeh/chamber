@@ -1,4 +1,5 @@
-import { models, FriendRequest } from '@danielfamiyeh/chamber-common';
+import { FriendRequest } from '@danielfamiyeh/chamber-common';
+import { models } from '@danielfamiyeh/chamber-common/dist/models';
 
 export async function sendFriendRequest(username1: string, username2: string) {
   const requester = await models.User.findOne({ username: username1 })
