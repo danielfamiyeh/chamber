@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
 
-export const verifyToken = (req: Request, res: Response) => {
+export const verify = (req: Request, res: Response) => {
   return res.json({});
 };

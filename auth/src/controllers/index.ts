@@ -1,3 +1,3 @@
 export { login } from './login';
 export { signUp } from './signup';
-export { verifyToken } from './verify-token';
+export { verify } from './verify-token';

@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { login, signUp, verifyToken } from '../controllers';
+import { login, signUp, verify } from '../controllers';
 
 export const router = Router()
-  .post('/login', login)
-  .post('/signUp', signUp)
-  .post('/verify-token', verifyToken);
+  .post('/verify', verify)
+  .post('/', login)
+  .put('/', signUp);
