@@ -7,6 +7,10 @@ export const testUser: Omit<User, 'validatePassword' | 'password'> = {
   incomingFriendRequests: [testFriendRequest],
   outgoingFriendRequests: [],
   friends: [testUser2],
+  createdAt: new Date(),
+  updatedAt: new Date(),
+  avatar:
+    'https://media.licdn.com/dms/image/D4D03AQHWNeTePP-x7A/profile-displayphoto-shrink_800_800/0/1647981019385?e=1678924800&v=beta&t=UFfiYwzr-i7X09-_5cCm4Hb6FjKNjPnppI0dqtTXOaU',
   chats: [],
 };
 

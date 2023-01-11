@@ -32,7 +32,7 @@ const screens = [
   },
 
   {
-    name: 'Friends',
+    name: 'FriendsFlow',
     Component: FriendsFlow,
     iconName: 'users',
     options: {
