@@ -11,7 +11,11 @@ const postStyles = StyleSheet.create({
   },
   metaContainer: {
     flexDirection: 'row',
-    marginBottom: scaleY(2),
+  },
+  divider: {
+    height: 1,
+    marginVertical: scaleY(6),
+    backgroundColor: 'lightgrey',
   },
   username: {
     fontWeight: 'bold',
@@ -34,5 +38,7 @@ const postStyles = StyleSheet.create({
   ctaRight: { flex: 0.5 },
   ctaButton: { alignSelf: 'center', borderWidth: 0 },
 });
+
+export const iconSize = 18;
 
 export default postStyles;

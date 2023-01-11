@@ -10,10 +10,12 @@ const chatListItemStyles = StyleSheet.create({
     paddingHorizontal: scaleX(16),
     paddingVertical: scaleY(12),
     maxHeight: scaleY(80),
+    borderRadius: 8,
   },
   left: {},
   right: {
     justifyContent: 'center',
+    overflow: 'hidden',
   },
   avatar: {
     borderWidth: 1,
@@ -29,6 +31,7 @@ const chatListItemStyles = StyleSheet.create({
   lastMessage: {},
   timeAgo: {
     color: 'grey',
+    marginTop: scaleY(4),
   },
   indicator: {},
 });
