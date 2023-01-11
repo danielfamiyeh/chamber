@@ -1,11 +1,11 @@
 import { Post } from '@danielfamiyeh/chamber-common';
 
-import { testContent } from './content';
+import { testTextContent, testImageContent } from './content';
 import { testUser } from './user';
 
 export const testPost: Post = {
   _id: 'post1',
-  content: [testContent],
+  content: [testTextContent, testImageContent],
   createdBy: testUser,
   createdAt: new Date(),
 };
