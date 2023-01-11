@@ -1,14 +1,13 @@
 import { StyleSheet } from 'react-native';
 import { scaleX, scaleY } from '../../../../../utils/methods/scaleable-units';
-import { PostProps, PostState } from './Post';
 
 const postStyles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     marginBottom: scaleY(4),
     borderRadius: scaleX(2),
-    paddingHorizontal: scaleX(8),
-    paddingVertical: scaleY(8),
+    paddingHorizontal: scaleX(16),
+    paddingVertical: scaleY(16),
   },
   metaContainer: {
     flexDirection: 'row',
@@ -28,26 +27,9 @@ const postStyles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: scaleY(12),
   },
-  ctaButton: {
-    flex: 0.5,
-    height: scaleY(24),
-    alignItems: 'center',
-    borderColor: 'lightgrey',
-    justifyContent: 'center',
-  },
+  ctaLeft: { flex: 0.5, borderRightWidth: 1, borderColor: 'lightgrey' },
+  ctaRight: { flex: 0.5 },
+  ctaButton: { alignSelf: 'center', borderWidth: 0 },
 });
-
-export const getComputedStyles = (props: PostProps, state: PostState) => {
-  const computedStyles = {
-    likeButton: {
-      opacity: state.isLikeButtonPressed ? 0.5 : 1,
-    },
-    commentButton: {
-      opacity: state.isCommentButtonPressed ? 0.5 : 1,
-    },
-  };
-
-  return computedStyles;
-};
 
 export default postStyles;

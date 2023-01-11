@@ -3,8 +3,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import AccountView from '../../../views/account';
-import FriendsView from '../../../views/friends';
 import MessageFlow from '../stack/flows/message';
+import FriendsFlow from '../stack/flows/friends';
 import FeedFlow from '../stack/flows/feed';
 
 import { scaleY } from '../../../utils/methods/scaleable-units';
@@ -31,7 +31,15 @@ const screens = [
     },
   },
 
-  { name: 'Friends', Component: FriendsView, iconName: 'users' },
+  {
+    name: 'Friends',
+    Component: FriendsFlow,
+    iconName: 'users',
+    options: {
+      headerShown: false,
+      tabBarLabel: 'Friends',
+    },
+  },
 
   {
     name: 'Account',
