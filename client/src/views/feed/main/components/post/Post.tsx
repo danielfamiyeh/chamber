@@ -1,12 +1,48 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
+import { Content, Post as IPost, User } from '@danielfamiyeh/chamber-common';
 
 import styles from './Post.styles';
+import { renderContent } from '../../../../../components/display/content/Content';
 
-const Post = (props: PostProps) => {
-  return <View style={styles.container} />;
+const dateFormatOptions = {
+  year: 'numeric',
+  month: 'numeric',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
 };
 
-interface PostProps {}
+const Post = (props: PostProps) => {
+  return (
+    <View style={styles.container}>
+      <View style={styles.metaContainer}>
+        <Text style={styles.username}>@{props.createdBy.username}</Text>
+
+        <Text style={styles.createdAt}>
+          {' '}
+          at{' '}
+          {new Intl.DateTimeFormat('en-GB', dateFormatOptions).format(
+            props.createdAt
+          )}
+        </Text>
+      </View>
+      <FlatList
+        ItemSeparatorComponent={() => <View style={styles.contentSeparator} />}
+        contentContainerStyle={styles.contentContainer}
+        renderItem={({ item: { type, value } }) => renderContent(type, value)}
+        data={props.content}
+      />
+    </View>
+  );
+};
+
+interface PostProps {
+  _id: string;
+  content: Content<IPost>[];
+  createdAt: Date;
+  createdBy: Pick<User, '_id' | 'username'>;
+}
 
 export default Post;
