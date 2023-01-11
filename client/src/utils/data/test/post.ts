@@ -5,7 +5,13 @@ import { testUser } from './user';
 
 export const testPost: Post = {
   _id: 'post1',
-  content: [testTextContent, testImageContent],
+  content: [
+    testTextContent,
+    testImageContent,
+    testTextContent,
+    testTextContent,
+    testTextContent,
+  ],
   createdBy: testUser,
   createdAt: new Date(),
 };

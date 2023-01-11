@@ -24,8 +24,11 @@ const postStyles = StyleSheet.create({
     height: scaleY(8),
   },
   ctaContainer: {
+    borderColor: 'lightgrey',
     flexDirection: 'row',
     marginTop: scaleY(12),
+    paddingTop: scaleY(8),
+    borderTopWidth: 1,
   },
   ctaLeft: { flex: 0.5, borderRightWidth: 1, borderColor: 'lightgrey' },
   ctaRight: { flex: 0.5 },
