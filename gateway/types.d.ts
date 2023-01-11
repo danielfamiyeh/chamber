@@ -2,8 +2,10 @@ import { Request } from 'express';
 
 export interface ProxyRequest extends Request {
   params: {
-    path: string;
-    data: string;
+    service: string;
     method: 'get' | 'put' | 'post' | 'delete';
+  };
+  query: {
+    subpath: string;
   };
 }

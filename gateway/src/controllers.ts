@@ -1,29 +1,31 @@
-import _axios from 'axios';
+import axios from 'axios';
 import { Response } from 'express';
 import { trycatchAsync } from '@danielfamiyeh/chamber-common';
 
+import { keyToUrl } from './utils/methods';
 import { ProxyRequest } from '../types';
-
-const axios = _axios.create({
-  baseURL: process.env.REGISTRY_URL,
-});
 
 export const proxyRequest = (req: ProxyRequest, res: Response) =>
   trycatchAsync(res, async () => {
-    const { path } = req.params;
-    const [service, ...subpaths] = path.split('/');
+    const { service, method } = req.params;
+    const { subpath = '' } = req.query;
+    const token = (req.headers.authorization ?? '').replace('Bearer ', '');
 
-    const authServiceKey = (await axios.get('/auth')).data;
+    // Fetch service URL from registry
+    const { service: serviceKey, error } = (
+      await axios.get(`${process.env.REGISTRY_URL}/${service}`)
+    ).data;
+    if (error) throw new Error(error);
 
-    if (service === 'auth') {
-      const { service: _service, error } = (await axios.get(`/${service}`))
-        .data;
-      return res.json({});
-      // return res.json(error ? { error } : { service: _service });
-    } else {
-      // // Check bearer token
-      // const { authorization = '' } = req.headers;
-      // const token = authorization.replace('Bearer ', '');
-      // const verification = await axios.get(`/`);
-    }
+    // Proxy request to dynamic endpoint
+    const { data } = await axios[method](
+      keyToUrl(serviceKey, ...subpath.split('/')),
+      {
+        headers: { Authorization: `Bearer ${token}` },
+        ...req.body,
+      }
+    );
+
+    if (data.error) throw new Error(data.error);
+    return res.json(data);
   });
