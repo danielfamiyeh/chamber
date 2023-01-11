@@ -1,7 +1,4 @@
 import { Router } from 'express';
-import { login, signUp, verify } from '../controllers';
+import { login, signUp } from '../controllers';
 
-export const router = Router()
-  .get('/', verify)
-  .post('/', login)
-  .put('/', signUp);
+export const router = Router().post('/', login).put('/', signUp);
