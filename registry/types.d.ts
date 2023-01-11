@@ -9,7 +9,13 @@ export type ServiceObj = {
   lastHeartbeat: number;
 };
 export type ServiceMap = Record<string, ServiceObj>;
-export type ServiceName = 'api' | 'chat' | 'friend' | 'notify' | 'user';
+export type ServiceName =
+  | 'api'
+  | 'chat'
+  | 'friend'
+  | 'notify'
+  | 'user'
+  | 'auth';
 export type Registry = Record<ServiceName, ServiceMap>;
 
 export interface GetServiceRequest extends Request {
@@ -18,6 +24,11 @@ export interface GetServiceRequest extends Request {
   };
 }
 
-export type PutServiceRequest = GetServiceRequest;
+export interface PutServiceRequest extends Request {
+  params: {
+    service: ServiceName;
+    port: string;
+  };
+}
 
 export type DeleteServiceRequest = GetServiceRequest;

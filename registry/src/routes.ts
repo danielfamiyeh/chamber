@@ -18,10 +18,10 @@ export const router = Router()
       return res.json({ service: key });
     })
   )
-  .put('/:service', (req: PutServiceRequest, res) =>
+  .put('/:service/:port', (req: PutServiceRequest, res) =>
     trycatch(res, () => {
-      const { service } = req.params;
-      const [hostname, port] = req.headers.host.split(':');
+      const { service, port } = req.params;
+      const [hostname] = req.headers.host.split(':');
       const key = ServiceRegistry.register(service, hostname, Number(port));
 
       return res.json({
