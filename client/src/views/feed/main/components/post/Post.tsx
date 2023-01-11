@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import { Text, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
@@ -7,15 +8,7 @@ import { Content, Post as IPost, User } from '@danielfamiyeh/chamber-common';
 import { renderContent } from '../../../../../components/display/content/Content';
 import Button from '../../../../../components/input/button/Button';
 
-import styles from './Post.styles';
-
-const dateFormatOptions = {
-  year: 'numeric',
-  month: 'numeric',
-  day: 'numeric',
-  hour: 'numeric',
-  minute: 'numeric',
-};
+import styles, { iconSize } from './Post.styles';
 
 const Post = (props: PostProps) => {
   const onLike = () => {};
@@ -26,12 +19,10 @@ const Post = (props: PostProps) => {
 
         <Text style={styles.createdAt}>
           {' '}
-          at{' '}
-          {new Intl.DateTimeFormat('en-GB', dateFormatOptions).format(
-            props.createdAt
-          )}
+          at {moment(props.createdAt).format('DD/MM/YYYY, hh:mm a')}
         </Text>
       </View>
+      <View style={styles.divider} />
       <FlatList
         ItemSeparatorComponent={() => <View style={styles.contentSeparator} />}
         contentContainerStyle={styles.contentContainer}
@@ -41,7 +32,7 @@ const Post = (props: PostProps) => {
       <View style={styles.ctaContainer}>
         <View style={styles.ctaLeft}>
           <Button style={styles.ctaButton} onPress={onLike}>
-            <Icon name="heart" size={24} />
+            <Icon name="heart" size={iconSize} />
           </Button>
         </View>
 
@@ -50,7 +41,7 @@ const Post = (props: PostProps) => {
             style={styles.ctaButton}
             onPress={() => props.navigate('Comments', { postId: props._id })}
           >
-            <Icon name="speech" size={24} />
+            <Icon name="speech" size={iconSize} />
           </Button>
         </View>
       </View>
