@@ -6,8 +6,8 @@ const postStyles = StyleSheet.create({
     backgroundColor: 'white',
     marginBottom: scaleY(4),
     borderRadius: scaleX(2),
-    paddingHorizontal: scaleX(8),
-    paddingVertical: scaleY(8),
+    paddingHorizontal: scaleX(16),
+    paddingVertical: scaleY(16),
   },
   metaContainer: {
     flexDirection: 'row',
@@ -23,6 +23,13 @@ const postStyles = StyleSheet.create({
   contentSeparator: {
     height: scaleY(8),
   },
+  ctaContainer: {
+    flexDirection: 'row',
+    marginTop: scaleY(12),
+  },
+  ctaLeft: { flex: 0.5, borderRightWidth: 1, borderColor: 'lightgrey' },
+  ctaRight: { flex: 0.5 },
+  ctaButton: { alignSelf: 'center', borderWidth: 0 },
 });
 
 export default postStyles;

@@ -1,10 +1,13 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import { Content, Post as IPost, User } from '@danielfamiyeh/chamber-common';
 
-import styles from './Post.styles';
 import { renderContent } from '../../../../../components/display/content/Content';
+import Button from '../../../../../components/input/button/Button';
+
+import styles from './Post.styles';
 
 const dateFormatOptions = {
   year: 'numeric',
@@ -15,6 +18,7 @@ const dateFormatOptions = {
 };
 
 const Post = (props: PostProps) => {
+  const onLike = () => {};
   return (
     <View style={styles.container}>
       <View style={styles.metaContainer}>
@@ -34,15 +38,37 @@ const Post = (props: PostProps) => {
         renderItem={({ item: { type, value } }) => renderContent(type, value)}
         data={props.content}
       />
+      <View style={styles.ctaContainer}>
+        <View style={styles.ctaLeft}>
+          <Button style={styles.ctaButton} onPress={onLike}>
+            <Icon name="heart" size={24} />
+          </Button>
+        </View>
+
+        <View style={styles.ctaRight}>
+          <Button
+            style={styles.ctaButton}
+            onPress={() => props.navigate('Comments', { postId: props._id })}
+          >
+            <Icon name="speech" size={24} />
+          </Button>
+        </View>
+      </View>
     </View>
   );
 };
 
-interface PostProps {
+export interface PostProps {
   _id: string;
   content: Content<IPost>[];
   createdAt: Date;
   createdBy: Pick<User, '_id' | 'username'>;
+  navigate: Function;
+}
+
+export interface PostState {
+  isLikeButtonPressed: boolean;
+  isCommentButtonPressed: boolean;
 }
 
 export default Post;

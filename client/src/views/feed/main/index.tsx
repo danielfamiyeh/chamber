@@ -15,7 +15,7 @@ const Feed = ({ navigation: { navigate } }) => {
     <FlatList
       data={posts}
       contentContainerStyle={styles.container}
-      renderItem={({ item }) => <Post {...item} />}
+      renderItem={({ item }) => <Post {...item} navigate={navigate} />}
     />
   );
 };

@@ -59,6 +59,7 @@ export interface ButtonProps extends ThemeableComponentProps {
   onPress: GestureEventHandler;
   text?: ButtonTextProps;
   children?: ReactNode;
+  noBorder?: boolean;
   disabled?: boolean;
   style?: object;
 }

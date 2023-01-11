@@ -3,8 +3,8 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import styles from './styles';
 
-const CreatePostView = ({ navigation: { navigate } }) => {
+const CreatePost = ({ navigation: { navigate } }) => {
   return <ScrollView contentContainerStyle={styles.container} />;
 };
 
-export default CreatePostView;
+export default CreatePost;
