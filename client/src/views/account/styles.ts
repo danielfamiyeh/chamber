@@ -7,6 +7,11 @@ const accountStyles = StyleSheet.create({
     paddingVertical: scaleY(8),
     paddingHorizontal: scaleX(8),
   },
+  text: {
+    color: 'grey',
+    marginTop: scaleY(8),
+    marginBottom: scaleY(4),
+  },
 });
 
 export default accountStyles;
