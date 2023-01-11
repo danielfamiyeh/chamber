@@ -14,5 +14,7 @@ export default express()
   .use('/api', router)
   .listen(process.env.PORT, () => {
     log('info', `Listening on port: ${process.env.PORT}`);
-    axios.put(`${process.env.REGISTRY_URL}/${process.env.SERVICE_NAME}`);
+    axios.put(
+      `${process.env.REGISTRY_URL}/${process.env.SERVICE_NAME}/${process.env.PORT}`
+    );
   });

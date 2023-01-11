@@ -16,5 +16,7 @@ export default express()
   .listen(process.env.PORT, async () => {
     await connectDb(process.env.DB_URI);
     log('info', `Listening on port: ${process.env.PORT}`);
-    axios.put(`${process.env.REGISTRY_URL}/${process.env.SERVICE_NAME}`);
+    axios.put(
+      `${process.env.REGISTRY_URL}/${process.env.SERVICE_NAME}/${process.env.PORT}`
+    );
   });

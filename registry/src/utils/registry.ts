@@ -4,6 +4,7 @@ import { log } from './logger';
 export class ServiceRegistry {
   private static services: Record<ServiceName, ServiceMap> = {
     api: {},
+    auth: {},
     chat: {},
     friend: {},
     notify: {},
