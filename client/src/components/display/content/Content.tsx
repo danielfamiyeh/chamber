@@ -1,9 +1,6 @@
-import {
-  Content as TContent,
-  ContentType,
-} from '@danielfamiyeh/chamber-common';
-import { Image, Text, View } from 'react-native';
 import React from 'react';
+import { Image, Text } from 'react-native';
+import { ContentType } from '@danielfamiyeh/chamber-common';
 
 import styles from './Content.styles';
 
@@ -20,13 +17,3 @@ export const renderContent = (type: ContentType, value: string) => {
       return null;
   }
 };
-
-const Content = (props: TContent<any>) => {
-  return (
-    <View style={styles.container}>
-      {renderContent(props.type, props.value)}
-    </View>
-  );
-};
-
-export default Content;

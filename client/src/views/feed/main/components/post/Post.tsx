@@ -6,12 +6,30 @@ import { Content, Post as IPost, User } from '@danielfamiyeh/chamber-common';
 import styles from './Post.styles';
 import { renderContent } from '../../../../../components/display/content/Content';
 
+const dateFormatOptions = {
+  year: 'numeric',
+  month: 'numeric',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+};
+
 const Post = (props: PostProps) => {
   return (
     <View style={styles.container}>
-      <Text>{props.createdBy.username}</Text>
-      <Text>{props.createdAt.toString()}</Text>
+      <View style={styles.metaContainer}>
+        <Text style={styles.username}>@{props.createdBy.username}</Text>
+
+        <Text style={styles.createdAt}>
+          {' '}
+          at{' '}
+          {new Intl.DateTimeFormat('en-GB', dateFormatOptions).format(
+            props.createdAt
+          )}
+        </Text>
+      </View>
       <FlatList
+        ItemSeparatorComponent={() => <View style={styles.contentSeparator} />}
         contentContainerStyle={styles.contentContainer}
         renderItem={({ item: { type, value } }) => renderContent(type, value)}
         data={props.content}
