@@ -1,5 +1,36 @@
 import { StyleSheet } from 'react-native';
+import { scaleX, scaleY } from '../../../../../utils/methods/scaleable-units';
 
-const chatListItemStyles = StyleSheet.create({ container: {} });
+const avatarSize = scaleX(52);
+
+const chatListItemStyles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    paddingHorizontal: scaleX(16),
+    paddingVertical: scaleY(12),
+    maxHeight: scaleY(80),
+  },
+  left: {},
+  right: {
+    justifyContent: 'center',
+  },
+  avatar: {
+    borderWidth: 1,
+    width: avatarSize,
+    height: avatarSize,
+    borderRadius: avatarSize / 2,
+    borderColor: 'lightgrey',
+    marginRight: scaleX(16),
+  },
+  recipients: {
+    fontWeight: 'bold',
+  },
+  lastMessage: {},
+  timeAgo: {
+    color: 'grey',
+  },
+  indicator: {},
+});
 
 export default chatListItemStyles;

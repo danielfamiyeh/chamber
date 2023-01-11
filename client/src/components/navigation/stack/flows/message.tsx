@@ -15,7 +15,7 @@ const MessageFlow = ({ navigation: { navigate } }) => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Messages"
+        name="Chats"
         component={ChatListView}
         options={{
           headerRight: () => (

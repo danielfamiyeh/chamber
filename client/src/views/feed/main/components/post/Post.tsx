@@ -66,9 +66,4 @@ export interface PostProps {
   navigate: Function;
 }
 
-export interface PostState {
-  isLikeButtonPressed: boolean;
-  isCommentButtonPressed: boolean;
-}
-
 export default Post;

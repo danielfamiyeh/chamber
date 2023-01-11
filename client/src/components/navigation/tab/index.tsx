@@ -27,7 +27,7 @@ const screens = [
     iconName: 'wechat',
     options: {
       headerShown: false,
-      tabBarLabel: 'Messages',
+      tabBarLabel: 'Chats',
     },
   },
 
