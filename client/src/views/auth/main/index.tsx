@@ -18,10 +18,9 @@ const AuthMain = ({ navigation: { navigate } }) => {
   return (
     <View style={styles.container}>
       <FormMain
-        model={form.model}
+        form={form}
         onSubmit={onSubmit}
         title={startCase(method)}
-        onValidate={form.validate}
         AboveForm={
           <Image
             source={require('../../../assets/auth/chamber_sign_in.png')}

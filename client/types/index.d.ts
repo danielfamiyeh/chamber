@@ -93,4 +93,5 @@ export type FormValidator = (model: FormModel) => void;
 export interface Form {
   model: FormModel;
   validate: FormValidator;
+  fieldProps?: Record<string, object>;
 }

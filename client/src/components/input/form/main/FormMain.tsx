@@ -5,16 +5,18 @@ import { FlatList } from 'react-native-gesture-handler';
 import FormFooter from '../footer/FormFooter';
 import FormField from '../field/FormField';
 
-import { FormModel } from '../../../../../types';
+import { Form } from '../../../../../types';
 import styles from './FormMain.styles';
 
 const FormMain = (props: FormMainProps) => {
-  const [model, setModel] = React.useState(props.model);
+  const { validate, fieldProps } = props.form;
+
+  const [model, setModel] = React.useState(props.form.model);
 
   const onSubmit = (evt: GestureResponderEvent) => {
     evt.preventDefault();
     try {
-      props.onValidate(model);
+      validate(model);
     } catch (error: any) {
       Alert.alert('Changes required', error.message);
     }
@@ -36,6 +38,7 @@ const FormMain = (props: FormMainProps) => {
           <FormField
             label={label}
             value={value}
+            fieldProps={(fieldProps ?? {})[label] ?? {}}
             onChange={(newValue) =>
               setModel((_model) => ({ ..._model, [label]: newValue }))
             }
@@ -50,13 +53,12 @@ const FormMain = (props: FormMainProps) => {
 };
 
 interface FormMainProps {
-  title: string;
-  model: FormModel;
-  onValidate: Function;
   AboveForm?: React.ReactNode;
   FooterChildren?: React.ReactNode;
   onSubmit: Function;
   style?: object;
+  title: string;
+  form: Form;
 }
 
 export default FormMain;

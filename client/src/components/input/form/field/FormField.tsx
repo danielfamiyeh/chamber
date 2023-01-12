@@ -23,6 +23,7 @@ const FormField = (props: FormFieldProps) => {
               onChangeText={(value: string) =>
                 props.onChange(props.value.constructor(value))
               }
+              {...props.fieldProps}
             />
           );
         default:
@@ -42,6 +43,7 @@ const FormField = (props: FormFieldProps) => {
 
 export interface FormFieldProps {
   label: string;
+  fieldProps?: object;
   value: string | number;
   onChange: (val: string | number) => void;
 }
