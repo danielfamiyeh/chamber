@@ -1,7 +1,7 @@
 import { Response } from 'express';
 import { models } from '@danielfamiyeh/chamber-common/dist/models';
 
-import { DeletePostRequest } from '../..';
+import { DeletePostRequest } from '../../..';
 
 export const deletePost = async (req: DeletePostRequest, res: Response) => {
   const { postId, userId } = req.body;

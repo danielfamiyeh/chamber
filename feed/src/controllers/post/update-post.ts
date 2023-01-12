@@ -1,7 +1,7 @@
 import { Response } from 'express';
 import { models } from '@danielfamiyeh/chamber-common/dist/models';
 
-import { UpdatePostRequest } from '../..';
+import { UpdatePostRequest } from '../../..';
 
 export const updatePost = async (req: UpdatePostRequest, res: Response) => {
   const { userId, postId, post } = req.body;

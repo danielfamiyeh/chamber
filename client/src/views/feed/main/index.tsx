@@ -1,8 +1,12 @@
 import React from 'react';
-import { FlatList } from 'react-native';
-import { testPost } from '../../../utils/data/test/post';
-import Post from './components/post/Post';
+import { useQuery } from 'react-query';
+import { Alert, FlatList } from 'react-native';
 
+import Post from './components/post/Post';
+import Loading from '../../../components/display/indicator/loading/Loading';
+
+import { serverRequest } from '../../../utils/methods/network';
+import { testPost } from '../../../utils/data/test/post';
 import styles from './styles';
 
 const Feed = ({ navigation: { navigate } }) => {
@@ -11,7 +15,19 @@ const Feed = ({ navigation: { navigate } }) => {
     []
   );
 
-  return (
+  const { data, isLoading } = useQuery('feed', () =>
+    serverRequest('feed/post?subpath=feed', {}, true)
+  );
+
+  React.useEffect(() => {
+    if (!isLoading && data?.error) {
+      Alert.alert('An error occured', data?.error);
+    }
+  }, [isLoading, data?.error]);
+
+  return isLoading ? (
+    <Loading />
+  ) : (
     <FlatList
       data={posts}
       contentContainerStyle={styles.container}

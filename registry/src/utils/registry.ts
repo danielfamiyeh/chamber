@@ -6,6 +6,7 @@ export class ServiceRegistry {
     api: {},
     auth: {},
     chat: {},
+    feed: {},
     friend: {},
     notify: {},
     user: {},

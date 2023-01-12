@@ -13,10 +13,11 @@ export default express()
   .use(cors())
   .use(bodyParser.json())
   .use('/api', router)
-  .listen(process.env.PORT, async () => {
-    await connectDb(process.env.DB_URI);
-    log('info', `Listening on port: ${process.env.PORT}`);
-    axios.put(
-      `${process.env.REGISTRY_URL}/${process.env.SERVICE_NAME}/${process.env.PORT}`
-    );
+  .listen(process.env.PORT, () => {
+    connectDb(process.env.DB_URI).then(() => {
+      log('info', `Listening on port: ${process.env.PORT}`);
+      axios.put(
+        `${process.env.REGISTRY_URL}/${process.env.SERVICE_NAME}/${process.env.PORT}`
+      );
+    });
   });
