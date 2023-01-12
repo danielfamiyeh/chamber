@@ -23,7 +23,7 @@ const Feed = ({ navigation: { navigate } }) => {
     <Loading />
   ) : (
     <FlatList
-      data={data}
+      data={data?.posts ?? []}
       contentContainerStyle={styles.container}
       renderItem={({ item }) => <Post {...item} navigate={navigate} />}
     />

@@ -18,7 +18,7 @@ export const getFeed = (req: GetFeedRequest, res: Response) =>
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(limit)
-      .populate('content')
+      .populate('content', 'type value', models.Content)
       .populate('createdBy');
 
     console.log(posts);
