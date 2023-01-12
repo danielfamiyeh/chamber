@@ -1,68 +1,48 @@
 import React from 'react';
-import { Alert, Image, Text, View } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Text, View } from 'react-native';
 import { ContentType } from '@danielfamiyeh/chamber-common';
-import { launchImageLibrary } from 'react-native-image-picker';
 
 import Button from '../../../../../components/input/button/Button';
+import ImageInput from './image/ImageInput';
+import TextInput from './text/TextInput';
 
 import styles from './ContentInput.styles';
 
-const ContentInput = (props: ContentInputProps) => {
-  console.log(props.contentValue.slice(0, 10));
+const ContentInput = (
+  props: ContentInputProps & {
+    onSubmit: ({ current }: { current: string }) => void;
+  }
+) => {
+  const contentValueRef = React.useRef('');
+  const { current: contentValue } = contentValueRef;
+  const setContentValue = (text: string) => (contentValueRef.current = text);
+
   const Component = React.useMemo(
     () => () => {
       switch (props.contentType) {
         case 'text':
           return (
-            <View style={styles.textInputContainer}>
-              <Text style={styles.textInputLabel}>What's on your mind?</Text>
-              <TextInput
-                multiline
-                style={styles.textInput}
-                placeholder="Type something here...."
-              />
-            </View>
+            <TextInput
+              {...props}
+              contentValue={contentValue}
+              setContentValue={setContentValue}
+            />
           );
 
         case 'image':
-          return props.contentValue ? (
-            <Image
-              style={styles.image}
-              source={{ uri: `data:image/png;base64,${props.contentValue}` }}
+          return (
+            <ImageInput
+              {...props}
+              contentValue={contentValue}
+              setContentValue={setContentValue}
             />
-          ) : (
-            <Button
-              style={styles.uploadImageButton}
-              onPress={() =>
-                launchImageLibrary({
-                  quality: 1,
-                  mediaType: 'photo',
-                  includeBase64: true,
-                })
-                  .then(({ assets = [] }) => {
-                    props.setContentValue(assets[0].base64 ?? '');
-                  })
-                  .catch(({ message }) =>
-                    Alert.alert('An error occured', message)
-                  )
-              }
-            >
-              <Icon
-                name="image"
-                size={48}
-                style={styles.uploadImageButtonIcon}
-              />
-              <Text style={styles.uploadImageButtonText}>Upload an Image</Text>
-            </Button>
           );
 
         default:
           return null;
       }
     },
-    [props]
+    [props, contentValue]
   );
 
   return (
@@ -72,10 +52,17 @@ const ContentInput = (props: ContentInputProps) => {
         style={styles.changeTypeButton}
         onPress={() => {
           props.setContentType();
-          props.setContentValue('');
+          setContentValue('');
         }}
       >
         <Text style={styles.changeTypeButtonText}>Change Content Type</Text>
+      </Button>
+
+      <Button
+        style={styles.submitButton}
+        onPress={() => props.onSubmit(contentValueRef)}
+      >
+        <Text style={styles.submitButtonText}>Submit</Text>
       </Button>
     </View>
   );
@@ -84,6 +71,9 @@ const ContentInput = (props: ContentInputProps) => {
 export interface ContentInputProps {
   contentType: ContentType;
   setContentType: Function;
+}
+
+export interface ContentInputComponentProps extends ContentInputProps {
   contentValue: string;
   setContentValue: Function;
 }

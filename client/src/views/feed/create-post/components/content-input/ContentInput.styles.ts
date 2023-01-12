@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
-import { scaleX, scaleY } from '../../../../../utils/methods/scaleable-units';
 import ThemeManager from '../../../../../utils/ui/ThemeManger';
+import { scaleX, scaleY } from '../../../../../utils/methods/scaleable-units';
 
 const contentInputStyles = StyleSheet.create({
   container: {
@@ -9,34 +9,6 @@ const contentInputStyles = StyleSheet.create({
     backgroundColor: 'white',
     paddingHorizontal: scaleX(16),
     justifyContent: 'center',
-  },
-  textInputContainer: {},
-  textInputLabel: {
-    fontWeight: '200',
-    marginBottom: scaleY(6),
-  },
-  textInput: {
-    borderWidth: 1,
-    borderColor: 'grey',
-    textAlignVertical: 'top',
-    borderRadius: scaleX(4),
-    paddingHorizontal: scaleX(12),
-    paddingVertical: scaleY(8),
-    fontSize: scaleX(16),
-    height: scaleY(64),
-  },
-  uploadImageButton: {
-    alignItems: 'center',
-    borderRadius: scaleX(4),
-    paddingVertical: scaleY(24),
-  },
-  uploadImageButtonIcon: {},
-  uploadImageButtonText: {},
-  image: {
-    borderWidth: 1,
-    height: scaleY(240),
-    resizeMode: 'contain',
-    borderColor: 'lightgrey',
   },
   changeTypeButton: {
     borderWidth: 0,
@@ -46,6 +18,17 @@ const contentInputStyles = StyleSheet.create({
   },
   changeTypeButtonText: {
     color: ThemeManager.theme.info,
+  },
+  submitButton: {
+    alignSelf: 'center',
+    marginTop: scaleY(32),
+    borderRadius: scaleX(4),
+    paddingVertical: scaleY(4),
+    paddingHorizontal: scaleX(24),
+    backgroundColor: ThemeManager.theme.info,
+  },
+  submitButtonText: {
+    color: 'white',
   },
 });
 
