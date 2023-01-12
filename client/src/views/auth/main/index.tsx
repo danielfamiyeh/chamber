@@ -1,11 +1,12 @@
 import React from 'react';
 import { startCase } from 'lodash';
-import { View } from 'react-native';
+import { Image, View } from 'react-native';
 import { useRoute } from '@react-navigation/native';
+
+import FormMain from '../../../components/input/form/main/FormMain';
 
 import { authForm, AuthMethod } from './utils/constants';
 import styles from './styles';
-import FormMain from '../../../components/input/form/main/FormMain';
 
 const AuthMain = ({ navigation: { navigate } }) => {
   const { params = {} } = useRoute();
@@ -17,10 +18,15 @@ const AuthMain = ({ navigation: { navigate } }) => {
   return (
     <View style={styles.container}>
       <FormMain
-        model={form.model}
+        form={form}
         onSubmit={onSubmit}
         title={startCase(method)}
-        onValidate={form.validate}
+        AboveForm={
+          <Image
+            source={require('../../../assets/auth/chamber_sign_in.png')}
+            style={styles.image}
+          />
+        }
       />
     </View>
   );

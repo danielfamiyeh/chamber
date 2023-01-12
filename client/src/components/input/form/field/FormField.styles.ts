@@ -8,10 +8,11 @@ const formFieldStyles = StyleSheet.create({
     fontWeight: '500',
     marginBottom: scaleY(4),
   },
-  inputContainer: {
+  textInput: {
     borderWidth: 1,
     height: scaleY(38),
     borderRadius: scaleX(4),
+    paddingHorizontal: scaleX(16),
     borderColor: 'lightgrey',
   },
 });
