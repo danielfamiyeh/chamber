@@ -3,7 +3,7 @@ import { Schema } from './schema';
 
 export const SessionSchema = new Schema<Session>([
   {
-    key: 'id',
+    key: '_id',
     type: String,
   },
   {

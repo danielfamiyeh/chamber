@@ -9,20 +9,12 @@ const useLocalStorage = <T>(key: string, initialValue: T) => {
     /** Load value from local storage onMount */
     const init = async () => {
       const storedValue = await AsyncStorage.getItem(key);
+      console.log({ storedValue });
       if (storedValue) {
         setVal(JSON.parse(storedValue));
       }
     };
-
-    /** Save value to local storage onUnmount */
-    const save = async () =>
-      await AsyncStorage.setItem(key, JSON.stringify(valRef.current));
-
     init();
-
-    return () => {
-      save();
-    };
   }, [key]);
 
   // Watch val with ref to save onUnmount
