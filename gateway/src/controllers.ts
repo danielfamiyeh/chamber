@@ -1,4 +1,5 @@
 import axios from 'axios';
+import jwt from 'jsonwebtoken';
 import { Response } from 'express';
 import { trycatchAsync } from '@danielfamiyeh/chamber-common';
 
@@ -15,7 +16,13 @@ export const proxyRequest = (req: ProxyRequest, res: Response) =>
     const { service: serviceKey, error } = (
       await axios.get(`${process.env.REGISTRY_URL}/${service}`)
     ).data;
+
     if (error) throw new Error(error);
+
+    // Auth service routes dont'r require authentication
+    // All other routes do
+    const authPayload =
+      service === 'auth' ? {} : jwt.verify(token, process.env.JWT_SECRET);
 
     // Proxy request to dynamic endpoint
     const { data } = await axios[method](
@@ -23,6 +30,7 @@ export const proxyRequest = (req: ProxyRequest, res: Response) =>
       {
         headers: { Authorization: `Bearer ${token}` },
         ...req.body,
+        ...Object(authPayload),
       }
     );
 
