@@ -23,6 +23,7 @@ const ContentSelect = (props: ContentSelectProps) => {
         {contentTypes.map(({ type, icon }) => {
           return (
             <Button
+              key={type}
               style={styles.contentTypeContainer}
               onPress={() => props.setContentType(type)}
             >

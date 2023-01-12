@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+
 import { scaleX, scaleY } from '../../../../../utils/methods/scaleable-units';
 import ThemeManager from '../../../../../utils/ui/ThemeManger';
 
@@ -24,7 +25,19 @@ const contentInputStyles = StyleSheet.create({
     fontSize: scaleX(16),
     height: scaleY(64),
   },
-  image: { borderWidth: 1 },
+  uploadImageButton: {
+    alignItems: 'center',
+    borderRadius: scaleX(4),
+    paddingVertical: scaleY(24),
+  },
+  uploadImageButtonIcon: {},
+  uploadImageButtonText: {},
+  image: {
+    borderWidth: 1,
+    height: scaleY(240),
+    resizeMode: 'contain',
+    borderColor: 'lightgrey',
+  },
   changeTypeButton: {
     borderWidth: 0,
     marginTop: scaleY(8),
