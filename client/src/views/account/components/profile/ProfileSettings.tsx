@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { useQuery } from 'react-query';
 import { Alert, Text, View, Image } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Loading from '../../../../components/display/indicator/loading/Loading';
 import { useSession } from '../../../../components/context/session';
@@ -26,12 +27,18 @@ const ProfileSettings = (props: ProfileSettingsProps) => {
     <Loading />
   ) : (
     <View style={styles.container}>
-      <Image
-        style={styles.avatar}
-        source={{
-          uri: testUser.avatar,
-        }}
-      />
+      {data?.avatar ? (
+        <Image
+          style={styles.avatar}
+          source={{
+            uri: data?.avatar,
+          }}
+        />
+      ) : (
+        <View style={styles.avatar}>
+          <Icon name="account-circle" size={108} />
+        </View>
+      )}
       <Text style={styles.username}>@{data?.username ?? 'user'}</Text>
 
       <View style={styles.meta}>
