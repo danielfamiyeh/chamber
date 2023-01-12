@@ -11,19 +11,22 @@ import styles from './FormMain.styles';
 const FormMain = (props: FormMainProps) => {
   const { validate, fieldProps } = props.form;
 
-  const [model, setModel] = React.useState(props.form.model);
+  const modelRef = React.useRef(props.form.model);
+  // const [model, setModel] = React.useState(props.form.model);
 
   const onSubmit = (evt: GestureResponderEvent) => {
     evt.preventDefault();
 
+    console.log(modelRef.current);
     try {
-      validate(model);
+      validate(modelRef.current);
     } catch (error: any) {
       Alert.alert('Changes required', error.message);
     }
 
-    props.onSubmit(model);
+    props.onSubmit(modelRef.current);
   };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{props.title}</Text>
@@ -31,7 +34,7 @@ const FormMain = (props: FormMainProps) => {
       {props.AboveForm}
       <FlatList
         style={styles.formContainer}
-        data={Object.entries(model)}
+        data={Object.entries(modelRef.current)}
         ItemSeparatorComponent={() => (
           <View style={styles.formFieldSeparator} />
         )}
@@ -40,8 +43,11 @@ const FormMain = (props: FormMainProps) => {
             label={label}
             value={value}
             fieldProps={(fieldProps ?? {})[label] ?? {}}
-            onChange={(newValue) =>
-              setModel((_model) => ({ ..._model, [label]: newValue }))
+            onChange={
+              (newValue) => {
+                modelRef.current = { ...modelRef.current, [label]: newValue };
+              }
+              // setModel((_model) => ({ ..._model, [label]: newValue }))
             }
           />
         )}
