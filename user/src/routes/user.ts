@@ -4,20 +4,17 @@ import { createUser } from '../controllers/user/create-user';
 import { trycatchAsync } from '@danielfamiyeh/chamber-common';
 
 export const userRouter = Router()
-  .get('/', (req, res) =>
+  .post('/', (req, res) =>
     trycatchAsync(res, async () => {
-      const { username } = req.query;
+      const user = await getUser(req.body._id);
 
-      const user = await getUser(username as string);
-      return res.json({ user });
+      return res.json(user);
     })
   )
-  .put('/', (req, res) =>
+  .patch('/', (req, res) =>
     trycatchAsync(res, async () => {
-      const { username } = req.query;
-
-      const user = await createUser(username as string);
-      return res.json({ user });
+      // UPDATE USER
+      return res.json({});
     })
   )
   .delete('/', (req, res) =>

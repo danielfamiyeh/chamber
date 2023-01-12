@@ -12,17 +12,17 @@ import styles from './ProfileSettings.styles';
 
 const ProfileSettings = (props: ProfileSettingsProps) => {
   const { val: session } = useSession();
-  const { data, isError, error, isLoading } = useQuery('user', () =>
-    serverRequest('user/get')
+  const { data, isLoading } = useQuery('user', () =>
+    serverRequest('user/post?subpath=user', {}, true)
   );
 
   React.useEffect(() => {
     if (!isLoading && data?.error) {
-      Alert.alert('An error occured', data.error);
-    } else if (isError) {
-      Alert.alert('An error occured', error.message);
+      Alert.alert('An error occured', data?.error);
     }
-  }, [isLoading, isError, error, data.error]);
+  }, [isLoading, data?.error]);
+
+  console.log(data);
 
   return (
     <View style={styles.container}>
