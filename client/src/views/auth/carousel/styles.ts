@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { scaleX, scaleY } from '../../../utils/methods/scaleable-units';
+import ThemeManager from '../../../utils/ui/ThemeManger';
 
 const carouselStyles = StyleSheet.create({
   container: {
@@ -17,6 +18,9 @@ const carouselStyles = StyleSheet.create({
   controlButton: {
     borderWidth: 0,
   },
+  controlButtonText: {
+    color: 'grey',
+  },
   ctaContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -29,8 +33,10 @@ const carouselStyles = StyleSheet.create({
     paddingVertical: scaleY(8),
     paddingHorizontal: scaleX(16),
   },
-  ctaLoginButton: {},
-  ctaSignUpButton: {},
+  ctaButtonText: {
+    fontWeight: '700',
+    color: ThemeManager.theme.info,
+  },
 });
 
 export default carouselStyles;

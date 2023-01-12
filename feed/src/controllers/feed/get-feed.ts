@@ -1,8 +1,8 @@
 import { Response } from 'express';
+import { trycatchAsync } from '@danielfamiyeh/chamber-common';
 import { models } from '@danielfamiyeh/chamber-common/dist/models';
 
 import { GetFeedRequest } from '../../..';
-import { trycatchAsync } from '@danielfamiyeh/chamber-common';
 
 export const getFeed = (req: GetFeedRequest, res: Response) =>
   trycatchAsync(res, async () => {
