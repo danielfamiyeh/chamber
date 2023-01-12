@@ -20,7 +20,7 @@ const carouselStyles = StyleSheet.create({
   ctaContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: scaleY(24),
+    marginTop: scaleY(128),
   },
   ctaButton: {
     borderWidth: 0,
