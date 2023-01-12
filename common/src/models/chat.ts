@@ -3,14 +3,14 @@ import { Chat as IChat } from '../../types';
 
 const ChatSchema = new Schema<IChat>(
   {
-    recipients: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-    messages: [{ type: Schema.Types.ObjectId, ref: 'Message' }],
-    admins: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-    createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
+    recipients: [{ type: Schema.Types.ObjectId, ref: 'user' }],
+    messages: [{ type: Schema.Types.ObjectId, ref: 'message' }],
+    admins: [{ type: Schema.Types.ObjectId, ref: 'user' }],
+    createdBy: { type: Schema.Types.ObjectId, ref: 'user' },
   },
   {
     timestamps: true,
   }
 );
 
-export const Chat = model<IChat>('Chat', ChatSchema);
+export const Chat = model<IChat>('chat', ChatSchema);

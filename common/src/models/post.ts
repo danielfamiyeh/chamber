@@ -3,10 +3,10 @@ import { Post as IPost } from '../../types';
 
 export const PostSchema = new Schema<IPost>(
   {
-    content: [{ type: Schema.Types.ObjectId, ref: 'Content' }],
+    content: [{ type: Schema.Types.ObjectId, ref: 'content' }],
     createdBy: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'user',
       required: true,
     },
   },

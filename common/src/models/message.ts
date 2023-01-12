@@ -5,11 +5,11 @@ const MessageSchema = new Schema<IMessage>(
   {
     sender: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'user',
     },
     chat: {
       type: Schema.Types.ObjectId,
-      ref: 'Chat',
+      ref: 'chat',
     },
     content: {
       type: {
@@ -23,4 +23,4 @@ const MessageSchema = new Schema<IMessage>(
   { timestamps: true }
 );
 
-export const Message = model<IMessage>('Message', MessageSchema);
+export const Message = model<IMessage>('message', MessageSchema);

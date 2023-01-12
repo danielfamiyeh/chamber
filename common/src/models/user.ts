@@ -19,18 +19,18 @@ const UserSchema = new Schema<IUser>(
     chats: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Chat',
+        ref: 'chat',
       },
     ],
 
-    friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    friends: [{ type: Schema.Types.ObjectId, ref: 'user' }],
 
     incomingFriendRequests: [
-      { type: Schema.Types.ObjectId, ref: 'FriendRequest' },
+      { type: Schema.Types.ObjectId, ref: 'friendrequest' },
     ],
 
     outgoingFriendRequests: [
-      { type: Schema.Types.ObjectId, ref: 'FriendRequest' },
+      { type: Schema.Types.ObjectId, ref: 'friendrequest' },
     ],
   },
   { timestamps: true }
@@ -60,4 +60,4 @@ UserSchema.methods.validatePassword = function (password: string) {
   return compare(password, this.password);
 };
 
-export const User = model<IUser>('User', UserSchema);
+export const User = model<IUser>('user', UserSchema);

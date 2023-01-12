@@ -10,8 +10,9 @@ export interface GetPostRequest extends Request {
 
 export interface CreatePostRequest extends Request {
   body: {
-    post: Pick<Post, '_id' | 'content'>;
-    userId: string;
+    _id: string;
+    contentType: string;
+    contentValue: string;
   };
 }
 
