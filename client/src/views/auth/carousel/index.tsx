@@ -53,28 +53,37 @@ const Carousel = ({ navigation: { navigate } }) => {
         {!isNotLastSlide && (
           <View style={styles.ctaContainer}>
             <Button
-              style={{ ...styles.ctaButton }}
+              style={styles.ctaButton}
               onPress={() => navigate('AuthMain', { method: 'signIn' })}
             >
-              <Text>Sign In</Text>
+              <Text style={styles.ctaButtonText}>Sign In</Text>
             </Button>
 
             <Button
-              style={{ ...styles.ctaButton }}
+              style={styles.ctaButton}
               onPress={() => navigate('AuthMain', { method: 'signUp' })}
             >
-              <Text>Sign Up</Text>
+              <Text style={styles.ctaButtonText}>Sign Up</Text>
             </Button>
           </View>
         )}
       </CarouselSlide>
-      <View style={styles.controlContainer}>
+      <View
+        style={{
+          ...styles.controlContainer,
+          justifyContent: !(isNotLastSlide && state.slideIdx)
+            ? 'center'
+            : 'space-between',
+        }}
+      >
         <Button style={styles.controlButton} onPress={onPressPrev}>
-          {state.slideIdx > 0 && <Text>Prev.</Text>}
+          {state.slideIdx > 0 && (
+            <Text style={styles.controlButtonText}>Prev</Text>
+          )}
         </Button>
 
         <Button style={styles.controlButton} onPress={onPressNext}>
-          {isNotLastSlide && <Text>Next.</Text>}
+          {isNotLastSlide && <Text style={styles.controlButtonText}>Next</Text>}
         </Button>
       </View>
     </View>
