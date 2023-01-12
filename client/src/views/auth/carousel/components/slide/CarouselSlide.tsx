@@ -1,12 +1,13 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Image, Text, View } from 'react-native';
 
 import styles from './CarouselSlide.styles';
 
 const CarouselSlide = (props: CarouselSlide) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.logo}>chamber.</Text>
+      <Text style={styles.logo}>chamber</Text>
+      <Image style={styles.image} source={props.image} />
       <Text style={styles.title}>{props.title}</Text>
       <Text style={styles.description}>{props.description}</Text>
     </View>
@@ -14,6 +15,7 @@ const CarouselSlide = (props: CarouselSlide) => {
 };
 
 export interface CarouselSlide {
+  image: string;
   title: string;
   description: string;
 }

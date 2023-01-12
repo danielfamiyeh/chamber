@@ -1,11 +1,19 @@
 import { StyleSheet } from 'react-native';
-import ThemeManager from '../../../utils/ui/ThemeManger';
+import { scaleY } from '../../../utils/methods/scaleable-units';
 
 const carouselStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: ThemeManager.theme.background,
+    backgroundColor: 'white',
+    paddingVertical: scaleY(16),
+    justifyContent: 'space-between',
   },
+  ctaContainer: {
+    height: 24,
+    backgroundColor: 'black',
+  },
+  ctaPrev: {},
+  ctaNext: {},
 });
 
 export default carouselStyles;
