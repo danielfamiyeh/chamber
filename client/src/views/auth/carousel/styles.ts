@@ -8,7 +8,7 @@ const carouselStyles = StyleSheet.create({
     paddingVertical: scaleY(16),
     justifyContent: 'space-between',
   },
-  ctaContainer: {
+  controlContainer: {
     height: 24,
     flexDirection: 'row',
     paddingHorizontal: scaleX(24),
@@ -17,8 +17,20 @@ const carouselStyles = StyleSheet.create({
   controlButton: {
     borderWidth: 0,
   },
-  ctaPrev: {},
-  ctaNext: {},
+  ctaContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: scaleY(24),
+  },
+  ctaButton: {
+    borderWidth: 0,
+    borderBottomWidth: 1,
+    borderRadius: scaleX(4),
+    paddingVertical: scaleY(8),
+    paddingHorizontal: scaleX(16),
+  },
+  ctaLoginButton: {},
+  ctaSignUpButton: {},
 });
 
 export default carouselStyles;

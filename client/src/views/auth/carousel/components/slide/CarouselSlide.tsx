@@ -11,6 +11,7 @@ const CarouselSlide = (props: CarouselSlide) => {
       <Image style={styles.image} source={props.image} />
       <Text style={styles.title}>{props.title}</Text>
       <Text style={styles.description}>{props.description}</Text>
+      {props.children}
     </View>
   );
 };
@@ -19,6 +20,7 @@ export interface CarouselSlide {
   image: string;
   title: string;
   description: string;
+  children?: React.ReactNode;
 }
 
 export default CarouselSlide;
