@@ -17,7 +17,7 @@ const ContentSelect = (props: ContentSelectProps) => {
   return (
     <View style={styles.container}>
       <Text style={styles.promptText}>
-        What content would you like to upload?
+        What content would you like to post?
       </Text>
       <View style={styles.selectContainer}>
         {contentTypes.map(({ type, icon }) => {
