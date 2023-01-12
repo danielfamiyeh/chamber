@@ -16,7 +16,7 @@ export const toast = {
     displayToast('warning', text1, text2),
 
   error: (text1: string, text2: string) =>
-    displayToast('error', text1 || 'An error occured', text2),
+    displayToast('error', text1 || 'An error occurred', text2),
 
   info: (text1: string, text2: string) => displayToast('info', text1, text2),
 };

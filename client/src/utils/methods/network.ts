@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { ServerRequestReturnType } from '../../../types';
-import { apiUrl } from '../config';
+import { API_SERVER_URL } from '../../config';
 import { toast } from './toast';
 
 export const serverRequest = async <T>(
@@ -19,10 +19,12 @@ export const serverRequest = async <T>(
       token && (authHeader = { Authorization: `Bearer ${token}` });
     }
 
+    console.log(`${API_SERVER_URL}/${path}`);
+
     const res = await (
-      await fetch(`${apiUrl}/${path}`, {
+      await fetch(`${API_SERVER_URL}/${path}`, {
         ...options,
-        method: options.method ?? 'GET',
+        method: 'POST',
         headers: {
           'Content-type': 'application/json',
           ...(options.headers ?? {}),

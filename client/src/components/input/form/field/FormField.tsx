@@ -1,12 +1,12 @@
 import React from 'react';
 import { startCase } from 'lodash';
-import { Text, View } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
+import { Text, TextInput, View } from 'react-native';
 
 import styles from './FormField.styles';
 
 const FormField = (props: FormFieldProps) => {
-  const [value, setValue] = React.useState(props.value ?? '');
+  const [initialValue] = React.useState(String(props.value ?? ''));
+
   const InputField = React.useMemo(
     () => () => {
       switch (props.value.constructor.name) {
@@ -20,9 +20,8 @@ const FormField = (props: FormFieldProps) => {
                   : 'default'
               }
               style={styles.textInput}
-              defaultValue={value.toString()}
-              onChangeText={(_value: string) => setValue(_value)}
-              onEndEditing={() =>
+              defaultValue={initialValue}
+              onChangeText={(value) =>
                 props.onChange(props.value.constructor(value))
               }
               {...props.fieldProps}
