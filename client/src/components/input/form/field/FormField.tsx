@@ -6,6 +6,7 @@ import { TextInput } from 'react-native-gesture-handler';
 import styles from './FormField.styles';
 
 const FormField = (props: FormFieldProps) => {
+  const [value, setValue] = React.useState(props.value ?? '');
   const InputField = React.useMemo(
     () => () => {
       switch (props.value.constructor.name) {
@@ -19,8 +20,9 @@ const FormField = (props: FormFieldProps) => {
                   : 'default'
               }
               style={styles.textInput}
-              value={props.value.toString()}
-              onChangeText={(value: string) =>
+              defaultValue={value.toString()}
+              onChangeText={(_value: string) => setValue(_value)}
+              onEndEditing={() =>
                 props.onChange(props.value.constructor(value))
               }
               {...props.fieldProps}

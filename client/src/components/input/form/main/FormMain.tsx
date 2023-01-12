@@ -15,6 +15,7 @@ const FormMain = (props: FormMainProps) => {
 
   const onSubmit = (evt: GestureResponderEvent) => {
     evt.preventDefault();
+
     try {
       validate(model);
     } catch (error: any) {
