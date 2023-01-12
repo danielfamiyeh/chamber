@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { scaleX, scaleY } from '../../../../../utils/methods/scaleable-units';
+import ThemeManager from '../../../../../utils/ui/ThemeManger';
 
 const contentSelectStyles = StyleSheet.create({
   container: {
@@ -18,12 +19,14 @@ const contentSelectStyles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   contentTypeContainer: {
-    borderColor: 'grey',
+    borderColor: ThemeManager.theme.info,
     borderRadius: scaleX(8),
     paddingVertical: scaleY(8),
     paddingHorizontal: scaleY(16),
   },
-  contentTypeIcon: {},
+  contentTypeIcon: {
+    color: ThemeManager.theme.info,
+  },
   contentTypeText: {
     fontSize: scaleX(16),
     textAlign: 'center',
