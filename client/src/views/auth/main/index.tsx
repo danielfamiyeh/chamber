@@ -1,48 +1,50 @@
 import React from 'react';
 import { startCase } from 'lodash';
-import { Text, Image, View, Alert } from 'react-native';
 import { useRoute } from '@react-navigation/native';
+import { Text, Image, View, Alert } from 'react-native';
 
 import Button from '../../../components/input/button/Button';
+import { useSession } from '../../../components/context/session';
 import FormMain from '../../../components/input/form/main/FormMain';
 
 import { authForm, AuthMethod } from './utils/constants';
-import styles from './styles';
-import { serverRequest } from '../../../utils/methods/network';
 import { toast } from '../../../utils/methods/toast';
+import { API_SERVER_URL } from '../../../config';
+import styles from './styles';
 
 const AuthMain = ({ navigation: { navigate, push } }) => {
   const { params = {} } = useRoute();
   const { method = 'signIn' } = params;
 
-  const onSubmit = React.useCallback(
-    (model: AuthModel) => () =>
-      serverRequest('/auth', {
-        method: method === 'signIn' ? 'post' : 'put',
-        body: JSON.stringify(model),
-      })
-        .then((res) => {
-          console.log(res);
-          toast.success('Success', 'Signing you in...');
-        })
-        .catch(({ message }) => Alert.alert('Something went wrong', message)),
-    [method]
-  );
+  const { setSession } = useSession();
 
-  const form = React.useMemo(() => authForm[method as AuthMethod], [method]);
-  const otherMethod = React.useMemo(
-    () => (method === 'signIn' ? 'signUp' : 'signIn'),
-    [method]
-  );
-  const linkText = React.useMemo(
-    () =>
-      `${
-        method === 'signIn' ? "Don't" : 'Already'
-      } have an account? ${startCase(
-        method === 'signIn' ? 'signUp' : 'signIn'
-      )}`,
-    [method]
-  );
+  const linkText = `${
+    method === 'signIn' ? "Don't" : 'Already'
+  } have an account? ${startCase(method === 'signIn' ? 'signUp' : 'signIn')}`;
+  const otherMethod = method === 'signIn' ? 'signUp' : 'signIn';
+  const form = authForm[method as AuthMethod];
+
+  const onSubmit = async (model: AuthModel) => {
+    try {
+      const session = await (
+        await fetch(
+          `${API_SERVER_URL}/auth/${method === 'signIn' ? 'post' : 'put'}`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            method: 'post',
+            body: JSON.stringify(model),
+          }
+        )
+      ).json();
+      if (session.error) {
+        throw new Error(session.error);
+      }
+    } catch (error: any) {
+      Alert.alert('An error occurred', error.message);
+    }
+  };
 
   return (
     <View style={styles.container}>

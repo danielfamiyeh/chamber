@@ -17,6 +17,7 @@ export const proxyRequest = (req: ProxyRequest, res: Response) =>
     ).data;
     if (error) throw new Error(error);
 
+    console.log(req.body);
     // Proxy request to dynamic endpoint
     const { data } = await axios[method](
       keyToUrl(serviceKey, ...subpath.split('/')),

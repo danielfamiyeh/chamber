@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, GestureResponderEvent, Text, View } from 'react-native';
+import { Alert, Text, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
 import FormFooter from '../footer/FormFooter';
@@ -12,12 +12,8 @@ const FormMain = (props: FormMainProps) => {
   const { validate, fieldProps } = props.form;
 
   const modelRef = React.useRef(props.form.model);
-  // const [model, setModel] = React.useState(props.form.model);
 
-  const onSubmit = (evt: GestureResponderEvent) => {
-    evt.preventDefault();
-
-    console.log(modelRef.current);
+  const onSubmit = () => {
     try {
       validate(modelRef.current);
     } catch (error: any) {
