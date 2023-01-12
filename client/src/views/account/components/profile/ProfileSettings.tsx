@@ -1,17 +1,28 @@
 import React from 'react';
 import moment from 'moment';
 import { useQuery } from 'react-query';
-import { Text, View, Image } from 'react-native';
+import { Alert, Text, View, Image } from 'react-native';
 
 import { useSession } from '../../../../components/context/session';
 
+import { serverRequest } from '../../../../utils/methods/network';
 import { testUser } from '../../../../utils/data/test/user';
 import { Session } from '../../../../../types';
 import styles from './ProfileSettings.styles';
-import { API_SERVER_URL } from '../../../../config';
 
 const ProfileSettings = (props: ProfileSettingsProps) => {
   const { val: session } = useSession();
+  const { data, isError, error, isLoading } = useQuery('user', () =>
+    serverRequest('user/get')
+  );
+
+  React.useEffect(() => {
+    if (!isLoading && data?.error) {
+      Alert.alert('An error occured', data.error);
+    } else if (isError) {
+      Alert.alert('An error occured', error.message);
+    }
+  }, [isLoading, isError, error, data.error]);
 
   return (
     <View style={styles.container}>

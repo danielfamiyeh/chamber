@@ -33,7 +33,7 @@ const AuthMain = ({ navigation: { push } }) => {
     );
 
     if (session.error) {
-      Alert.alert(session.error);
+      return Alert.alert(session.error);
     } else if (session?._id && session?.token) {
       toast.success('Success', 'Signing you in. Please wait...');
       return setSession(session);
