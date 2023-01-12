@@ -1,10 +1,17 @@
 import React from 'react';
-import { ScrollView } from 'react-native-gesture-handler';
+import { Content, ContentType, Post } from '@danielfamiyeh/chamber-common';
 
-import styles from './styles';
+import ContentSelect from './components/content-select/ContentSelect';
 
 const CreatePost = ({ navigation: { navigate } }) => {
-  return <ScrollView contentContainerStyle={styles.container} />;
+  const [contentValue, setContentValue] = React.useState('');
+  const [contentType, setContentType] = React.useState<ContentType>();
+
+  return contentType ? (
+    <></>
+  ) : (
+    <ContentSelect setContentType={setContentType} />
+  );
 };
 
 export default CreatePost;
