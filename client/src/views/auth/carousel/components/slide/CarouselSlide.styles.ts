@@ -18,6 +18,7 @@ const carouselSlideStyles = StyleSheet.create({
   title: {
     textAlign: 'center',
     fontSize: scaleX(24),
+    marginBottom: scaleY(12),
   },
   description: {
     textAlign: 'center',

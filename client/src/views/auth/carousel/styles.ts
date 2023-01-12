@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { scaleY } from '../../../utils/methods/scaleable-units';
+import { scaleX, scaleY } from '../../../utils/methods/scaleable-units';
 
 const carouselStyles = StyleSheet.create({
   container: {
@@ -10,7 +10,12 @@ const carouselStyles = StyleSheet.create({
   },
   ctaContainer: {
     height: 24,
-    backgroundColor: 'black',
+    flexDirection: 'row',
+    paddingHorizontal: scaleX(24),
+    justifyContent: 'space-between',
+  },
+  controlButton: {
+    borderWidth: 0,
   },
   ctaPrev: {},
   ctaNext: {},

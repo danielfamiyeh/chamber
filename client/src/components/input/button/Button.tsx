@@ -11,7 +11,7 @@ const Button = (props: ButtonProps) => {
 
   return (
     <Pressable
-      onPress={props.onPress}
+      onPress={props.disabled ? () => {} : props.onPress}
       onPressIn={() => setIsPressed(true)}
       onPressOut={() => setIsPressed(false)}
       style={{

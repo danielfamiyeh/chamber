@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 
 import CarouselSlide from './components/slide/CarouselSlide';
 import Button from '../../../components/input/button/Button';
@@ -8,8 +8,17 @@ import { slides } from './utils/constants';
 import styles from './styles';
 
 const Carousel = () => {
-  const [slideIdx, setSlideIdx] = React.useState(0);
-  const currentSlide = React.useMemo(() => slides[slideIdx], [slideIdx]);
+  const [state, _setState] = React.useState({
+    slideIdx: 0,
+  });
+
+  const setState = (ns: object) =>
+    _setState((_state) => ({ ..._state, ...ns }));
+
+  const currentSlide = React.useMemo(
+    () => slides[state.slideIdx],
+    [state.slideIdx]
+  );
 
   return (
     <View style={styles.container}>
@@ -19,11 +28,19 @@ const Carousel = () => {
         description={currentSlide.description}
       />
       <View style={styles.ctaContainer}>
-        <Button></Button>
-        <Button></Button>
+        <Button disabled style={styles.controlButton}>
+          <Text>Prev.</Text>
+        </Button>
+        <Button style={styles.controlButton}>
+          <Text>Next.</Text>
+        </Button>
       </View>
     </View>
   );
 };
+
+export interface CarouselState {
+  slideIdx: number;
+}
 
 export default Carousel;
