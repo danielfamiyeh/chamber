@@ -25,6 +25,7 @@ const FormMain = (props: FormMainProps) => {
     <View style={styles.container}>
       <Text style={styles.title}>{props.title}</Text>
       <View style={styles.titleDivider} />
+      {props.AboveForm}
       <FlatList
         style={styles.formContainer}
         data={Object.entries(model)}
@@ -52,7 +53,8 @@ interface FormMainProps {
   title: string;
   model: FormModel;
   onValidate: Function;
-  FooterChildren: React.ReactNode;
+  AboveForm?: React.ReactNode;
+  FooterChildren?: React.ReactNode;
   onSubmit: Function;
   style?: object;
 }

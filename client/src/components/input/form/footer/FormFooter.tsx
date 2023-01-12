@@ -9,7 +9,9 @@ const FormFooter = (props: FormFooterProps) => {
   return (
     <View style={styles.container}>
       <Button style={styles.submitButton} onPress={props.onSubmit}>
-        <Text>{props.submitButtonText ?? 'Submit'}</Text>
+        <Text style={styles.submitButtonText}>
+          {props.submitButtonText ?? 'Submit'}
+        </Text>
       </Button>
     </View>
   );
