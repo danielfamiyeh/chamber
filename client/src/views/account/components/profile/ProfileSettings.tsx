@@ -5,14 +5,11 @@ import { Alert, Text, View, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Loading from '../../../../components/display/indicator/loading/Loading';
-import { useSession } from '../../../../components/context/session';
 
 import { serverRequest } from '../../../../utils/methods/network';
-import { testUser } from '../../../../utils/data/test/user';
-import { Session } from '../../../../../types';
 import styles from './ProfileSettings.styles';
 
-const ProfileSettings = (props: ProfileSettingsProps) => {
+const ProfileSettings = () => {
   const { data, isLoading } = useQuery('user', () =>
     serverRequest('user/post?subpath=user', {}, true)
   );
@@ -54,9 +51,5 @@ const ProfileSettings = (props: ProfileSettingsProps) => {
     </View>
   );
 };
-
-export interface ProfileSettingsProps {
-  session: Session;
-}
 
 export default ProfileSettings;
