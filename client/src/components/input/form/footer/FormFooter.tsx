@@ -13,6 +13,7 @@ const FormFooter = (props: FormFooterProps) => {
           {props.submitButtonText ?? 'Submit'}
         </Text>
       </Button>
+      {props.children}
     </View>
   );
 };
