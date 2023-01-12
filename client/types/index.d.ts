@@ -86,3 +86,11 @@ export interface ISessionContext {
     setterOrSession: ((oldSession: Session) => void) | Session
   ) => void;
 }
+
+export type FormModel = Record<string, string | number>;
+export type FormValidator = (model: FormModel) => void;
+
+export interface Form {
+  model: FormModel;
+  validate: FormValidator;
+}

@@ -1,21 +1,22 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import CreateUserView from '../../../views/auth/create-user';
-
-import { useUser } from '../../context/user';
 import { useSession } from '../../context/session';
+import AuthFlow from './flows/auth';
 import TabNavigator from '../tab';
 
 const Stack = createStackNavigator();
 
 const StackNavigator = () => {
-  const { user } = useUser();
   const { session } = useSession();
 
   return (
-    <Stack.Navigator>
-      {session?.id && user?.id ? (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      {session?.id && session?.token ? (
         <>
           <Stack.Screen
             name="App"
@@ -24,7 +25,7 @@ const StackNavigator = () => {
           />
         </>
       ) : (
-        <Stack.Screen name="Sign Up" component={CreateUserView} />
+        <Stack.Screen name="AuthFlow" component={AuthFlow} />
       )}
     </Stack.Navigator>
   );

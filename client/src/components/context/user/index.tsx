@@ -17,6 +17,7 @@ export const UserProvider = (props: any) => {
     '@user',
     UserSchema.model
   );
+
   return (
     <UserContext.Provider
       {...props}
