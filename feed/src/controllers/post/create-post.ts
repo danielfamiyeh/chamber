@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import { CreatePostRequest } from '../..';
+import { CreatePostRequest } from '../../..';
 
 export const createPost = (req: CreatePostRequest, res: Response) => {
   const {

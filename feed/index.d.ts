@@ -24,3 +24,10 @@ export interface UpdatePostRequest extends Request {
 }
 
 export type DeletePostRequest = GetPostRequest;
+
+export interface GetFeedRequest extends Request {
+  query: {
+    start: string;
+    end: string;
+  };
+}

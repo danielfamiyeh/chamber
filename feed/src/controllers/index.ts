@@ -1,4 +1,2 @@
-export { getPost } from './get-post';
-export { createPost } from './create-post';
-export { deletePost } from './delete-post';
-export { updatePost } from './update-post';
+export { feedRouter } from './feed';
+export { postRouter } from './post';
