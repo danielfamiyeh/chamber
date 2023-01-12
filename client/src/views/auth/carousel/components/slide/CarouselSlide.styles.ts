@@ -20,6 +20,10 @@ const carouselSlideStyles = StyleSheet.create({
     fontSize: scaleX(24),
     marginBottom: scaleY(12),
   },
+  titleDivider: {
+    height: 1,
+    backgroundColor: 'lightgrey',
+  },
   description: {
     textAlign: 'center',
   },
