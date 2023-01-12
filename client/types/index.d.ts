@@ -64,8 +64,6 @@ export interface ButtonProps extends ThemeableComponentProps {
   style?: object;
 }
 
-export type ServerRequestReturnType = 'json' | 'blob' | 'text' | 'arrayBuffer';
-
 export interface Session {
   id: string;
   token: string;

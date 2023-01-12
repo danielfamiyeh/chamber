@@ -1,11 +1,14 @@
-import moment from 'moment';
 import React from 'react';
+import moment from 'moment';
+import { useQuery } from 'react-query';
 import { Text, View, Image } from 'react-native';
 
 import { useSession } from '../../../../components/context/session';
 
 import { testUser } from '../../../../utils/data/test/user';
+import { Session } from '../../../../../types';
 import styles from './ProfileSettings.styles';
+import { API_SERVER_URL } from '../../../../config';
 
 const ProfileSettings = (props: ProfileSettingsProps) => {
   const { val: session } = useSession();
@@ -34,6 +37,8 @@ const ProfileSettings = (props: ProfileSettingsProps) => {
   );
 };
 
-export interface ProfileSettingsProps {}
+export interface ProfileSettingsProps {
+  session: Session;
+}
 
 export default ProfileSettings;

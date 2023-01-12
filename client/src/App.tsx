@@ -14,6 +14,7 @@ const App = () => {
   React.useEffect(() => {
     preloadImages().then(() => setImagesLoaded(true));
   }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <AppProvider>

@@ -1,12 +1,13 @@
 import React from 'react';
-import { UserProvider } from './user';
+
+import { QueryProvider } from './query';
 import { SessionProvider } from './session';
 
 const AppProvider = ({ children }: { children: React.ReactNode }) => {
   return (
-    <SessionProvider>
-      <UserProvider>{children}</UserProvider>
-    </SessionProvider>
+    <QueryProvider>
+      <SessionProvider>{children}</SessionProvider>
+    </QueryProvider>
   );
 };
 
