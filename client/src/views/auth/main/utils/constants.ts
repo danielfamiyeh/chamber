@@ -44,7 +44,6 @@ export const authForm: Record<
     },
 
     validate(model: FormModel) {
-      console.log({ model });
       if (!model.username) {
         throw new Error('Username field cannot be left blank');
       }

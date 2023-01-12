@@ -28,9 +28,13 @@ export const proxyRequest = (req: ProxyRequest, res: Response) =>
     const { data } = await axios[method](
       keyToUrl(serviceKey, ...subpath.split('/')),
       {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
         ...req.body,
         ...Object(authPayload),
+        data: { ...req.body, ...Object(authPayload) },
       }
     );
 

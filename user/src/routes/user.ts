@@ -1,13 +1,17 @@
 import { Router } from 'express';
-import { getUser } from '../controllers/user/get-user';
-import { createUser } from '../controllers/user/create-user';
 import { trycatchAsync } from '@danielfamiyeh/chamber-common';
+
+import {
+  getUser,
+  createUser,
+  updateUser,
+  deleteUser,
+} from '../controllers/user';
 
 export const userRouter = Router()
   .post('/', (req, res) =>
     trycatchAsync(res, async () => {
       const user = await getUser(req.body._id);
-
       return res.json(user);
     })
   )
@@ -18,7 +22,8 @@ export const userRouter = Router()
     })
   )
   .delete('/', (req, res) =>
-    trycatchAsync(res, () => {
-      return res.json({});
+    trycatchAsync(res, async () => {
+      const success = await deleteUser(req.body._id);
+      return res.json({ success });
     })
   );

@@ -9,7 +9,6 @@ const useLocalStorage = <T>(key: string, initialValue: T) => {
     /** Load value from local storage onMount */
     const init = async () => {
       const storedValue = await AsyncStorage.getItem(key);
-      console.log({ storedValue });
       if (storedValue) {
         setVal(JSON.parse(storedValue));
       }

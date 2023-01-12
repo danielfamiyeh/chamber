@@ -22,6 +22,8 @@ const profileStyles = StyleSheet.create({
     height: avatarSize,
     borderRadius: avatarSize / 2,
     alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   username: {
     alignSelf: 'center',
