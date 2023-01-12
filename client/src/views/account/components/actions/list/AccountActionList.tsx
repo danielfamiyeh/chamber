@@ -4,8 +4,9 @@ import { FlatList } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { useSession } from '../../../../../components/context/session';
-
 import AccountAction from '../main/AccountAction';
+
+import { Session } from '../../../../../../types';
 import { actions } from './utils/constants';
 
 const AccountActionList = (props: AccountActionListProps) => {
@@ -46,6 +47,8 @@ const AccountActionList = (props: AccountActionListProps) => {
   );
 };
 
-interface AccountActionListProps {}
+interface AccountActionListProps {
+  session: Session;
+}
 
 export default AccountActionList;
