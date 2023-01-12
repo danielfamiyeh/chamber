@@ -16,7 +16,7 @@ const StackNavigator = () => {
         headerShown: false,
       }}
     >
-      {session?.id && session?.token ? (
+      {session?._id && session?.token ? (
         <>
           <Stack.Screen
             name="App"

@@ -12,7 +12,7 @@ import { toast } from '../../../utils/methods/toast';
 import { API_SERVER_URL } from '../../../config';
 import styles from './styles';
 
-const AuthMain = ({ navigation: { navigate, push } }) => {
+const AuthMain = ({ navigation: { push } }) => {
   const { params = {} } = useRoute();
   const { method = 'signIn' } = params;
 
@@ -38,9 +38,15 @@ const AuthMain = ({ navigation: { navigate, push } }) => {
           }
         )
       ).json();
+
       if (session.error) {
         throw new Error(session.error);
+      } else if (session?._id && session?.token) {
+        toast.success('Success', 'Signing you in. Please wait...');
+        return setSession(session);
       }
+
+      throw new Error("We couldn't complete your request");
     } catch (error: any) {
       Alert.alert('An error occurred', error.message);
     }

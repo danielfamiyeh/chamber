@@ -33,7 +33,7 @@ export type Chat = {
 };
 
 export type Session = {
-  id: string;
+  _id: string;
   token: string;
 };
 
