@@ -13,7 +13,8 @@ const AuthMain = ({ navigation: { navigate, push } }) => {
   const { params = {} } = useRoute();
   const { method = 'signIn' } = params;
 
-  const onSubmit = React.useCallback(() => {}, []);
+  const onSubmit = React.useCallback(() => {}, [method]);
+
   const form = React.useMemo(() => authForm[method as AuthMethod], [method]);
   const otherMethod = React.useMemo(
     () => (method === 'signIn' ? 'signUp' : 'signIn'),
