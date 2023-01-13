@@ -28,7 +28,9 @@ export const getPost = async (req: GetPostRequest, res: Response) => {
       .map((friendId) => friendId.toString())
       .includes(userId)
   ) {
-    throw new Error("Cannot fetch post, not in the creator's friends list.");
+    throw new Error(
+      'Cannot fetch post, you have no relationship to the creator'
+    );
   }
 
   return res.json({ post });

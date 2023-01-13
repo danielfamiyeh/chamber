@@ -12,10 +12,9 @@ export type ServiceName =
   | 'api'
   | 'chat'
   | 'feed'
-  | 'friend'
+  | 'relationship'
   | 'notify'
   | 'user'
-  | 'friend'
   | 'auth';
 export type ServiceMap = Record<string, ServiceObj>;
 export type Registry = Record<ServiceName, ServiceMap>;
