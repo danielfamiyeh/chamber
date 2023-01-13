@@ -4,7 +4,7 @@ import { models } from '@danielfamiyeh/chamber-common/dist/models';
 export async function sendFriendRequest(username1: string, username2: string) {
   const requester = await models.User.findOne({ username: username1 })
     .populate('friends')
-    .populate('outgoingFriendRequests')
+    .populate('outgoingRelationRequests')
     .exec();
 
   const requested = await models.User.findOne({ username: username2 });
@@ -14,7 +14,7 @@ export async function sendFriendRequest(username1: string, username2: string) {
   }
 
   if (
-    (requester.outgoingFriendRequests as unknown as FriendRequest[]).find(
+    (requester.outgoingRelationRequests as unknown as FriendRequest[]).find(
       ({ to }) => to.toString() === requested._id.toString()
     )
   ) {
@@ -30,7 +30,7 @@ export async function sendFriendRequest(username1: string, username2: string) {
     { username: username1 },
     {
       $push: {
-        outgoingFriendRequests: doc._id,
+        outgoingRelationRequests: doc._id,
       },
     }
   );
@@ -39,7 +39,7 @@ export async function sendFriendRequest(username1: string, username2: string) {
     { username: username2 },
     {
       $push: {
-        incomingFriendRequests: doc._id,
+        incomingRelationRequests: doc._id,
       },
     }
   );

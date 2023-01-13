@@ -7,19 +7,19 @@ export async function rejectFriendRequest(
 ) {
   const requester = await models.User.findOne({ username: username1 })
     .populate('friends')
-    .populate('outgoingFriendRequests')
+    .populate('outgoingRelationRequests')
     .exec();
 
   const requested = await models.User.findOne({
     username: username2,
-  }).populate('incomingFriendRequests');
+  }).populate('incomingRelationRequests');
 
   if (!(requester && requested)) {
     throw new Error('Trouble fetching user data');
   }
 
   if (
-    !(requested?.incomingFriendRequests as unknown as FriendRequest[]).find(
+    !(requested?.incomingRelationRequests as unknown as FriendRequest[]).find(
       ({ from }) => from.toString() === requester._id.toString()
     )
   ) {
@@ -35,8 +35,8 @@ export async function rejectFriendRequest(
     { username: username1 },
     {
       $set: {
-        outgoingFriendRequests: (
-          requester.outgoingFriendRequests as unknown as FriendRequest[]
+        outgoingRelationRequests: (
+          requester.outgoingRelationRequests as unknown as FriendRequest[]
         ).filter(({ to }) => to.toString() !== requested._id.toString()),
       },
     }
@@ -46,8 +46,8 @@ export async function rejectFriendRequest(
     { username: username2 },
     {
       $set: {
-        incomingFriendRequests: (
-          requested.incomingFriendRequests as unknown as FriendRequest[]
+        incomingRelationRequests: (
+          requested.incomingRelationRequests as unknown as FriendRequest[]
         ).filter(({ from }) => from.toString() !== requester._id.toString()),
       },
     }

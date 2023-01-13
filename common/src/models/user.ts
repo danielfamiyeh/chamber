@@ -23,13 +23,18 @@ const UserSchema = new Schema<IUser>(
       },
     ],
 
-    friends: [{ type: Schema.Types.ObjectId, ref: 'user' }],
+    relations: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'relationship',
+      },
+    ],
 
-    incomingFriendRequests: [
+    incomingRelationRequests: [
       { type: Schema.Types.ObjectId, ref: 'friendrequest' },
     ],
 
-    outgoingFriendRequests: [
+    outgoingRelationRequests: [
       { type: Schema.Types.ObjectId, ref: 'friendrequest' },
     ],
   },

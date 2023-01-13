@@ -1,6 +1,6 @@
 {
   "name": "@danielfamiyeh/chamber-common",
-  "version": "1.0.17",
+  "version": "1.0.20",
   "description": "",
   "main": "dist/index.js",
   "types": "./types.d.ts",

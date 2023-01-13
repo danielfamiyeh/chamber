@@ -1,7 +1,6 @@
 {
-  "name": "@danielfamiyeh/chamber-feed",
+  "name": "@danielfamiyeh/chamber-relationship",
   "version": "1.0.0",
-  "description": "",
   "main": "dist/index.js",
   "scripts": {
     "test": "ts-mocha -p tsconfig.json tests/**/*.test.ts",
@@ -31,5 +30,6 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "description": ""
 }

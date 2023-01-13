@@ -2,11 +2,13 @@ export { models, log, trycatch, trycatchAsync, connectDb } from './src';
 
 export type LogLevel = 'info' | 'warning' | 'error';
 
-export type FriendRequest = {
+export type RelationRequest = {
   _id: string;
   to: User | string;
   from: User | string;
   createdAt: Date;
+  updatedAt: Date;
+  type: RelationType;
 };
 
 export type Chat = {
@@ -23,9 +25,9 @@ export type User = {
   username: string;
   password: string;
   chats: (Chat | string)[];
-  friends: (User | string)[];
-  incomingFriendRequests: (FriendRequest | string)[];
-  outgoingFriendRequests: (FriendRequest | string)[];
+  relations: (string | Relation)[];
+  incomingRelationRequests: (RelationRequest | string)[];
+  outgoingRelationRequests: (RelationRequest | string)[];
   validatePassword: (password: string) => Promise<Boolean>;
 };
 
@@ -61,6 +63,15 @@ export type Post = {
   _id: string;
   content: (string | Content<Post>)[];
   createdBy: string | User;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type RelationType = 'friend' | 'closeFriend';
+
+export type Relation = {
+  type: RelationType;
+  user: User | string;
   createdAt: Date;
   updatedAt: Date;
 };

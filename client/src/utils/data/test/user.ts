@@ -4,8 +4,8 @@ import { testFriendRequest } from './friend-request';
 export const testUser: Omit<User, 'validatePassword' | 'password'> = {
   _id: 'test-user-1',
   username: 'daniel',
-  incomingFriendRequests: [testFriendRequest],
-  outgoingFriendRequests: [],
+  incomingRelationRequests: [testFriendRequest],
+  outgoingRelationRequests: [],
   friends: [testUser2],
   createdAt: new Date(),
   updatedAt: new Date(),
@@ -17,8 +17,8 @@ export const testUser: Omit<User, 'validatePassword' | 'password'> = {
 export const testUser2: Omit<User, 'validatePassword' | 'password'> = {
   _id: 'test-user-2',
   username: 'daniel2',
-  incomingFriendRequests: [],
-  outgoingFriendRequests: [],
+  incomingRelationRequests: [],
+  outgoingRelationRequests: [],
   friends: [testUser],
   chats: [],
 };
@@ -26,8 +26,8 @@ export const testUser2: Omit<User, 'validatePassword' | 'password'> = {
 export const testUser3: Omit<User, 'validatePassword' | 'password'> = {
   _id: 'test-user-2',
   username: 'daniel2',
-  incomingFriendRequests: [],
-  outgoingFriendRequests: [testFriendRequest],
+  incomingRelationRequests: [],
+  outgoingRelationRequests: [testFriendRequest],
   friends: [],
   chats: [],
 };

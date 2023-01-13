@@ -1,5 +1,5 @@
-import { ServiceMap, ServiceName } from '../../types';
 import { log } from './logger';
+import { ServiceMap, ServiceName } from '../../types';
 
 export class ServiceRegistry {
   private static services: Record<ServiceName, ServiceMap> = {
@@ -7,9 +7,9 @@ export class ServiceRegistry {
     auth: {},
     chat: {},
     feed: {},
-    friend: {},
-    notify: {},
     user: {},
+    notify: {},
+    relationship: {},
   };
 
   static key(serviceName: string, ip: string, port: number) {

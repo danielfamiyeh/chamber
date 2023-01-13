@@ -1,13 +1,12 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { TextInput, View } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
 
 import SearchBar from './components/search-bar/SearchBar';
+import SearchResultList from './components/search-results/list/SearchResultsList';
 
 import { getFriends, searchUsers } from './utils/methods';
 import styles from './styles';
-import SearchResultList from './components/search-results/list/SearchResultsList';
 
 const FriendsView = () => {
   const { data: friendsData, isLoading: isLoadingFriends } = useQuery(
@@ -39,7 +38,7 @@ const FriendsView = () => {
       <SearchResultList
         onSearchAgain={onSearchAgain}
         results={friendsData?.results ?? []}
-        hasSearched={searchTerm && !isLoadingSearchData}
+        hasSearched={!!searchTerm && !isLoadingSearchData}
       />
     </View>
   );

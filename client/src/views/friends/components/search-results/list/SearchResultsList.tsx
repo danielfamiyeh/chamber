@@ -33,7 +33,7 @@ const SearchResultList = (props: SearchResultListProps) => {
 
 export interface SearchResultListProps {
   onSearchAgain: () => void;
-  results: { user: User; addedAt: Date }[];
+  results: { user: User; friendsSince: Date }[];
   hasSearched: boolean;
 }
 
