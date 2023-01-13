@@ -6,6 +6,7 @@ import {
   createUser,
   updateUser,
   deleteUser,
+  searchUser,
 } from '../controllers/user';
 
 export const userRouter = Router()
@@ -26,4 +27,7 @@ export const userRouter = Router()
       const success = await deleteUser(req.body._id);
       return res.json({ success });
     })
+  )
+  .post('/search', (req, res) =>
+    trycatchAsync(res, () => searchUser(req, res))
   );
