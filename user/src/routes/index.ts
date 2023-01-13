@@ -1,8 +1,26 @@
 import { Router } from 'express';
+import { trycatchAsync } from '@danielfamiyeh/chamber-common';
 
-import { userRouter } from './user';
-import { friendRequestRouter } from './friend-request';
+import { getUser, deleteUser, searchUser } from '../controllers';
 
 export const router = Router()
-  .use('/user', userRouter)
-  .use('/friend-request', friendRequestRouter);
+  .post('/', (req, res) =>
+    trycatchAsync(res, async () => {
+      const user = await getUser(req.body._id);
+      return res.json(user);
+    })
+  )
+  .patch('/', (req, res) =>
+    trycatchAsync(res, async () => {
+      return res.json({});
+    })
+  )
+  .delete('/', (req, res) =>
+    trycatchAsync(res, async () => {
+      const success = await deleteUser(req.body._id);
+      return res.json({ success });
+    })
+  )
+  .post('/search', (req, res) =>
+    trycatchAsync(res, () => searchUser(req, res))
+  );
