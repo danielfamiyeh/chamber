@@ -1,4 +1,4 @@
-import { FriendRequest } from './friend-request';
+import { Relation, RelationRequest } from './relation';
 import { Message } from './message';
 import { Content } from './content';
 import { Chat } from './chat';
@@ -11,5 +11,6 @@ export const models = {
   Post,
   User,
   Message,
-  FriendRequest,
+  Relation,
+  RelationRequest,
 };

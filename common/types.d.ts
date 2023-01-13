@@ -2,11 +2,13 @@ export { models, log, trycatch, trycatchAsync, connectDb } from './src';
 
 export type LogLevel = 'info' | 'warning' | 'error';
 
-export type FriendRequest = {
+export type RelationRequest = {
   _id: string;
   to: User | string;
   from: User | string;
   createdAt: Date;
+  updatedAt: Date;
+  type: RelationType;
 };
 
 export type Chat = {
@@ -25,8 +27,8 @@ export type User = {
   password: string;
   chats: (Chat | string)[];
   relation: RelationType;
-  incomingFriendRequests: (FriendRequest | string)[];
-  outgoingFriendRequests: (FriendRequest | string)[];
+  incomingRelationRequests: (RelationRequest | string)[];
+  outgoingRelationRequests: (RelationRequest | string)[];
   validatePassword: (password: string) => Promise<Boolean>;
 };
 
