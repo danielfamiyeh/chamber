@@ -5,6 +5,7 @@ import { TextInput, View } from 'react-native';
 import SearchBar from './components/search-bar/SearchBar';
 import SearchResultList from './components/search-results/list/SearchResultsList';
 
+import { useDebounce } from '../../utils/hooks/useDebounce';
 import { getFriends, searchUsers } from './utils/methods';
 import styles from './styles';
 
@@ -16,7 +17,7 @@ const FriendsView = () => {
 
   const { data: searchData, isLoading: isLoadingSearchData } = useQuery(
     'search',
-    searchUsers
+    onSearch
   );
 
   const [searchTerm, setSearchTerm] = React.useState('');
@@ -27,6 +28,12 @@ const FriendsView = () => {
     searchBarInputRef.current?.focus();
   };
 
+  const onSearch = React.useCallback(
+    () => searchUsers(searchTerm),
+    [searchTerm]
+  );
+
+  useDebounce(onSearch, [searchTerm], 400);
   return (
     <View style={styles.container}>
       <SearchBar

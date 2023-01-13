@@ -21,15 +21,6 @@ const screens = [
       tabBarLabel: 'Feed',
     },
   },
-  {
-    name: 'MessageFlow',
-    Component: MessageFlow,
-    iconName: 'wechat',
-    options: {
-      headerShown: false,
-      tabBarLabel: 'Chats',
-    },
-  },
 
   {
     name: 'FriendsFlow',
@@ -38,6 +29,16 @@ const screens = [
     options: {
       headerShown: false,
       tabBarLabel: 'Friends',
+    },
+  },
+
+  {
+    name: 'MessageFlow',
+    Component: MessageFlow,
+    iconName: 'wechat',
+    options: {
+      headerShown: false,
+      tabBarLabel: 'Chats',
     },
   },
 
