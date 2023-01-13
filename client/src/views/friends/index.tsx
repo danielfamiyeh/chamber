@@ -37,8 +37,9 @@ const FriendsView = () => {
         inputRef={searchBarInputRef}
       />
       <SearchResultList
-        results={friendsData?.results ?? []}
         onSearchAgain={onSearchAgain}
+        results={friendsData?.results ?? []}
+        hasSearched={searchTerm && !isLoadingSearchData}
       />
     </View>
   );

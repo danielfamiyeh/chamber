@@ -23,9 +23,10 @@ const searchResultsStyles = StyleSheet.create({
   },
 
   listEmptyText: {
-    fontSize: scaleX(14),
+    color: 'grey',
     alignSelf: 'center',
     textAlign: 'center',
+    fontSize: scaleX(18),
   },
 
   noResultsPrompt: {
@@ -34,6 +35,15 @@ const searchResultsStyles = StyleSheet.create({
     marginBottom: scaleY(6),
     alignSelf: 'center',
     textAlign: 'center',
+  },
+
+  searchButton: {
+    alignSelf: 'center',
+    marginTop: scaleY(10),
+    borderRadius: scaleX(4),
+    paddingVertical: scaleY(8),
+    paddingHorizontal: scaleX(24),
+    backgroundColor: ThemeManager.theme.info,
   },
 
   searchAgainButton: {

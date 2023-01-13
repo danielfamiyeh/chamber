@@ -8,9 +8,7 @@ import Button from '../../../../../components/input/button/Button';
 import styles from './SearchResultsList.styles';
 
 const SearchResultList = (props: SearchResultListProps) => {
-  const isEmpty = !props.results.length;
-
-  return isEmpty ? (
+  return !props.results.length && props.hasSearched ? (
     <View style={styles.listEmptyContainer}>
       <Icon name="sad-cry" style={styles.listEmptyIcon} size={96} />
       <Text style={styles.noResultsPrompt}>
@@ -21,13 +19,22 @@ const SearchResultList = (props: SearchResultListProps) => {
       </Button>
     </View>
   ) : (
-    <></>
+    <View style={styles.listEmptyContainer}>
+      <Icon name="sad-cry" style={styles.listEmptyIcon} size={96} />
+      <Text style={styles.listEmptyText}>How sad.</Text>
+      <Text style={styles.listEmptyText}>You have no friends!</Text>
+
+      <Button style={styles.searchButton} onPress={props.onSearchAgain}>
+        <Text style={styles.searchAgainButtonText}>Find Some</Text>
+      </Button>
+    </View>
   );
 };
 
 export interface SearchResultListProps {
   onSearchAgain: () => void;
   results: { user: User; addedAt: Date }[];
+  hasSearched: boolean;
 }
 
 export default SearchResultList;
