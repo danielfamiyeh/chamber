@@ -26,7 +26,7 @@ const UserSchema = new Schema<IUser>(
     relations: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'relationship',
+        ref: 'relation',
       },
     ],
 

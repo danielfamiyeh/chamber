@@ -11,4 +11,4 @@ const RelationSchema = new Schema({
   },
 });
 
-export const Relation = model('relationship', RelationSchema);
+export const Relation = model('relation', RelationSchema);

@@ -4,15 +4,18 @@ import { models } from '@danielfamiyeh/chamber-common/dist/models';
 import { SearchUserRequest } from '../../types';
 
 export const searchUser = async (req: SearchUserRequest, res: Response) => {
-  const { username } = req.query ?? {};
+  const { searchTerm } = req.body ?? {};
 
-  if (!username) {
+  if (!searchTerm) {
     throw new Error('Must provide a username in search query');
   }
 
-  const results = await models.User.find({
-    username: new RegExp(String(username), 'i'),
-  });
+  const results = await models.User.find(
+    {
+      username: new RegExp(String(searchTerm), 'i'),
+    },
+    'username incomingRelationRequests outgoingRelationRequests relations'
+  ).limit(5);
 
   return res.json({ results });
 };
