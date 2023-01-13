@@ -7,17 +7,28 @@ import Button from '../../../../components/input/button/Button';
 import styles from './SearchBar.styles';
 
 const SearchBar = (props: SearchBarProps) => {
+  const onClearAndBlur = () => {
+    if (props.value) {
+      props.onClearInput();
+      props.inputRef.current?.blur();
+    }
+  };
+
   return (
     <Pressable style={styles.container}>
       <TextInput
-        ref={props.inputRef}
         value={props.value}
+        ref={props.inputRef}
         style={styles.input}
         onChangeText={props.onChange}
         placeholder="Search a username..."
       />
-      <Button style={styles.iconContainer}>
-        <Icon name="search" size={24} style={styles.icon} />
+      <Button style={styles.iconContainer} onPress={onClearAndBlur}>
+        <Icon
+          size={24}
+          style={styles.icon}
+          name={props.value ? 'close' : 'search'}
+        />
       </Button>
     </Pressable>
   );
@@ -25,8 +36,9 @@ const SearchBar = (props: SearchBarProps) => {
 
 interface SearchBarProps {
   value: string;
-  inputRef: MutableRefObject<TextInput>;
+  onClearInput: () => void;
   onChange: (searchTerm: string) => void;
+  inputRef: MutableRefObject<TextInput | undefined>;
 }
 
 export default SearchBar;

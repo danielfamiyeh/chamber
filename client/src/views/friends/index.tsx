@@ -22,17 +22,19 @@ const FriendsView = () => {
 
   const [searchTerm, setSearchTerm] = React.useState('');
   const searchBarInputRef = React.useRef<TextInput>();
+  const onClearInput = () => setSearchTerm('');
   const onSearchAgain = () => {
-    setSearchTerm('');
+    onClearInput();
     searchBarInputRef.current?.focus();
   };
 
   return (
     <View style={styles.container}>
       <SearchBar
-        inputRef={searchBarInputRef}
         value={searchTerm}
         onChange={setSearchTerm}
+        onClearInput={onClearInput}
+        inputRef={searchBarInputRef}
       />
       <SearchResultList
         results={friendsData?.results ?? []}
