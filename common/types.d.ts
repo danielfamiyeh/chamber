@@ -15,7 +15,6 @@ export type Chat = {
   recipients: (User | string)[];
   messages: (Message | string)[];
   admins: (User | string)[];
-  relation: (string | Relation)[];
   createdBy: User | string;
   createdAt: Date;
   updatedAt: Date;
@@ -26,7 +25,7 @@ export type User = {
   username: string;
   password: string;
   chats: (Chat | string)[];
-  relation: RelationType;
+  relations: (string | Relation)[];
   incomingRelationRequests: (RelationRequest | string)[];
   outgoingRelationRequests: (RelationRequest | string)[];
   validatePassword: (password: string) => Promise<Boolean>;

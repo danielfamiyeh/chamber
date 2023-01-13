@@ -18,13 +18,13 @@ export const getPost = async (req: GetPostRequest, res: Response) => {
 
   const post = await models.Post.findOne({ _id: postId })
     .populate({
-      path: 'createdBy.friends',
+      path: 'createdBy.relations',
     })
     .populate({ path: 'createdBy.username' })
     .populate('content');
 
   if (
-    !(<User>(<unknown>post.createdBy)).friends
+    !(<User>(<unknown>post.createdBy)).relations
       .map((friendId) => friendId.toString())
       .includes(userId)
   ) {
