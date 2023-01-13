@@ -31,11 +31,11 @@ const UserSchema = new Schema<IUser>(
     ],
 
     incomingRelationRequests: [
-      { type: Schema.Types.ObjectId, ref: 'friendrequest' },
+      { type: Schema.Types.ObjectId, ref: 'relationrequest' },
     ],
 
     outgoingRelationRequests: [
-      { type: Schema.Types.ObjectId, ref: 'friendrequest' },
+      { type: Schema.Types.ObjectId, ref: 'relationrequest' },
     ],
   },
   { timestamps: true }
