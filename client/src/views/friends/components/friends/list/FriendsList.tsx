@@ -16,7 +16,7 @@ const FriendsList = (props: FriendsListProps) => {
 };
 
 interface FriendsListProps {
-  friends: { user: User; addedAt: Date }[];
+  friends: { user: User; friendsSince: Date }[];
 }
 
 export default FriendsList;

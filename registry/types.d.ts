@@ -8,7 +8,6 @@ export type ServiceObj = {
   createdAt: number;
   lastHeartbeat: number;
 };
-export type ServiceMap = Record<string, ServiceObj>;
 export type ServiceName =
   | 'api'
   | 'chat'
@@ -16,7 +15,9 @@ export type ServiceName =
   | 'friend'
   | 'notify'
   | 'user'
+  | 'friend'
   | 'auth';
+export type ServiceMap = Record<string, ServiceObj>;
 export type Registry = Record<ServiceName, ServiceMap>;
 
 export interface GetServiceRequest extends Request {

@@ -13,6 +13,7 @@ export type Chat = {
   recipients: (User | string)[];
   messages: (Message | string)[];
   admins: (User | string)[];
+  relation: (string | Relation)[];
   createdBy: User | string;
   createdAt: Date;
   updatedAt: Date;
@@ -23,7 +24,7 @@ export type User = {
   username: string;
   password: string;
   chats: (Chat | string)[];
-  friends: (User | string)[];
+  relation: RelationType;
   incomingFriendRequests: (FriendRequest | string)[];
   outgoingFriendRequests: (FriendRequest | string)[];
   validatePassword: (password: string) => Promise<Boolean>;
@@ -61,6 +62,15 @@ export type Post = {
   _id: string;
   content: (string | Content<Post>)[];
   createdBy: string | User;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type RelationType = 'friend' | 'closeFriend';
+
+export type Relation = {
+  type: RelationType;
+  user: User | string;
   createdAt: Date;
   updatedAt: Date;
 };

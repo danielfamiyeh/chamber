@@ -10,7 +10,7 @@ const FriendsListItem = (props: FriendsListItemProps) => {
 
 interface FriendsListItemProps {
   user: User;
-  addedAt: Date;
+  friendsSince: Date;
 }
 
 export default FriendsListItem;
