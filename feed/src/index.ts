@@ -11,7 +11,14 @@ import { router } from './routes';
 
 export default express()
   .use(cors())
-  .use(bodyParser.json())
+  .use(bodyParser.json({ limit: '15mb' }))
+  .use(
+    bodyParser.urlencoded({
+      extended: true,
+      limit: '15mb',
+      parameterLimit: 50000,
+    })
+  )
   .use('/api', router)
   .listen(process.env.PORT, () => {
     connectDb(process.env.DB_URI).then(() => {

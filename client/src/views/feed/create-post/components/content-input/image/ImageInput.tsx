@@ -39,13 +39,13 @@ const ImageInput = (props: ContentInputComponentProps) => {
       style={styles.uploadImageButton}
       onPress={() =>
         launchImageLibrary({
-          quality: 1,
+          quality: 0.1,
           mediaType: 'photo',
           includeBase64: true,
         })
           .then(({ assets = [{ base64: '' }] }) => {
             const [{ base64 }] = assets;
-            setContentValue(base64);
+            setContentValue(base64 ?? '');
           })
           .catch(({ message }) => Alert.alert('An error occured', message))
       }

@@ -21,7 +21,5 @@ export const getFeed = (req: GetFeedRequest, res: Response) =>
       .populate('content', 'type value', models.Content)
       .populate('createdBy');
 
-    console.log(posts);
-
     return res.json({ posts });
   });
