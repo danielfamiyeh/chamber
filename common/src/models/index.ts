@@ -7,9 +7,9 @@ import { Post } from './post';
 
 export const models = {
   Chat,
+  Content,
   Post,
   User,
-  Content,
   Message,
   FriendRequest,
 };

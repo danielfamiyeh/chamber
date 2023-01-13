@@ -1,5 +1,7 @@
 import { Router } from 'express';
-import { feedRouter, postRouter } from '../controllers';
+
+import { feedRouter } from './feed';
+import { postRouter } from './posts';
 
 export const router = Router()
   .use('/feed', feedRouter)

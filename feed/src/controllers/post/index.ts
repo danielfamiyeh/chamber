@@ -1,12 +1,4 @@
-import { Router } from 'express';
-
-import { getPost } from './get-post';
-import { createPost } from './create-post';
-import { deletePost } from './delete-post';
-import { updatePost } from './update-post';
-
-export const postRouter = Router()
-  .get('/', getPost)
-  .put('/', createPost)
-  .patch('/', updatePost)
-  .delete('/', deletePost);
+export { getPost } from './get-post';
+export { createPost } from './create-post';
+export { deletePost } from './delete-post';
+export { updatePost } from './update-post';
