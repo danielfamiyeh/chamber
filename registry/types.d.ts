@@ -12,8 +12,8 @@ export type ServiceName =
   | 'api'
   | 'chat'
   | 'feed'
-  | 'relationship'
-  | 'notify'
+  | 'relation'
+  | 'event'
   | 'user'
   | 'auth';
 export type ServiceMap = Record<string, ServiceObj>;

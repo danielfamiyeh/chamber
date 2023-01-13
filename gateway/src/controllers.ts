@@ -19,7 +19,7 @@ export const proxyRequest = (req: ProxyRequest, res: Response) =>
 
     if (error) throw new Error(error);
 
-    // Auth service routes dont'r require authentication
+    // Auth service routes don't require authentication
     // All other routes do
     const authPayload =
       service === 'auth' ? {} : jwt.verify(token, process.env.JWT_SECRET);
