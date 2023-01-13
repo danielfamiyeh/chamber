@@ -11,7 +11,7 @@ import styles from './ProfileSettings.styles';
 
 const ProfileSettings = () => {
   const { data, isLoading } = useQuery('user', () =>
-    serverRequest('user/post?subpath=user', {}, true)
+    serverRequest('user/post', {}, true)
   );
 
   React.useEffect(() => {
