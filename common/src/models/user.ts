@@ -60,4 +60,8 @@ UserSchema.methods.validatePassword = function (password: string) {
   return compare(password, this.password);
 };
 
+UserSchema.index({
+  username: 'text',
+});
+
 export const User = model<IUser>('user', UserSchema);
