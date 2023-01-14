@@ -3,6 +3,7 @@ import { Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import Button from '../../../../../components/input/button/Button';
+
 import {
   NumTotalRecordsMap,
   PageDirection,
@@ -10,7 +11,6 @@ import {
   PaginationDispatch,
   PaginationMap,
 } from '../../../../../utils/hooks/usePaginate';
-
 import styles from './SearchResultsListFooter.styles';
 
 const SearchResultsListFooter = (props: SearchResultsListFooterProps) => {
@@ -20,7 +20,7 @@ const SearchResultsListFooter = (props: SearchResultsListFooterProps) => {
         style={styles.button}
         disabled={!props.pageState.search.skip}
         onPress={() =>
-          props.dispatch({
+          props.pageDispatch({
             key: 'search',
             direction: PageDirection.LEFT,
           })
@@ -45,7 +45,7 @@ const SearchResultsListFooter = (props: SearchResultsListFooterProps) => {
       <Button
         style={styles.button}
         onPress={() =>
-          props.dispatch({
+          props.pageDispatch({
             key: 'search',
             direction: PageDirection.RIGHT,
           })
@@ -72,7 +72,7 @@ const SearchResultsListFooter = (props: SearchResultsListFooterProps) => {
 export interface SearchResultsListFooterProps {
   pageState: PaginationMap;
   numTotalRecords: NumTotalRecordsMap;
-  dispatch: PaginationDispatch;
+  pageDispatch: PaginationDispatch;
 }
 
 export default SearchResultsListFooter;

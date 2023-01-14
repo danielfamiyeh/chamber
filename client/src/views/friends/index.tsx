@@ -55,7 +55,7 @@ const FriendsView = () => {
       <SearchResultsList
         results={results}
         pageState={pageState}
-        pageDistpach={pageDispatch}
+        pageDispatch={pageDispatch}
         onSearchAgain={onSearchAgain}
         numTotalRecords={numTotalRecords}
         hasSearched={!!searchTerm && !isLoadingSearchData}

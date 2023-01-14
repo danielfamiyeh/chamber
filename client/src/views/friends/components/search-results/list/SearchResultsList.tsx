@@ -3,17 +3,17 @@ import { Text, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
-import Button from '../../../../../components/input/button/Button';
 import {
   NumTotalRecordsMap,
   PaginationDispatch,
   PaginationMap,
 } from '../../../../../utils/hooks/usePaginate';
-import SearchResultsListFooter from '../list-footer/SearchResultsListFooter';
-
 import SearchResultsListItem, {
   SearchResult,
 } from '../list-item/SearchResultsListItem';
+import Button from '../../../../../components/input/button/Button';
+import SearchResultsListFooter from '../list-footer/SearchResultsListFooter';
+
 import styles from './SearchResultsList.styles';
 
 const SearchResultList = (props: SearchResultListProps) => {
@@ -38,10 +38,9 @@ const SearchResultList = (props: SearchResultListProps) => {
         renderItem={({ item }) => <SearchResultsListItem {...item} />}
         ListHeaderComponent={() => (
           <SearchResultsListFooter
+            pageState={props.pageState}
             pageDispatch={props.pageDispatch}
             numTotalRecords={props.numTotalRecords}
-            numResults={props.results.length}
-            pageState={props.pageState}
           />
         )}
       />

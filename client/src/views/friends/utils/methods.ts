@@ -22,8 +22,8 @@ export const searchUsers = async (
     );
 
     setResults(res?.results ?? []);
-    setNumTotalRecords((_doc) => ({
-      ..._doc,
+    setNumTotalRecords((doc: Record<string, number>) => ({
+      ...doc,
       search: res?.numTotalRecords ?? 0,
     }));
     return res?.results ?? [];
