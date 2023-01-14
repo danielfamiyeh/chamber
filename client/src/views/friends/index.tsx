@@ -87,11 +87,11 @@ const FriendsView = () => {
       {toggleState === 'request' && (
         <>
           <RequestList
-            type="incoming"
+            direction="incoming"
             items={user?.incomingRelationRequests ?? []}
           />
           <RequestList
-            type="outgoing"
+            direction="outgoing"
             items={user?.incomingRelationRequests ?? []}
           />
         </>

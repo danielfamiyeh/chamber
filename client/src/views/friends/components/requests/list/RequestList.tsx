@@ -10,18 +10,20 @@ import RequestListItem from '../list-item/RequestListItem';
 const RequestList = (props: RequestListProps) => {
   return (
     <View style={styles.container}>
-      <Text>{startCase(props.type)}</Text>
+      <Text style={styles.title}>{startCase(props.direction)}</Text>
       <FlatList
         data={props.items}
-        renderItem={({ item }) => <RequestListItem {...item} />}
+        renderItem={({ item }) => (
+          <RequestListItem direction={props.direction} {...item} />
+        )}
       />
     </View>
   );
 };
 
 interface RequestListProps {
-  type: string;
   items: RelationRequest[];
+  direction: 'incoming' | 'outgoing';
 }
 
 export default RequestList;

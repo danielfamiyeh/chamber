@@ -4,9 +4,9 @@ export const lightTheme: Theme = {
   border: 'lightgrey',
   background: '#f2f6fc',
   info: '#2077fa',
-  success: '',
+  success: '#5cb85c',
   warning: '',
-  error: '',
+  error: '#df4759',
 };
 
 export default class ThemeManager {
