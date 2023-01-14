@@ -14,7 +14,15 @@ export const searchUser = async (req: SearchUserRequest, res: Response) => {
     {
       username: new RegExp(String(searchTerm), 'i'),
     },
-    'username incomingRelationRequests outgoingRelationRequests relations'
+    [
+      'username',
+      'avatar',
+      'incomingRelationRequests',
+      'outgoingRelationRequests',
+      'relations',
+      'chats',
+      'createdAt',
+    ].join(' ')
   ).limit(5);
 
   return res.json({ results });

@@ -16,6 +16,10 @@ const UserSchema = new Schema<IUser>(
       required: true,
     },
 
+    avatar: {
+      type: String,
+    },
+
     chats: [
       {
         type: Schema.Types.ObjectId,
