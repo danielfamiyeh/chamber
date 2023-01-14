@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
+import { Relation } from '@danielfamiyeh/chamber-common';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import {
@@ -15,7 +16,6 @@ import Button from '../../../../../components/input/button/Button';
 import SearchResultsListFooter from '../list-footer/SearchResultsListFooter';
 
 import styles from './SearchResultsList.styles';
-import { Relation, RelationRequest } from '@danielfamiyeh/chamber-common';
 
 const SearchResultList = (props: SearchResultListProps) => {
   if (!props.results.length && props.hasSearched) {
@@ -66,8 +66,6 @@ export interface SearchResultListProps {
   results: SearchResult[];
   pageState: PaginationMap;
   numTotalRecords: NumTotalRecordsMap;
-  incomingRelationRequests: RelationRequest[];
-  outgoingRelationRequests: RelationRequest[];
   pageDispatch: PaginationDispatch;
   onSearchAgain: () => void;
 }

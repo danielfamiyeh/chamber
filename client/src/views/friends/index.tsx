@@ -7,9 +7,10 @@ import SearchResultsList from './components/search-results/list/SearchResultsLis
 
 import { useDebounce } from '../../utils/hooks/useDebounce';
 import { usePaginate } from '../../utils/hooks/usePaginate';
-import { searchUsers, fetchFriends } from './utils/methods';
+import { searchUsers } from './utils/methods';
 import styles from './styles';
 import { useUser } from '../../utils/hooks/useUser';
+import HeaderToggle from '../../components/input/toggle/header/HeaderToggle';
 
 const FriendsView = () => {
   const [results, setResults] = React.useState([]);
@@ -17,6 +18,9 @@ const FriendsView = () => {
   const [searchTerm, setSearchTerm] = React.useState('');
   const [pageState, pageDispatch, numTotalRecords, setNumTotalRecords] =
     usePaginate('search');
+  const [toggleState, setToggleState] = React.useState<'list' | 'request'>(
+    'list'
+  );
 
   const onSearch = React.useCallback(
     () =>
@@ -47,23 +51,33 @@ const FriendsView = () => {
 
   return (
     <View style={styles.container}>
-      <SearchBar
-        value={searchTerm}
-        onChange={setSearchTerm}
-        onClearInput={onClearInput}
-        inputRef={searchBarInputRef}
+      <HeaderToggle
+        items={[
+          { name: 'List', onChange: () => setToggleState('list') },
+          { name: 'Requests', onChange: () => setToggleState('request') },
+        ]}
       />
-      <SearchResultsList
-        results={results}
-        pageState={pageState}
-        pageDispatch={pageDispatch}
-        onSearchAgain={onSearchAgain}
-        numTotalRecords={numTotalRecords}
-        relations={user?.relations ?? []}
-        hasSearched={!!searchTerm && !isLoadingSearchData}
-        outgoingRelationRequests={user?.outoingRelationRequests ?? []}
-        incomingRelationRequests={user?.incomingRelationRequests ?? []}
-      />
+      {toggleState === 'list' && (
+        <>
+          <SearchBar
+            value={searchTerm}
+            onChange={setSearchTerm}
+            onClearInput={onClearInput}
+            inputRef={searchBarInputRef}
+          />
+          <SearchResultsList
+            results={results}
+            pageState={pageState}
+            pageDispatch={pageDispatch}
+            onSearchAgain={onSearchAgain}
+            numTotalRecords={numTotalRecords}
+            relations={user?.relations ?? []}
+            hasSearched={!!searchTerm && !isLoadingSearchData}
+          />
+        </>
+      )}
+
+      {toggleState === 'request' && <></>}
     </View>
   );
 };
