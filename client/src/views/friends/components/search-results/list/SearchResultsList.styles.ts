@@ -5,7 +5,6 @@ import ThemeManager from '../../../../../utils/ui/ThemeManger';
 const searchResultsStyles = StyleSheet.create({
   container: {
     flex: 1,
-    borderWidth: 1,
   },
 
   listEmptyIcon: {
@@ -61,7 +60,6 @@ const searchResultsStyles = StyleSheet.create({
 
   searchResultsContainer: {
     flex: 1,
-    borderWidth: 1,
   },
 });
 
