@@ -22,9 +22,11 @@ export type Chat = {
 
 export type User = {
   _id: string;
+  avatar: string;
   username: string;
   password: string;
-  avatar: string;
+  createdAt: Date;
+  updatedAt?: Date;
   chats: (Chat | string)[];
   relations: (string | Relation)[];
   incomingRelationRequests: (RelationRequest | string)[];

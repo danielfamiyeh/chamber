@@ -7,8 +7,7 @@ export const createRelationRequest = async (
   req: CreateRelationRequest,
   res: Response
 ) => {
-  const { _id } = req.body;
-  const { userId, relationType } = req.query;
+  const { _id, userId, relationType } = req.body;
 
   const user = await models.User.findOne({ _id }).populate(
     'outgoingRelationRequests'
@@ -25,7 +24,9 @@ export const createRelationRequest = async (
     throw new Error("Could not locate the reciepient's account");
   }
 
-  if (user.outgoingRelationRequests.find(({ user }) => user === _id)) {
+  if (
+    user.outgoingRelationRequests.find(({ to }) => to.toString() === userId)
+  ) {
     throw new Error("You've already sent a request to this user");
   }
 
@@ -37,13 +38,11 @@ export const createRelationRequest = async (
     type: relationType,
   });
 
-  console.log({ request });
-
   await models.User.findOneAndUpdate(
     { _id },
     {
       $push: {
-        outgoingRelationRequests: request,
+        outgoingRelationRequests: request._id,
       },
     }
   );
@@ -53,7 +52,7 @@ export const createRelationRequest = async (
       _id: userId,
     },
     {
-      $push: { incomingRelationRequest: request },
+      $push: { incomingRelationRequests: request._id },
     }
   );
 

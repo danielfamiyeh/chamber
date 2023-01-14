@@ -1,9 +1,11 @@
+import { Function } from 'lodash';
 import React from 'react';
 import { Text, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import Button from '../../../../../components/input/button/Button';
+import SearchResultsListFooter from '../list-footer/SearchResultsListFooter';
 
 import SearchResultsListItem, {
   SearchResult,
@@ -26,9 +28,19 @@ const SearchResultList = (props: SearchResultListProps) => {
   } else if (props.results.length) {
     return (
       <FlatList
-        renderItem={({ item }) => <SearchResultsListItem {...item} />}
         data={props.results}
+        stickyHeaderIndices={[0]}
         contentContainerStyle={styles.searchResultsContainer}
+        renderItem={({ item }) => <SearchResultsListItem {...item} />}
+        ListHeaderComponent={() => (
+          <SearchResultsListFooter
+            skip={props.skip}
+            limit={props.limit}
+            setSkip={props.setSkip}
+            setLimit={props.setLimit}
+            numResults={props.results.length}
+          />
+        )}
       />
     );
   } else {
@@ -46,9 +58,13 @@ const SearchResultList = (props: SearchResultListProps) => {
 };
 
 export interface SearchResultListProps {
-  onSearchAgain: () => void;
-  results: SearchResult[];
+  skip: number;
+  limit: number;
+  setSkip: Function;
+  setLimit: Function;
   hasSearched: boolean;
+  results: SearchResult[];
+  onSearchAgain: () => void;
 }
 
 export default SearchResultList;

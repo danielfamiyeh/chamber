@@ -3,14 +3,13 @@ import { scaleX, scaleY } from '../../../../utils/methods/scaleable-units';
 
 const searchBarStyles = StyleSheet.create({
   container: {
-    borderWidth: 1,
+    alignItems: 'center',
+    flexDirection: 'row',
+    borderColor: 'lightgrey',
     borderRadius: scaleX(4),
     paddingLeft: scaleX(12),
-    borderColor: 'grey',
-    flexDirection: 'row',
-    alignItems: 'center',
+    borderBottomWidth: 1,
   },
-
   input: {
     flex: 1,
     height: scaleY(36),

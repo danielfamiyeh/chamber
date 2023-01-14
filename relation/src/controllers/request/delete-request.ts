@@ -7,8 +7,7 @@ export const deleteRelationRequest = async (
   req: DeleteRelationRequest,
   res: Response
 ) => {
-  const { _id } = req.body;
-  const { requestId } = req.query;
+  const { _id, requestId } = req.body;
 
   const user = await models.User.findOne({ _id });
 

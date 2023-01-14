@@ -4,7 +4,7 @@ import { models } from '@danielfamiyeh/chamber-common/dist/models';
 import { SearchUserRequest } from '../../types';
 
 export const searchUser = async (req: SearchUserRequest, res: Response) => {
-  const { searchTerm } = req.body ?? {};
+  const { searchTerm, skip = 0, limit = 10 } = req.body ?? {};
 
   if (!searchTerm) {
     throw new Error('Must provide a username in search query');
@@ -23,7 +23,9 @@ export const searchUser = async (req: SearchUserRequest, res: Response) => {
       'chats',
       'createdAt',
     ].join(' ')
-  ).limit(5);
+  )
+    .skip(skip)
+    .limit(limit);
 
   return res.json({ results });
 };

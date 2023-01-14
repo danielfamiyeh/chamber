@@ -7,8 +7,7 @@ export const updateRelationRequest = async (
   req: UpdateRelationRequest,
   res: Response
 ) => {
-  const { _id } = req.body;
-  const { action, requestId } = req.query;
+  const { _id, action, requestId } = req.body;
 
   const user = await models.User.findOne({ _id }).populate('');
 
