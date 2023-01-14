@@ -9,6 +9,7 @@ const searchBarStyles = StyleSheet.create({
     borderRadius: scaleX(4),
     paddingLeft: scaleX(12),
     borderBottomWidth: 1,
+    backgroundColor: 'white',
   },
   input: {
     flex: 1,

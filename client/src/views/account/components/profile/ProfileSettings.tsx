@@ -1,34 +1,31 @@
 import React from 'react';
 import moment from 'moment';
-import { useQuery } from 'react-query';
 import { Alert, Text, View, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Loading from '../../../../components/display/indicator/loading/Loading';
 
-import { serverRequest } from '../../../../utils/methods/network';
+import { useUser } from '../../../../utils/hooks/useUser';
 import styles from './ProfileSettings.styles';
 
 const ProfileSettings = () => {
-  const { data, isLoading } = useQuery('user', () =>
-    serverRequest('user/post', {}, true)
-  );
+  const { user, isLoadingUserData } = useUser();
 
   React.useEffect(() => {
-    if (!isLoading && data?.error) {
-      Alert.alert('An error occured', data?.error);
+    if (!isLoadingUserData && user?.error) {
+      Alert.alert('An error occured', user?.error);
     }
-  }, [isLoading, data?.error]);
+  }, [isLoadingUserData, user?.error]);
 
-  return isLoading ? (
+  return isLoadingUserData ? (
     <Loading />
   ) : (
     <View style={styles.container}>
-      {data?.avatar ? (
+      {user?.avatar ? (
         <Image
           style={styles.avatar}
           source={{
-            uri: data?.avatar,
+            uri: user?.avatar,
           }}
         />
       ) : (
@@ -36,15 +33,15 @@ const ProfileSettings = () => {
           <Icon name="account-circle" size={108} />
         </View>
       )}
-      <Text style={styles.username}>@{data?.username ?? 'user'}</Text>
+      <Text style={styles.username}>@{user?.username ?? 'user'}</Text>
 
       <View style={styles.meta}>
         <Text style={styles.createdAt}>
-          Account created at: {moment(data?.createdAt).format('DD/MM/YYYY')}
+          Account created at: {moment(user?.createdAt).format('DD/MM/YYYY')}
         </Text>
-        {!!data?.updatedAt && (
+        {!!user?.updatedAt && (
           <Text style={styles.updatedAt}>
-            Last updated at: {moment(data?.updatedAt).format('DD/MM/YYYY')}
+            Last updated at: {moment(user?.updatedAt).format('DD/MM/YYYY')}
           </Text>
         )}
       </View>

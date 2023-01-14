@@ -10,10 +10,13 @@ export const searchUser = async (req: SearchUserRequest, res: Response) => {
     throw new Error('Must provide a username in search query');
   }
 
+  const query = {
+    username: new RegExp(String(searchTerm), 'i'),
+  };
+
+  const numTotalRecords = await models.User.find(query).count();
   const results = await models.User.find(
-    {
-      username: new RegExp(String(searchTerm), 'i'),
-    },
+    query,
     [
       'username',
       'avatar',
@@ -27,5 +30,5 @@ export const searchUser = async (req: SearchUserRequest, res: Response) => {
     .skip(skip)
     .limit(limit);
 
-  return res.json({ results });
+  return res.json({ results, numTotalRecords });
 };
