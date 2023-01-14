@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import { TextInput, View } from 'react-native';
 
 import SearchBar from './components/search-bar/SearchBar';
@@ -10,16 +10,6 @@ import { getFriends, searchUsers } from './utils/methods';
 import styles from './styles';
 
 const FriendsView = () => {
-  const { data: friendsData, isLoading: isLoadingFriends } = useQuery(
-    'friends',
-    getFriends
-  );
-
-  const { data: searchData, isLoading: isLoadingSearchData } = useQuery(
-    'search',
-    onSearch
-  );
-
   const [searchTerm, setSearchTerm] = React.useState('');
   const searchBarInputRef = React.useRef<TextInput>();
   const onClearInput = () => setSearchTerm('');
@@ -28,10 +18,19 @@ const FriendsView = () => {
     searchBarInputRef.current?.focus();
   };
 
+  const [results, setResults] = React.useState([]);
+
   const onSearch = React.useCallback(
-    () => searchUsers(searchTerm),
+    () => searchUsers(searchTerm, setResults),
     [searchTerm]
   );
+
+  const { data: friendsData, isLoading: isLoadingFriends } = useQuery(
+    'friends',
+    getFriends
+  );
+
+  const { isLoading: isLoadingSearchData } = useQuery('search', onSearch);
 
   useDebounce(onSearch, [searchTerm], 400);
   return (
@@ -44,7 +43,7 @@ const FriendsView = () => {
       />
       <SearchResultList
         onSearchAgain={onSearchAgain}
-        results={friendsData?.results ?? []}
+        results={results}
         hasSearched={!!searchTerm && !isLoadingSearchData}
       />
     </View>

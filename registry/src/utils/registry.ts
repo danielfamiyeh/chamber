@@ -12,14 +12,6 @@ class ServiceRegistry {
     relation: {},
   };
 
-  static set init(initialConfig: Record<ServiceName, number[]>) {
-    Object.entries(initialConfig).forEach(([serviceName, ports]) => {
-      ports.forEach((port) =>
-        ServiceRegistry.register(<ServiceName>serviceName, 'localhost', port)
-      );
-    });
-  }
-
   static key(serviceName: string, ip: string, port: number) {
     return `${serviceName}@${ip}:${port}`;
   }
@@ -70,13 +62,21 @@ class ServiceRegistry {
   }
 
   /** Returns object with active services */
-  public static get services() {
+  static get services() {
     return Object.assign(
       {},
       ...Object.entries(this._services)
         .filter(([, serviceMap]) => Object.values(serviceMap).length)
         .map(([serviceName, serviceMap]) => ({ [serviceName]: serviceMap }))
     );
+  }
+
+  static set init(initialConfig: Record<ServiceName, number[]>) {
+    Object.entries(initialConfig).forEach(([serviceName, ports]) => {
+      ports.forEach((port) =>
+        ServiceRegistry.register(<ServiceName>serviceName, 'localhost', port)
+      );
+    });
   }
 }
 

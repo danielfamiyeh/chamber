@@ -16,6 +16,7 @@ export type ServiceName =
   | 'event'
   | 'user'
   | 'auth';
+
 export type ServiceMap = Record<string, ServiceObj>;
 export type Registry = Record<ServiceName, ServiceMap>;
 

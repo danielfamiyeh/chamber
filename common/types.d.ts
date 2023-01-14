@@ -24,6 +24,7 @@ export type User = {
   _id: string;
   username: string;
   password: string;
+  avatar: string;
   chats: (Chat | string)[];
   relations: (string | Relation)[];
   incomingRelationRequests: (RelationRequest | string)[];

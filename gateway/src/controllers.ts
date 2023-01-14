@@ -24,6 +24,7 @@ export const proxyRequest = (req: ProxyRequest, res: Response) =>
     const authPayload =
       service === 'auth' ? {} : jwt.verify(token, process.env.JWT_SECRET);
 
+    console.log(keyToUrl(serviceKey, ...subpath.split('/')));
     // Proxy request to dynamic endpoint
     const { data } = await axios[method](
       keyToUrl(serviceKey, ...subpath.split('/')),

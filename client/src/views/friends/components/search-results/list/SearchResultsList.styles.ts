@@ -58,6 +58,11 @@ const searchResultsStyles = StyleSheet.create({
   searchAgainButtonText: {
     color: 'white',
   },
+
+  searchResultsContainer: {
+    flex: 1,
+    borderWidth: 1,
+  },
 });
 
 export default searchResultsStyles;

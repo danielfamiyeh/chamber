@@ -16,6 +16,10 @@ const UserSchema = new Schema<IUser>(
       required: true,
     },
 
+    avatar: {
+      type: String,
+    },
+
     chats: [
       {
         type: Schema.Types.ObjectId,
@@ -26,16 +30,16 @@ const UserSchema = new Schema<IUser>(
     relations: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'relationship',
+        ref: 'relation',
       },
     ],
 
     incomingRelationRequests: [
-      { type: Schema.Types.ObjectId, ref: 'friendrequest' },
+      { type: Schema.Types.ObjectId, ref: 'relationrequest' },
     ],
 
     outgoingRelationRequests: [
-      { type: Schema.Types.ObjectId, ref: 'friendrequest' },
+      { type: Schema.Types.ObjectId, ref: 'relationrequest' },
     ],
   },
   { timestamps: true }
