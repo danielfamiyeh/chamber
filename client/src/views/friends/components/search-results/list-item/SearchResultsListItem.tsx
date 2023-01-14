@@ -8,24 +8,12 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Button from '../../../../../components/input/button/Button';
 
 import styles from './SearchResultsListItem.styles';
+import { onAddFriend, onSendMessage } from './utils/methods';
 
 const iconSize = 24;
 
 const SearchResultsListItem = (props: SearchResult) => {
   const { navigate } = useNavigation();
-
-  const onSendMessage = () => {
-    navigate('CreateChat', {
-      recipients: props._id,
-    });
-  };
-
-  const onAddFriend = () => {
-    if (props.friendsSince) {
-      return;
-    }
-    // TODO: Add friend
-  };
 
   return (
     <View style={styles.container}>
@@ -42,7 +30,10 @@ const SearchResultsListItem = (props: SearchResult) => {
       </View>
 
       <View style={styles.rightCta}>
-        <Button onPress={onAddFriend} style={styles.addFriendButton}>
+        <Button
+          style={styles.addFriendButton}
+          onPress={onAddFriend(props._id, props.username, !!props.friendsSince)}
+        >
           <Icon
             name={props.friendsSince ? 'friend' : 'group-add'}
             size={iconSize}
@@ -50,8 +41,8 @@ const SearchResultsListItem = (props: SearchResult) => {
         </Button>
         <Button
           disabled={!props.friendsSince}
-          onPress={onSendMessage}
           style={styles.sendMessageButton}
+          onPress={onSendMessage(props._id, navigate)}
         >
           <Icon name="message" size={iconSize} />
         </Button>

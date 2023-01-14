@@ -1,5 +1,5 @@
 {
-  "name": "@danielfamiyeh/chamber-relationship",
+  "name": "@danielfamiyeh/chamber-relation",
   "version": "1.0.0",
   "main": "dist/index.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "build": "npx tsc"
   },
   "dependencies": {
-    "@danielfamiyeh/chamber-common": "^1.0.20",
+    "@danielfamiyeh/chamber-common": "^1.0.26",
     "assert": "^2.0.0",
     "axios": "^1.2.2",
     "body-parser": "^1.20.1",
