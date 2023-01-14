@@ -12,6 +12,7 @@ const searchResultsListItemStyles = StyleSheet.create({
     borderColor: 'lightgrey',
     paddingHorizontal: scaleX(12),
     justfiyContent: 'space-between',
+    backgroundColor: 'white',
   },
 
   leftMeta: { flex: 0.8 },

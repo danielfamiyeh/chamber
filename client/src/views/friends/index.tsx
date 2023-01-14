@@ -3,14 +3,15 @@ import { useQuery } from 'react-query';
 import { TextInput, View } from 'react-native';
 
 import SearchBar from './components/search-bar/SearchBar';
+import RequestList from './components/requests/list/RequestList';
+import HeaderToggle from '../../components/input/toggle/header/HeaderToggle';
 import SearchResultsList from './components/search-results/list/SearchResultsList';
 
 import { useDebounce } from '../../utils/hooks/useDebounce';
 import { usePaginate } from '../../utils/hooks/usePaginate';
+import { useUser } from '../../utils/hooks/useUser';
 import { searchUsers } from './utils/methods';
 import styles from './styles';
-import { useUser } from '../../utils/hooks/useUser';
-import HeaderToggle from '../../components/input/toggle/header/HeaderToggle';
 
 const FriendsView = () => {
   const [results, setResults] = React.useState([]);
@@ -52,9 +53,15 @@ const FriendsView = () => {
   return (
     <View style={styles.container}>
       <HeaderToggle
+        style={{ backgroundColor: 'white' }}
+        toggleState={toggleState}
+        setToggleState={setToggleState}
         items={[
-          { name: 'List', onChange: () => setToggleState('list') },
-          { name: 'Requests', onChange: () => setToggleState('request') },
+          { name: 'List', key: 'list' },
+          {
+            name: 'Requests',
+            key: 'request',
+          },
         ]}
       />
       {toggleState === 'list' && (
@@ -77,7 +84,18 @@ const FriendsView = () => {
         </>
       )}
 
-      {toggleState === 'request' && <></>}
+      {toggleState === 'request' && (
+        <>
+          <RequestList
+            type="incoming"
+            items={user?.incomingRelationRequests ?? []}
+          />
+          <RequestList
+            type="outgoing"
+            items={user?.incomingRelationRequests ?? []}
+          />
+        </>
+      )}
     </View>
   );
 };

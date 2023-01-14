@@ -7,18 +7,21 @@ import styles from './HeaderToggle.styles';
 
 const HeaderToggle = (props: HeaderToggleProps) => {
   return (
-    <View style={styles.container}>
-      {props.items.map(({ name, onChange }, i) => (
+    <View style={{ ...styles.container, ...props.style }}>
+      {props.items.map(({ name, key }) => (
         <Button
-          key={name}
-          onPress={onChange}
-          style={{
-            ...styles.item,
-            borderRightWidth: +(i < props.items.length - 1),
-            borderLeftWidth: +(i === props.items.length - 1),
-          }}
+          key={key}
+          onPress={() => props.setToggleState(key ?? name)}
+          style={styles.item}
         >
-          <Text style={styles.itemText}>{name}</Text>
+          <Text
+            style={{
+              ...styles.itemText,
+              fontWeight: props.toggleState === key ? 'bold' : 'normal',
+            }}
+          >
+            {name}
+          </Text>
         </Button>
       ))}
     </View>
@@ -27,11 +30,14 @@ const HeaderToggle = (props: HeaderToggleProps) => {
 
 export interface HeaderToggleItem {
   name: string;
-  onChange: () => void;
+  key: string;
 }
 
 export interface HeaderToggleProps {
+  style?: object;
+  toggleState: string;
   items: HeaderToggleItem[];
+  setToggleState: Function;
 }
 
 export default HeaderToggle;

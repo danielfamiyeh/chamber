@@ -18,7 +18,7 @@ const headerToggleStyles = StyleSheet.create({
   },
   itemText: {
     fontSize: scaleX(16),
-    fontWeight: '300',
+    // fontWeight: '300',
   },
 });
 
