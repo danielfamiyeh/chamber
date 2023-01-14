@@ -7,15 +7,16 @@ import SearchResultsList from './components/search-results/list/SearchResultsLis
 
 import { useDebounce } from '../../utils/hooks/useDebounce';
 import { usePaginate } from '../../utils/hooks/usePaginate';
-import { searchUsers } from './utils/methods';
+import { searchUsers, fetchFriends } from './utils/methods';
 import styles from './styles';
+import { useUser } from '../../utils/hooks/useUser';
 
 const FriendsView = () => {
   const [results, setResults] = React.useState([]);
   const searchBarInputRef = React.useRef<TextInput>();
   const [searchTerm, setSearchTerm] = React.useState('');
   const [pageState, pageDispatch, numTotalRecords, setNumTotalRecords] =
-    usePaginate('search', 'friends');
+    usePaginate('search');
 
   const onSearch = React.useCallback(
     () =>
@@ -34,9 +35,9 @@ const FriendsView = () => {
     ]
   );
 
-  const { isLoading: isLoadingSearchData } = useQuery('search', onSearch);
-
   useDebounce(onSearch, [searchTerm], 400);
+  const { isLoading: isLoadingSearchData } = useQuery('search', onSearch);
+  const { user, isLoadingUserData } = useUser();
 
   const onClearInput = () => setSearchTerm('');
   const onSearchAgain = () => {
@@ -58,7 +59,10 @@ const FriendsView = () => {
         pageDispatch={pageDispatch}
         onSearchAgain={onSearchAgain}
         numTotalRecords={numTotalRecords}
+        relations={user?.relations ?? []}
         hasSearched={!!searchTerm && !isLoadingSearchData}
+        outgoingRelationRequests={user?.outoingRelationRequests ?? []}
+        incomingRelationRequests={user?.incomingRelationRequests ?? []}
       />
     </View>
   );

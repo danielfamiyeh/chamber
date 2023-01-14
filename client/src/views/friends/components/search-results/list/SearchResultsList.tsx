@@ -15,6 +15,7 @@ import Button from '../../../../../components/input/button/Button';
 import SearchResultsListFooter from '../list-footer/SearchResultsListFooter';
 
 import styles from './SearchResultsList.styles';
+import { Relation, RelationRequest } from '@danielfamiyeh/chamber-common';
 
 const SearchResultList = (props: SearchResultListProps) => {
   if (!props.results.length && props.hasSearched) {
@@ -61,9 +62,12 @@ const SearchResultList = (props: SearchResultListProps) => {
 
 export interface SearchResultListProps {
   hasSearched: boolean;
+  relations: Relation[];
   results: SearchResult[];
   pageState: PaginationMap;
   numTotalRecords: NumTotalRecordsMap;
+  incomingRelationRequests: RelationRequest[];
+  outgoingRelationRequests: RelationRequest[];
   pageDispatch: PaginationDispatch;
   onSearchAgain: () => void;
 }

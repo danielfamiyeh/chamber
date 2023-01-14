@@ -31,3 +31,10 @@ export const searchUsers = async (
     Alert.alert(error.message);
   }
 };
+
+export const fetchFriends = async () => {
+  try {
+  } catch (error: any) {
+    Alert.alert(error.message);
+  }
+};
