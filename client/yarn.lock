@@ -1800,10 +1800,10 @@
     "exec-sh" "^0.3.2"
     "minimist" "^1.2.0"
 
-"@danielfamiyeh/chamber-common@^1.0.15":
-  "integrity" "sha512-aQH3TxtX4fE1iCLx7rfQlfCbgxdrxqspfpPUZf8pxFFujfiRqbH/66AWEB8xt/NkF4pkeTz2bEVaL8CFgsc6hQ=="
-  "resolved" "https://npm.pkg.github.com/download/@danielfamiyeh/chamber-common/1.0.15/4e616936d6899a5cbda83342969fdca918b4b444"
-  "version" "1.0.15"
+"@danielfamiyeh/chamber-common@^1.0.26":
+  "integrity" "sha512-Qy3rnE9KbD4QsdKN0yz8Y7mpq44JZfeE2jLHZB+ZpWHiodfHfb74aec6bnqF5O1zj8SjjmrRV4mXbDaJfSlJIw=="
+  "resolved" "https://npm.pkg.github.com/download/@danielfamiyeh/chamber-common/1.0.26/9ca0d6714d921bdb03ee865380d3e0585dde22f1"
+  "version" "1.0.26"
   dependencies:
     "@types/express" "^4.17.15"
     "bcrypt" "^5.1.0"
