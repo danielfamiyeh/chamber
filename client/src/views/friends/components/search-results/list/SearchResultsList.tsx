@@ -1,10 +1,14 @@
-import { Function } from 'lodash';
 import React from 'react';
 import { Text, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import Button from '../../../../../components/input/button/Button';
+import {
+  NumTotalRecordsMap,
+  PaginationDispatch,
+  PaginationMap,
+} from '../../../../../utils/hooks/usePaginate';
 import SearchResultsListFooter from '../list-footer/SearchResultsListFooter';
 
 import SearchResultsListItem, {
@@ -34,11 +38,10 @@ const SearchResultList = (props: SearchResultListProps) => {
         renderItem={({ item }) => <SearchResultsListItem {...item} />}
         ListHeaderComponent={() => (
           <SearchResultsListFooter
-            skip={props.skip}
-            limit={props.limit}
-            setSkip={props.setSkip}
-            setLimit={props.setLimit}
+            pageDispatch={props.pageDispatch}
+            numTotalRecords={props.numTotalRecords}
             numResults={props.results.length}
+            pageState={props.pageState}
           />
         )}
       />
@@ -58,12 +61,11 @@ const SearchResultList = (props: SearchResultListProps) => {
 };
 
 export interface SearchResultListProps {
-  skip: number;
-  limit: number;
-  setSkip: Function;
-  setLimit: Function;
   hasSearched: boolean;
   results: SearchResult[];
+  pageState: PaginationMap;
+  numTotalRecords: NumTotalRecordsMap;
+  pageDispatch: PaginationDispatch;
   onSearchAgain: () => void;
 }
 

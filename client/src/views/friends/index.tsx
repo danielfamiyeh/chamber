@@ -3,22 +3,35 @@ import { useQuery } from 'react-query';
 import { TextInput, View } from 'react-native';
 
 import SearchBar from './components/search-bar/SearchBar';
-import SearchResultList from './components/search-results/list/SearchResultsList';
+import SearchResultsList from './components/search-results/list/SearchResultsList';
 
 import { useDebounce } from '../../utils/hooks/useDebounce';
+import { usePaginate } from '../../utils/hooks/usePaginate';
 import { searchUsers } from './utils/methods';
 import styles from './styles';
 
 const FriendsView = () => {
-  const [skip, setSkip] = React.useState(0);
-  const [limit, setLimit] = React.useState(10);
   const [results, setResults] = React.useState([]);
   const searchBarInputRef = React.useRef<TextInput>();
   const [searchTerm, setSearchTerm] = React.useState('');
+  const [pageState, pageDispatch, numTotalRecords, setNumTotalRecords] =
+    usePaginate('search', 'friends');
 
   const onSearch = React.useCallback(
-    () => searchUsers(searchTerm, skip, limit, setResults),
-    [searchTerm, skip, limit]
+    () =>
+      searchUsers(
+        searchTerm,
+        pageState.search.skip,
+        pageState.search.limit,
+        setResults,
+        setNumTotalRecords
+      ),
+    [
+      searchTerm,
+      pageState.search.skip,
+      pageState.search.limit,
+      setNumTotalRecords,
+    ]
   );
 
   const { isLoading: isLoadingSearchData } = useQuery('search', onSearch);
@@ -39,13 +52,12 @@ const FriendsView = () => {
         onClearInput={onClearInput}
         inputRef={searchBarInputRef}
       />
-      <SearchResultList
-        skip={skip}
-        limit={limit}
+      <SearchResultsList
         results={results}
-        setSkip={setSkip}
-        setLimit={setLimit}
+        pageState={pageState}
+        pageDistpach={pageDispatch}
         onSearchAgain={onSearchAgain}
+        numTotalRecords={numTotalRecords}
         hasSearched={!!searchTerm && !isLoadingSearchData}
       />
     </View>

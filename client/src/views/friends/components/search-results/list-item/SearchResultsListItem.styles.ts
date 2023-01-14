@@ -1,6 +1,8 @@
 import { StyleSheet } from 'react-native';
 import { scaleX, scaleY } from '../../../../../utils/methods/scaleable-units';
 
+export const iconSize = 24;
+
 const searchResultsListItemStyles = StyleSheet.create({
   container: {
     height: scaleY(48),

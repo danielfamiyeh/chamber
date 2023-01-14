@@ -7,10 +7,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Button from '../../../../../components/input/button/Button';
 
-import styles from './SearchResultsListItem.styles';
+import styles, { iconSize } from './SearchResultsListItem.styles';
 import { onAddFriend, onSendMessage } from './utils/methods';
-
-const iconSize = 24;
 
 const SearchResultsListItem = (props: SearchResult) => {
   const { navigate } = useNavigation();

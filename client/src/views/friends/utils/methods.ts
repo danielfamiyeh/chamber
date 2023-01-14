@@ -5,7 +5,8 @@ export const searchUsers = async (
   searchTerm: string,
   skip: number,
   limit: number,
-  setResults: Function
+  setResults: Function,
+  setNumTotalRecords: Function
 ) => {
   try {
     const res = await serverRequest(
@@ -21,43 +22,12 @@ export const searchUsers = async (
     );
 
     setResults(res?.results ?? []);
+    setNumTotalRecords((_doc) => ({
+      ..._doc,
+      search: res?.numTotalRecords ?? 0,
+    }));
     return res?.results ?? [];
   } catch (error: any) {
     Alert.alert(error.message);
-  }
-};
-
-export enum Paginate {
-  LEFT = -1,
-  RIGHT = 1,
-}
-
-export const paginateOffset = 10;
-
-export const onPaginate = (
-  direction: Paginate,
-  skip: number,
-  numResults: number,
-  setSkip: Function,
-  setLimit: Function
-) => {
-  if (direction === Paginate.LEFT) {
-    setSkip((_skip: number) =>
-      !skip
-        ? skip
-        : (() => {
-            setLimit((_limit: number) => _limit - paginateOffset);
-            return skip - paginateOffset;
-          })()
-    );
-  } else {
-    setSkip((_skip: number) =>
-      skip + paginateOffset > numResults
-        ? skip
-        : (() => {
-            setLimit((_limit: number) => _limit + paginateOffset);
-            return skip + paginateOffset;
-          })()
-    );
   }
 };
