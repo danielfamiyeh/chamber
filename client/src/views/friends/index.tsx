@@ -12,6 +12,7 @@ import { usePaginate } from '../../utils/hooks/usePaginate';
 import { useUser } from '../../utils/hooks/useUser';
 import { searchUsers } from './utils/methods';
 import styles from './styles';
+import FriendsList from './components/friends/list/FriendsList';
 
 const FriendsView = () => {
   const [results, setResults] = React.useState([]);
@@ -72,15 +73,19 @@ const FriendsView = () => {
             onClearInput={onClearInput}
             inputRef={searchBarInputRef}
           />
-          <SearchResultsList
-            results={results}
-            pageState={pageState}
-            pageDispatch={pageDispatch}
-            onSearchAgain={onSearchAgain}
-            numTotalRecords={numTotalRecords}
-            relations={user?.relations ?? []}
-            hasSearched={!!searchTerm && !isLoadingSearchData}
-          />
+          {searchTerm ? (
+            <SearchResultsList
+              results={results}
+              pageState={pageState}
+              pageDispatch={pageDispatch}
+              onSearchAgain={onSearchAgain}
+              numTotalRecords={numTotalRecords}
+              relations={user?.relations ?? []}
+              hasSearched={!!searchTerm && !isLoadingSearchData}
+            />
+          ) : (
+            <FriendsList relations={user?.relations} />
+          )}
         </>
       )}
 

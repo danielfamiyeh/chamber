@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { Text, View } from 'react-native';
+import { QueryClient } from 'react-query';
 import { User } from '@danielfamiyeh/chamber-common';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -9,7 +10,6 @@ import Button from '../../../../../components/input/button/Button';
 
 import styles, { iconSize } from './SearchResultsListItem.styles';
 import { onAddFriend, onSendMessage } from './utils/methods';
-import { QueryClient } from 'react-query';
 
 const SearchResultsListItem = (props: SearchResultProps) => {
   const { navigate } = useNavigation();
@@ -41,13 +41,6 @@ const SearchResultsListItem = (props: SearchResultProps) => {
             name={props.friendsSince ? 'friend' : 'group-add'}
             size={iconSize}
           />
-        </Button>
-        <Button
-          disabled={!props.friendsSince}
-          style={styles.sendMessageButton}
-          onPress={onSendMessage(props._id, navigate)}
-        >
-          <Icon name="message" size={iconSize} />
         </Button>
       </View>
     </View>

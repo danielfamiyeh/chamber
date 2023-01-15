@@ -9,11 +9,15 @@ export const createRelationRequest = async (
 ) => {
   const { _id, userId, relationType } = req.body;
 
-  const user = await models.User.findOne({ _id }).populate(
-    'outgoingRelationRequests'
-  );
+  const user = await models.User.findOne({ _id }).populate([
+    { path: 'outgoingRelationRequests', model: 'relationrequest' },
+    { path: 'relations', model: 'relation' },
+  ]);
   const recipient = await models.User.findOne({ _id: userId }).populate(
     'outgoingRelationRequests'
+  );
+  const existingRelation = user.relations.find(
+    ({ user }) => user.toString() === userId
   );
 
   if (!user) {
@@ -24,13 +28,15 @@ export const createRelationRequest = async (
     throw new Error("Could not locate the reciepient's account");
   }
 
+  if (existingRelation) {
+    throw new Error(`This user is already your ${existingRelation.type}`);
+  }
+
   if (
     user.outgoingRelationRequests.find(({ to }) => to.toString() === userId)
   ) {
     throw new Error("You've already sent a request to this user");
   }
-
-  // TODO: Inability to add yourself as a related user
 
   const request = await models.RelationRequest.create({
     from: _id,

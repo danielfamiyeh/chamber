@@ -10,7 +10,8 @@ const searchResultsListItemStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderColor: 'lightgrey',
-    paddingHorizontal: scaleX(12),
+    paddingLeft: scaleX(16),
+    paddingRight: scaleX(20),
     justfiyContent: 'space-between',
     backgroundColor: 'white',
   },
@@ -20,7 +21,7 @@ const searchResultsListItemStyles = StyleSheet.create({
     flex: 0.2,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
   },
   sendMessageButton: {
     borderWidth: 0,

@@ -18,7 +18,7 @@ import SearchResultsListFooter from '../list-footer/SearchResultsListFooter';
 
 import styles from './SearchResultsList.styles';
 
-const SearchResultList = (props: SearchResultListProps) => {
+const SearchResultsList = (props: SearchResultsListProps) => {
   const queryClient = useQueryClient();
   if (!props.results.length && props.hasSearched) {
     return (
@@ -51,20 +51,11 @@ const SearchResultList = (props: SearchResultListProps) => {
       />
     );
   } else {
-    return (
-      <View style={styles.listEmptyContainer}>
-        <Icon name="sad-cry" style={styles.listEmptyIcon} size={96} />
-        <Text style={styles.listEmptyText}>How sad.</Text>
-        <Text style={styles.listEmptyText}>You have no friends!</Text>
-        <Button style={styles.searchButton} onPress={props.onSearchAgain}>
-          <Text style={styles.searchAgainButtonText}>Find Some</Text>
-        </Button>
-      </View>
-    );
+    return null;
   }
 };
 
-export interface SearchResultListProps {
+export interface SearchResultsListProps {
   hasSearched: boolean;
   relations: Relation[];
   results: SearchResult[];
@@ -74,4 +65,4 @@ export interface SearchResultListProps {
   onSearchAgain: () => void;
 }
 
-export default SearchResultList;
+export default SearchResultsList;

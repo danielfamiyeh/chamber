@@ -1,18 +1,16 @@
 import { StyleSheet } from 'react-native';
-import { scaleX, scaleY } from '../../../../../utils/methods/scaleable-units';
 import ThemeManager from '../../../../../utils/ui/ThemeManger';
+import { scaleX, scaleY } from '../../../../../utils/methods/scaleable-units';
 
 const searchResultsStyles = StyleSheet.create({
   container: {
     flex: 1,
   },
-
   listEmptyIcon: {
     color: 'grey',
     alignSelf: 'center',
     marginBottom: scaleY(16),
   },
-
   listEmptyContainer: {
     flex: 1,
     textAlign: 'center',
@@ -20,14 +18,12 @@ const searchResultsStyles = StyleSheet.create({
     paddingBottom: scaleY(32),
     paddingHorizontal: scaleX(8),
   },
-
   listEmptyText: {
     color: 'grey',
     alignSelf: 'center',
     textAlign: 'center',
     fontSize: scaleX(18),
   },
-
   noResultsPrompt: {
     color: 'grey',
     fontSize: scaleX(18),
@@ -35,16 +31,6 @@ const searchResultsStyles = StyleSheet.create({
     alignSelf: 'center',
     textAlign: 'center',
   },
-
-  searchButton: {
-    alignSelf: 'center',
-    marginTop: scaleY(10),
-    borderRadius: scaleX(4),
-    paddingVertical: scaleY(8),
-    paddingHorizontal: scaleX(24),
-    backgroundColor: ThemeManager.theme.info,
-  },
-
   searchAgainButton: {
     alignSelf: 'center',
     marginTop: scaleY(6),

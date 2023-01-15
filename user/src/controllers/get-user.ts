@@ -34,6 +34,11 @@ export async function getUser(_id: string) {
         },
       ],
     },
+    {
+      path: 'relations',
+      model: 'relation',
+      populate: { path: 'user', model: 'user', select: '_id username' },
+    },
   ]);
 
   return user;
