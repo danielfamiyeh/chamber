@@ -21,12 +21,6 @@ export const deleteRelationRequest = async (
     throw new Error('Unable to locate the request');
   }
 
-  const outgoingModifer = {
-    $pull: {
-      outgoingRelationRequest: { _id: requestId },
-    },
-  };
-
   // Remove incoming request
   await models.User.update(
     {
@@ -34,7 +28,7 @@ export const deleteRelationRequest = async (
     },
     {
       $pull: {
-        incomingRelationRequest: { _id: requestId },
+        incomingRelationRequests: requestId,
       },
     }
   );
@@ -46,7 +40,7 @@ export const deleteRelationRequest = async (
     },
     {
       $pull: {
-        outgoingRelationRequest: { _id: requestId },
+        outgoingRelationRequest: requestId,
       },
     }
   );

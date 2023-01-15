@@ -53,8 +53,8 @@ const FriendsView = () => {
   return (
     <View style={styles.container}>
       <HeaderToggle
-        style={{ backgroundColor: 'white' }}
         toggleState={toggleState}
+        style={styles.headerToggle}
         setToggleState={setToggleState}
         items={[
           { name: 'List', key: 'list' },

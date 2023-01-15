@@ -9,8 +9,9 @@ import Button from '../../../../../components/input/button/Button';
 
 import styles, { iconSize } from './SearchResultsListItem.styles';
 import { onAddFriend, onSendMessage } from './utils/methods';
+import { QueryClient } from 'react-query';
 
-const SearchResultsListItem = (props: SearchResult) => {
+const SearchResultsListItem = (props: SearchResultProps) => {
   const { navigate } = useNavigation();
 
   return (
@@ -30,7 +31,11 @@ const SearchResultsListItem = (props: SearchResult) => {
       <View style={styles.rightCta}>
         <Button
           style={styles.addFriendButton}
-          onPress={onAddFriend(props._id, props.username, !!props.friendsSince)}
+          onPress={() =>
+            onAddFriend(props._id, props.username, !!props.friendsSince)().then(
+              () => props.queryClient.invalidateQueries('user')
+            )
+          }
         >
           <Icon
             name={props.friendsSince ? 'friend' : 'group-add'}
@@ -59,5 +64,9 @@ export type SearchResult = Pick<
   | 'outgoingRelationRequests'
   | 'createdAt'
 > & { friendsSince: Date };
+
+export interface SearchResultProps extends SearchResult {
+  queryClient: QueryClient;
+}
 
 export default SearchResultsListItem;

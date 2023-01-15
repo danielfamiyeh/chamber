@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { useQueryClient } from 'react-query';
 import { FlatList } from 'react-native-gesture-handler';
 import { Relation } from '@danielfamiyeh/chamber-common';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -18,6 +19,7 @@ import SearchResultsListFooter from '../list-footer/SearchResultsListFooter';
 import styles from './SearchResultsList.styles';
 
 const SearchResultList = (props: SearchResultListProps) => {
+  const queryClient = useQueryClient();
   if (!props.results.length && props.hasSearched) {
     return (
       <View style={styles.listEmptyContainer}>
@@ -36,7 +38,9 @@ const SearchResultList = (props: SearchResultListProps) => {
         data={props.results}
         stickyHeaderIndices={[0]}
         contentContainerStyle={styles.searchResultsContainer}
-        renderItem={({ item }) => <SearchResultsListItem {...item} />}
+        renderItem={({ item }) => (
+          <SearchResultsListItem {...item} queryClient={queryClient} />
+        )}
         ListHeaderComponent={() => (
           <SearchResultsListFooter
             pageState={props.pageState}
