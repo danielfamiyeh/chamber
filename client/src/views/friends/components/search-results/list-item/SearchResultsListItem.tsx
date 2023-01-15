@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { Text, View } from 'react-native';
+import { QueryClient } from 'react-query';
 import { User } from '@danielfamiyeh/chamber-common';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -10,7 +11,7 @@ import Button from '../../../../../components/input/button/Button';
 import styles, { iconSize } from './SearchResultsListItem.styles';
 import { onAddFriend, onSendMessage } from './utils/methods';
 
-const SearchResultsListItem = (props: SearchResult) => {
+const SearchResultsListItem = (props: SearchResultProps) => {
   const { navigate } = useNavigation();
 
   return (
@@ -30,19 +31,16 @@ const SearchResultsListItem = (props: SearchResult) => {
       <View style={styles.rightCta}>
         <Button
           style={styles.addFriendButton}
-          onPress={onAddFriend(props._id, props.username, !!props.friendsSince)}
+          onPress={() =>
+            onAddFriend(props._id, props.username, !!props.friendsSince)().then(
+              () => props.queryClient.invalidateQueries('user')
+            )
+          }
         >
           <Icon
             name={props.friendsSince ? 'friend' : 'group-add'}
             size={iconSize}
           />
-        </Button>
-        <Button
-          disabled={!props.friendsSince}
-          style={styles.sendMessageButton}
-          onPress={onSendMessage(props._id, navigate)}
-        >
-          <Icon name="message" size={iconSize} />
         </Button>
       </View>
     </View>
@@ -59,5 +57,9 @@ export type SearchResult = Pick<
   | 'outgoingRelationRequests'
   | 'createdAt'
 > & { friendsSince: Date };
+
+export interface SearchResultProps extends SearchResult {
+  queryClient: QueryClient;
+}
 
 export default SearchResultsListItem;

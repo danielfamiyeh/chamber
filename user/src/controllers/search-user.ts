@@ -4,13 +4,14 @@ import { models } from '@danielfamiyeh/chamber-common/dist/models';
 import { SearchUserRequest } from '../../types';
 
 export const searchUser = async (req: SearchUserRequest, res: Response) => {
-  const { searchTerm, skip = 0, limit = 10 } = req.body ?? {};
+  const { _id, searchTerm, skip = 0, limit = 10 } = req.body ?? {};
 
   if (!searchTerm) {
     throw new Error('Must provide a username in search query');
   }
 
   const query = {
+    _id: { $ne: _id },
     username: new RegExp(String(searchTerm), 'i'),
   };
 

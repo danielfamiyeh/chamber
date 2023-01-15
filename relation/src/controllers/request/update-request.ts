@@ -9,7 +9,9 @@ export const updateRelationRequest = async (
 ) => {
   const { _id, action, requestId } = req.body;
 
-  const user = await models.User.findOne({ _id }).populate('');
+  const user = await models.User.findOne({ _id }).populate(
+    'incomingRelationRequests'
+  );
 
   if (!user) {
     throw new Error("Couldn't locate your account");
@@ -17,7 +19,7 @@ export const updateRelationRequest = async (
 
   if (action === 'accept' || 'reject') {
     const request = user.incomingRelationRequests.find(
-      ({ _id: reqId }) => reqId === requestId
+      ({ _id: reqId }) => reqId.toString() === requestId
     );
     if (!request) {
       throw new Error("Couldn't perform requested action on the request");
@@ -38,12 +40,12 @@ export const updateRelationRequest = async (
     // from both users
     const incomingModifer: Record<string, object> = {
       $pull: {
-        incomingRelationRequest: { _id: requestId },
+        incomingRelationRequests: requestId,
       },
     };
     const outgoingModifer: Record<string, object> = {
       $pull: {
-        outgoingRelationRequest: { _id: requestId },
+        outgoingRelationRequests: requestId,
       },
     };
 
@@ -58,7 +60,7 @@ export const updateRelationRequest = async (
       };
 
       outgoingModifer.$push = {
-        $relations: outgoingRelation._id,
+        relations: outgoingRelation._id,
       };
     }
 
@@ -67,7 +69,7 @@ export const updateRelationRequest = async (
     await models.User.findOneAndUpdate({ _id: request.from }, outgoingModifer);
 
     // And delete the request
-    await models.findOneAndDelete({ _id: requestId });
+    await models.RelationRequest.findOneAndDelete({ _id: requestId });
 
     return res.json({ success: true });
   }

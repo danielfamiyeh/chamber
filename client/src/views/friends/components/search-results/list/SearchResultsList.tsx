@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { useQueryClient } from 'react-query';
 import { FlatList } from 'react-native-gesture-handler';
 import { Relation } from '@danielfamiyeh/chamber-common';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -17,7 +18,8 @@ import SearchResultsListFooter from '../list-footer/SearchResultsListFooter';
 
 import styles from './SearchResultsList.styles';
 
-const SearchResultList = (props: SearchResultListProps) => {
+const SearchResultsList = (props: SearchResultsListProps) => {
+  const queryClient = useQueryClient();
   if (!props.results.length && props.hasSearched) {
     return (
       <View style={styles.listEmptyContainer}>
@@ -36,7 +38,9 @@ const SearchResultList = (props: SearchResultListProps) => {
         data={props.results}
         stickyHeaderIndices={[0]}
         contentContainerStyle={styles.searchResultsContainer}
-        renderItem={({ item }) => <SearchResultsListItem {...item} />}
+        renderItem={({ item }) => (
+          <SearchResultsListItem {...item} queryClient={queryClient} />
+        )}
         ListHeaderComponent={() => (
           <SearchResultsListFooter
             pageState={props.pageState}
@@ -47,20 +51,11 @@ const SearchResultList = (props: SearchResultListProps) => {
       />
     );
   } else {
-    return (
-      <View style={styles.listEmptyContainer}>
-        <Icon name="sad-cry" style={styles.listEmptyIcon} size={96} />
-        <Text style={styles.listEmptyText}>How sad.</Text>
-        <Text style={styles.listEmptyText}>You have no friends!</Text>
-        <Button style={styles.searchButton} onPress={props.onSearchAgain}>
-          <Text style={styles.searchAgainButtonText}>Find Some</Text>
-        </Button>
-      </View>
-    );
+    return null;
   }
 };
 
-export interface SearchResultListProps {
+export interface SearchResultsListProps {
   hasSearched: boolean;
   relations: Relation[];
   results: SearchResult[];
@@ -70,4 +65,4 @@ export interface SearchResultListProps {
   onSearchAgain: () => void;
 }
 
-export default SearchResultList;
+export default SearchResultsList;
