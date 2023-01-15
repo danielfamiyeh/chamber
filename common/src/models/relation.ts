@@ -28,11 +28,6 @@ const RelationRequestSchema = new Schema<IRelationRequest>(
   { timestamps: true }
 );
 
-export const RelationRequest = model<IRelationRequest>(
-  'relationrequest',
-  RelationRequestSchema
-);
-
 const RelationSchema = new Schema<IRelation>(
   {
     type: RelationTypeSchema,
@@ -46,4 +41,9 @@ const RelationSchema = new Schema<IRelation>(
   }
 );
 
-export const Relation = model('relation', RelationSchema);
+export const RelationRequest = model<IRelationRequest>(
+  'relationrequest',
+  RelationRequestSchema
+);
+
+export const Relation = model<IRelation>('relation', RelationSchema);

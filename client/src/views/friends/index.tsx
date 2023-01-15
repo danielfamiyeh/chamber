@@ -92,7 +92,7 @@ const FriendsView = () => {
           />
           <RequestList
             direction="outgoing"
-            items={user?.incomingRelationRequests ?? []}
+            items={user?.outgoingRelationRequests ?? []}
           />
         </>
       )}

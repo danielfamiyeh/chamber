@@ -67,6 +67,7 @@ const RequestListItemCta = (props: RequestListItemCtaProps) => {
 };
 
 export interface RequestListItemCtaProps {
+  username: string;
   requestId: string;
   direction: 'incoming' | 'outgoing';
 }
