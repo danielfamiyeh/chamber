@@ -46,6 +46,14 @@ export type Message = {
     type: MessageContentType;
     value: string;
   };
+  readReceipts: MessageReadReceipt | string;
+};
+
+export type MessageReadReceipt = {
+  _id: string;
+  chat: Chat | string;
+  readBy: User | string;
+  createdAt: Date;
 };
 
 export type RelatedCollection = 'post' | 'chat';
