@@ -5,17 +5,11 @@ const avatarSize = scaleX(52);
 
 const chatListItemStyles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
     backgroundColor: 'white',
     paddingHorizontal: scaleX(16),
     paddingVertical: scaleY(12),
     maxHeight: scaleY(80),
     borderRadius: 8,
-  },
-  left: {},
-  right: {
-    justifyContent: 'center',
-    overflow: 'hidden',
   },
   avatar: {
     borderWidth: 1,
@@ -28,10 +22,18 @@ const chatListItemStyles = StyleSheet.create({
   recipients: {
     fontWeight: 'bold',
   },
-  lastMessage: {},
-  timeAgo: {
+  lastMessage: {
+    marginVertical: scaleY(2),
+  },
+  lastMessageTimeAgo: {
     color: 'grey',
     marginTop: scaleY(4),
+  },
+  createdAt: {
+    color: 'grey',
+  },
+  createdAtDate: {
+    fontWeight: 'bold',
   },
   indicator: {},
 });
