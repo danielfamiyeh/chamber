@@ -5,5 +5,5 @@ import { sendMessage } from '../controllers/message/send-message';
 import { trycatchAsync } from '@danielfamiyeh/chamber-common';
 
 export const messageRouter = Router()
-  .get('/', (req, res) => trycatchAsync(res, () => getMessage(req, res)))
+  .post('/', (req, res) => trycatchAsync(res, () => getMessage(req, res)))
   .put('/', (req, res) => trycatchAsync(res, () => sendMessage(req, res)));

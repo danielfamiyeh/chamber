@@ -13,8 +13,8 @@ export interface GetMessageRequest extends Request {
   body: {
     chatId: string;
     _id: string;
-    start?: number;
-    end?: number;
+    skip?: number;
+    limit?: number;
   };
 }
 
