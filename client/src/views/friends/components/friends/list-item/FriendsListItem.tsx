@@ -26,7 +26,7 @@ const FriendsListItem = (props: FriendsListItemProps) => {
         <Button
           style={styles.sendMessageButton}
           onPress={onSendMessage(
-            props._id,
+            (props.user as User)?._id,
             (props.user as User)?.username,
             props.navigate
           )}

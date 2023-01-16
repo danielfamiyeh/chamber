@@ -14,13 +14,17 @@ export const getChat = async (
   req: GetChatRequest,
   res: Response
 ): Promise<Response> => {
-  const { userId, chatId } = req.body;
+  const { _id, chatId } = req.body;
 
   const chat = await models.Chat.findOne({ _id: chatId })
     .populate('recipients')
     .populate('messages');
 
-  if (chat.recipients.find(({ _id }) => _id.toString() === userId)) {
+  if (
+    chat.recipients.find(
+      ({ _id: recipientId }) => recipientId.toString() === _id
+    )
+  ) {
     return res.json({ chat });
   }
 
