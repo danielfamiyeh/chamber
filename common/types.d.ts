@@ -12,6 +12,7 @@ export type RelationRequest = {
 };
 
 export type Chat = {
+  _id: string;
   recipients: (User | string)[];
   messages: (Message | string)[];
   admins: (User | string)[];
@@ -73,6 +74,7 @@ export type Post = {
 export type RelationType = 'friend' | 'closeFriend';
 
 export type Relation = {
+  _id: string;
   type: RelationType;
   user: User | string;
   createdAt: Date;

@@ -15,7 +15,9 @@ const FriendsList = (props: FriendsListProps) => {
     <FlatList
       data={props.relations}
       style={styles.container}
-      renderItem={({ item }) => <FriendsListItem {...item} />}
+      renderItem={({ item }) => (
+        <FriendsListItem {...item} navigate={props.navigate} />
+      )}
       contentContainerStyle={styles.contentContainer}
     />
   ) : (
@@ -33,6 +35,7 @@ const FriendsList = (props: FriendsListProps) => {
 interface FriendsListProps {
   relations: Relation[];
   onSearch: GestureEventHandler;
+  navigate: Function;
 }
 
 export default FriendsList;

@@ -7,9 +7,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Button from '../../../../../components/input/button/Button';
 
 import styles, { iconSize } from './FriendsListItem.styles';
+import { onSendMessage } from './utils/methods';
 
-const onSendMessage = () => {};
-const navigate = () => {};
 const FriendsListItem = (props: FriendsListItemProps) => {
   return (
     <View style={styles.container}>
@@ -23,7 +22,7 @@ const FriendsListItem = (props: FriendsListItemProps) => {
       <View style={styles.rightCta}>
         <Button
           style={styles.sendMessageButton}
-          onPress={onSendMessage(props._id, navigate)}
+          onPress={onSendMessage(props._id, props.navigate)}
         >
           <Icon name="message" size={iconSize} />
         </Button>
@@ -32,6 +31,8 @@ const FriendsListItem = (props: FriendsListItemProps) => {
   );
 };
 
-interface FriendsListItemProps extends Relation {}
+interface FriendsListItemProps extends Relation {
+  navigate: Function;
+}
 
 export default FriendsListItem;
