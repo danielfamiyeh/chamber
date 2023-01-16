@@ -25,7 +25,11 @@ const FriendsListItem = (props: FriendsListItemProps) => {
       <View style={styles.rightCta}>
         <Button
           style={styles.sendMessageButton}
-          onPress={onSendMessage(props._id, props.navigate)}
+          onPress={onSendMessage(
+            props._id,
+            (props.user as User)?.username,
+            props.navigate
+          )}
         >
           <Icon name="message" size={iconSize} />
         </Button>
