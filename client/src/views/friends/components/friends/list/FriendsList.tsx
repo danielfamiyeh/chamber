@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { Relation } from '@danielfamiyeh/chamber-common';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import Button from '../../../../../components/input/button/Button';
 

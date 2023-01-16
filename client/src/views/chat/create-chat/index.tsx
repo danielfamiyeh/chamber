@@ -3,8 +3,8 @@ import { View } from 'react-native';
 
 import styles from './styles';
 
-const CreateChatView = () => {
+const ChatView = () => {
   return <View style={styles.container}></View>;
 };
 
-export default CreateChatView;
+export default ChatView;

@@ -1,19 +1,22 @@
 import React from 'react';
 import moment from 'moment';
-import { Text, View } from 'react-native';
-import { Relation } from '@danielfamiyeh/chamber-common';
+import { Pressable, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Relation, User } from '@danielfamiyeh/chamber-common';
 
 import Button from '../../../../../components/input/button/Button';
 
+import { onSendMessage, onNavigateProfile } from './utils/methods';
 import styles, { iconSize } from './FriendsListItem.styles';
-import { onSendMessage } from './utils/methods';
 
 const FriendsListItem = (props: FriendsListItemProps) => {
   return (
-    <View style={styles.container}>
+    <Pressable
+      style={styles.container}
+      onPress={onNavigateProfile(props._id, props.navigate)}
+    >
       <View style={styles.leftMeta}>
-        <Text>{props.user?.username}</Text>
+        <Text>{(props.user as User)?.username}</Text>
         <Text style={styles.dateText}>
           Friends since: {moment(props.createdAt).format('DD/MM/YYYY')}
         </Text>
@@ -27,7 +30,7 @@ const FriendsListItem = (props: FriendsListItemProps) => {
           <Icon name="message" size={iconSize} />
         </Button>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

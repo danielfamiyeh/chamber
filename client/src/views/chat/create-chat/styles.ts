@@ -1,5 +1,10 @@
 import { StyleSheet } from 'react-native';
 
-const createChatViewStyles = StyleSheet.create({ container: {} });
+const chatViewStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    borderWidth: 1,
+  },
+});
 
-export default createChatViewStyles;
+export default chatViewStyles;
