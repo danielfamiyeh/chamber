@@ -1,21 +1,37 @@
-import { Response } from 'express';
-import { User } from '@danielfamiyeh/chamber-common';
+import { Request, Response } from 'express';
 import { models } from '@danielfamiyeh/chamber-common/dist/models';
 
 import { NotifyService } from '../utils/service';
-import { ListenSSERequest } from '../../types';
 
-export const subscribe = async (req: ListenSSERequest, res: Response) => {
-  const { userId } = req.query;
-  const user = await models.User.findOne({ _id: userId })
-    .populate({
-      path: 'chats.messages',
-      model: 'Message',
-    })
-    .exec();
+export const subscribe = async (req: Request, res: Response) => {
+  const { _id } = req.body;
+  if (!_id) throw new Error('User ID must be provided');
+  const user = await models.User.findOne({ _id }, '_id');
 
-  if (!userId) return res.json({ error: 'User ID must be provided' });
-  if (!user) return res.json({ error: 'User does not exist' });
+  if (!user) throw new Error('User does not exist');
 
-  return NotifyService.subscribe(<User>(<unknown>user), req, res);
+  return NotifyService.subscribe(_id, req, res);
+};
+
+export const unsubscribe = async (req: Request, res: Response) => {
+  const { _id } = req.body;
+  if (!_id) throw new Error('User ID must be provided');
+  const user = await models.User.findOne({ _id }, '_id');
+
+  if (!user) throw new Error('User does not exist');
+
+  return NotifyService.unsubscribe(_id);
+};
+
+export const onEvent = async (req: Request, res: Response) => {
+  const { _id, payload } = req.body;
+
+  if (!(_id || payload)) {
+    throw new Error('User ID and payload must be provided');
+  }
+  const user = await models.User.findOne({ _id }, '_id');
+
+  if (!user) throw new Error('User does not exist');
+
+  return NotifyService.onEvent(_id, payload);
 };

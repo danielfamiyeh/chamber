@@ -1,19 +1,17 @@
 import { Request, Response } from 'express';
-import { User } from '@danielfamiyeh/chamber-common';
 
 import { ClientMap } from '../../types';
+import { log } from './logger';
 
 export class NotifyService {
   static clients: ClientMap = {};
 
-  static subscribe(user: User, req: Request, res: Response) {
-    const { clients } = NotifyService;
+  static subscribe(userId: string, req: Request, res: Response) {
+    let client = NotifyService.clients[userId];
 
-    if (clients[user._id]) {
-      return res.json({ info: 'Already listening for events' });
-    }
+    if (client) return res.json({ info: 'Already listening for events' });
 
-    clients[user._id] = { req, res };
+    client = { req, res };
 
     res.set({
       'Cache-Control': 'no-cache',
@@ -21,11 +19,27 @@ export class NotifyService {
       Connection: 'keep-alive',
     });
 
-    req.on('close', () => {
-      delete clients[user._id];
-      // TODO: Inform other users of disconnection
-    });
+    log('info', `Client ${userId} has connected`);
 
-    user.chats.forEach((chat) => res.write(JSON.stringify({ chat })));
+    req.on('close', () => {
+      delete NotifyService.clients[userId];
+      log('info', `Client ${userId} has disconnected`);
+    });
+  }
+  static unsubscribe(userId: string) {
+    const client = NotifyService.clients[userId];
+    if (!client) throw new Error('No client found for this user');
+
+    client.res.end();
+  }
+
+  static onEvent(userId: string, payload: string) {
+    const client = NotifyService.clients[userId];
+
+    if (!client) throw new Error('No client found for this user');
+
+    client.res.write(payload);
+
+    log('info', `Event ${payload} sent to client ${userId}`);
   }
 }
