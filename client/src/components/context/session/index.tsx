@@ -1,3 +1,4 @@
+import { useQueryClient } from 'react-query';
 import RNEventSource from 'react-native-event-source';
 import React, { createContext, useContext } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -17,6 +18,8 @@ export const SessionProvider = (props: any) => {
     '@session',
     SessionSchema.model
   );
+
+  const queryClient = useQueryClient();
 
   const signOut = () => {
     setSession({ _id: '', token: '' });
@@ -39,7 +42,16 @@ export const SessionProvider = (props: any) => {
     );
 
     eventSource.addEventListener('message', ({ data }) => {
-      console.log(JSON.parse(data));
+      const payload = JSON.parse(data);
+
+      switch (payload.eventName) {
+        case 'message': {
+          queryClient.invalidateQueries('messages');
+          queryClient.invalidateQueries('chats');
+
+          break;
+        }
+      }
     });
 
     return () => {
