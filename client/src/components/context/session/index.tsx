@@ -37,19 +37,20 @@ export const SessionProvider = (props: any) => {
       },
     });
 
-    eventSource.addEventListener('open', () =>
+    eventSource?.addEventListener('open', () =>
       console.log('Connection established')
     );
 
-    eventSource.addEventListener('message', ({ data }) => {
+    eventSource?.addEventListener('message', ({ data }) => {
       const payload = JSON.parse(data);
+      if (payload?.eventName) {
+        switch (payload.eventName) {
+          case 'message': {
+            queryClient.invalidateQueries('messages');
+            queryClient.invalidateQueries('chats');
 
-      switch (payload.eventName) {
-        case 'message': {
-          queryClient.invalidateQueries('messages');
-          queryClient.invalidateQueries('chats');
-
-          break;
+            break;
+          }
         }
       }
     });
