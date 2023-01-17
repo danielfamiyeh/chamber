@@ -38,7 +38,9 @@ export const SessionProvider = (props: any) => {
       console.log('Connection established')
     );
 
-    eventSource.addEventListener('message', ({ data }) => {});
+    eventSource.addEventListener('message', ({ data }) => {
+      console.log(JSON.parse(data));
+    });
 
     return () => {
       eventSource.removeAllListeners();

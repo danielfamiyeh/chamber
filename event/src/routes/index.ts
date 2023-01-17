@@ -8,12 +8,8 @@ export const router = Router()
     trycatchAsync(res, async () => await subscribe(req, res))
   )
   .delete('/', (req: Request, res: Response) =>
-    trycatchAsync(res, async () => {
-      await unsubscribe(req);
-    })
+    trycatchAsync(res, async () => await unsubscribe(req))
   )
-  .post('/', (req: Request, res: Response) =>
-    trycatchAsync(res, async () => {
-      await onEvent(req);
-    })
+  .put('/', (req: Request, res: Response) =>
+    trycatchAsync(res, async () => await onEvent(req))
   );

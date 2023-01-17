@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { Response } from 'express';
 import { models } from '@danielfamiyeh/chamber-common/dist/models';
 
@@ -39,6 +40,22 @@ export const sendMessage = async (req: SendMessageRequest, res: Response) => {
         messages: message._id,
       },
     }
+  );
+
+  await Promise.all(
+    chat.recipients.map((recipientId: object) =>
+      axios.post(
+        `${process.env.GATEWAY_URL}/event/put`,
+        {
+          payload: {
+            eventName: 'message',
+            eventData: JSON.stringify(message),
+            recipientId: recipientId.toString(),
+          },
+        },
+        { headers: { authorization: req.headers.authorization } }
+      )
+    )
   );
   return res.json({ message });
 };

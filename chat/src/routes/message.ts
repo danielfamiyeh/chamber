@@ -6,4 +6,6 @@ import { sendMessage } from '../controllers/message/send-message';
 
 export const messageRouter = Router()
   .post('/', (req, res) => trycatchAsync(res, () => getMessage(req, res)))
-  .put('/', (req, res) => trycatchAsync(res, () => sendMessage(req, res)));
+  .put('/', (req, res) =>
+    trycatchAsync(res, async () => await sendMessage(req, res))
+  );
