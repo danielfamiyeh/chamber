@@ -3,8 +3,11 @@ import { useQuery } from 'react-query';
 import { useRoute } from '@react-navigation/native';
 import { ActivityIndicator, FlatList, View } from 'react-native';
 
-import { getMessages } from './utils/methods';
+import ChatBubble from './components/bubble/ChatBubble';
+import ChatForm from './components/form/ChatForm';
 
+import { useUser } from '../../../utils/hooks/useUser';
+import { getMessages } from './utils/methods';
 import styles from './styles';
 
 const ChatWindowView = () => {
@@ -14,16 +17,22 @@ const ChatWindowView = () => {
     getMessages(params?.chatId ?? '')
   );
 
-  return isLoading ? (
-    <View style={{ flex: 1 }}>
+  const { user, isLoadingUserData } = useUser();
+
+  return isLoading || isLoadingUserData ? (
+    <View style={styles.container}>
       <ActivityIndicator />
     </View>
   ) : (
-    <FlatList
-      data={data}
-      style={styles.container}
-      keyExtractor={({ _id }) => _id}
-    />
+    <View style={styles.container}>
+      <FlatList
+        data={data}
+        renderItem={({ item }) => <ChatBubble {...item} />}
+        style={styles.container}
+        keyExtractor={({ _id }) => _id}
+      />
+      <ChatForm />
+    </View>
   );
 };
 
