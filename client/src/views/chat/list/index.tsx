@@ -1,32 +1,36 @@
 import React from 'react';
+import { useQuery, useQueryClient } from 'react-query';
+import { ActivityIndicator, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
 import ChatListItem from './components/item/ChatListItem';
+import ChatListZeroState from './components/zero-state/ChatListZeroState';
 
-import { testChat } from '../../../utils/data/test/chat';
-import styles from './styles';
-import { View } from 'react-native';
 import { scaleY } from '../../../utils/methods/scaleable-units';
+import { getChats } from './utils/methods';
+
+import styles from './styles';
 
 const ChatListView = ({ navigation: { navigate } }) => {
-  const chats = React.useMemo(
-    () => new Array(5).fill(null).map((_) => testChat),
-    []
-  );
+  const { data, loading } = useQuery('chats', getChats);
+  const [isRefreshing, setIsRefreshing] = React.useState(false);
+  const queryClient = useQueryClient();
 
-  return (
+  return loading ? (
+    <View style={{ flex: 1 }}>
+      <ActivityIndicator />
+    </View>
+  ) : (
     <FlatList
-      data={chats}
+      data={data ?? []}
+      refreshing={isRefreshing}
+      onRefresh={() => {
+        queryClient.invalidateQueries('chats');
+      }}
       contentContainerStyle={styles.container}
+      ListEmptyComponent={() => <ChatListZeroState navigate={navigate} />}
       ItemSeparatorComponent={() => <View style={{ height: scaleY(4) }} />}
-      renderItem={({ item: { _id, messages, recipients } }) => (
-        <ChatListItem
-          lastMessage={messages[messages.length - 1]}
-          recipients={recipients}
-          navigate={navigate}
-          chatId={_id}
-        />
-      )}
+      renderItem={({ item }) => <ChatListItem {...item} navigate={navigate} />}
     />
   );
 };

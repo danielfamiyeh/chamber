@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { Relation } from '@danielfamiyeh/chamber-common';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import Button from '../../../../../components/input/button/Button';
 
@@ -15,7 +15,9 @@ const FriendsList = (props: FriendsListProps) => {
     <FlatList
       data={props.relations}
       style={styles.container}
-      renderItem={({ item }) => <FriendsListItem {...item} />}
+      renderItem={({ item }) => (
+        <FriendsListItem {...item} navigate={props.navigate} />
+      )}
       contentContainerStyle={styles.contentContainer}
     />
   ) : (
@@ -33,6 +35,7 @@ const FriendsList = (props: FriendsListProps) => {
 interface FriendsListProps {
   relations: Relation[];
   onSearch: GestureEventHandler;
+  navigate: Function;
 }
 
 export default FriendsList;

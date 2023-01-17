@@ -4,7 +4,7 @@ export interface SendMessageRequest extends Request {
   body: {
     contentValue: string;
     contentType: string;
-    userId: string;
+    _id: string;
     chatId: string;
   };
 }
@@ -12,15 +12,15 @@ export interface SendMessageRequest extends Request {
 export interface GetMessageRequest extends Request {
   body: {
     chatId: string;
-    userId: string;
-    start?: number;
-    end?: number;
+    _id: string;
+    skip?: number;
+    limit?: number;
   };
 }
 
 export interface CreateChatRequest extends Request {
   body: {
-    userId: string;
+    _id: string;
     recipients: string[];
     initialMessage?: string;
   };
@@ -28,7 +28,7 @@ export interface CreateChatRequest extends Request {
 
 export interface GetChatRequest extends Request {
   body: {
-    userId: string;
+    _id: string;
     chatId: string;
   };
 }

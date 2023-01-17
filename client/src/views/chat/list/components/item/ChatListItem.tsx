@@ -1,42 +1,43 @@
 import React from 'react';
 import moment from 'moment';
-import { Text, View, Image } from 'react-native';
-import { Message, User } from '@danielfamiyeh/chamber-common';
+import { Text } from 'react-native';
+import { Chat, Message } from '@danielfamiyeh/chamber-common';
 
 import Button from '../../../../../components/input/button/Button';
 
 import styles from './ChatListItem.styles';
 
 const ChatListItem = (props: ChatListItemProps) => {
-  const onPress = () => props.navigate('Chat', { chatId: props.chatId });
+  const onPress = () => props.navigate('Chat', { chatId: props._id });
+  const numMessages = props.messages.length;
+  const lastMessage = React.useMemo(
+    () => props.messages[numMessages - 1],
+    [props.messages, numMessages]
+  );
+
   return (
     <Button style={styles.container} onPress={onPress}>
-      <View style={styles.left}>
-        <View style={styles.avatar} />
-      </View>
-      <View style={styles.right}>
-        <Text style={styles.recipients}>
-          {props.recipients.map(({ username }) => username).join(', ')}
+      <Text style={styles.recipients}>
+        {props.recipients
+          .slice(0, 2)
+          .map(({ username }) => username)
+          .join(', ')}
+      </Text>
+      <Text style={styles.lastMessage}>
+        {(lastMessage as Message)?.content?.value}
+      </Text>
+      <Text style={styles.createdAt}>
+        Created at:
+        <Text style={styles.createdAtDate}>
+          {' '}
+          {moment(props.createdAt).format('DD/MM/YYYY')}
         </Text>
-        <View>
-          <Text style={styles.lastMessage}>
-            {/* TODO x sent a message*/}
-            {props.lastMessage.content.value}
-          </Text>
-          <Text style={styles.timeAgo}>
-            {moment(props.lastMessage.createdAt).fromNow()}
-          </Text>
-        </View>
-      </View>
+      </Text>
     </Button>
   );
 };
 
-export interface ChatListItemProps {
-  chatId: string;
-  recipients: (string | User)[];
-  lastMessage: string | Message;
+export interface ChatListItemProps extends Chat {
   navigate: Function;
 }
-
 export default ChatListItem;

@@ -14,14 +14,20 @@ export const createChat = async (
   req: CreateChatRequest,
   res: Response
 ): Promise<Response> => {
-  const { userId, recipients, initialMessage } = req.body;
+  const { _id, recipients, initialMessage } = req.body;
 
-  const creator = await models.User.findOne({ userId });
+  const creator = await models.User.findOne({ _id }).populate([
+    {
+      path: 'relations',
+      model: 'relation',
+      populate: { path: 'user', model: 'user', select: '_id username' },
+    },
+  ]);
 
   recipients.forEach((recipientId) => {
     if (
-      !creator.friends
-        .map((friendId) => friendId.toString())
+      !creator.relations
+        .map(({ user }) => user._id.toString())
         .includes(recipientId)
     ) {
       throw new Error(
@@ -31,14 +37,23 @@ export const createChat = async (
   });
 
   const chat = await models.Chat.create({
-    recipients: [...userId, ...recipients],
-    createdBy: userId,
-    admins: [userId],
+    recipients: [_id, ...recipients],
+    createdBy: _id,
+    admins: [_id],
   });
+
+  await models.User.update(
+    { _id: { $in: [_id, ...recipients] } },
+    {
+      $push: {
+        chats: chat._id,
+      },
+    }
+  );
 
   if (initialMessage) {
     const _initialMessage = await models.Message.create({
-      user: userId,
+      user: _id,
       chat: chat._id,
       content: {
         type: 'text',

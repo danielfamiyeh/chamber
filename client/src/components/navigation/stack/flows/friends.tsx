@@ -1,32 +1,16 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import FriendsView from '../../../../views/friends';
-import Button from '../../../input/button/Button';
-
-import { scaleX } from '../../../../utils/methods/scaleable-units';
+import ProfileView from '../../../../views/profile';
 
 const Stack = createStackNavigator();
 
-const FriendsFlow = ({ navigation: { navigate } }) => {
+const FriendsFlow = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen
-        name="Friends"
-        component={FriendsView}
-        options={{
-          headerRight: () => (
-            <Button
-              noBorder
-              style={{ marginRight: scaleX(12) }}
-              onPress={() => navigate('Add Friend')}
-            >
-              <Icon name="plus" size={24} />
-            </Button>
-          ),
-        }}
-      />
+      <Stack.Screen name="Friends" component={FriendsView} />
+      <Stack.Screen name="Profile" component={ProfileView} />
     </Stack.Navigator>
   );
 };

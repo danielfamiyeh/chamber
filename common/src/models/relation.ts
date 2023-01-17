@@ -1,4 +1,5 @@
 import { model, Schema } from 'mongoose';
+
 import {
   Relation as IRelation,
   RelationRequest as IRelationRequest,

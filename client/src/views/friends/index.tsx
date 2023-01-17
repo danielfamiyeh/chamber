@@ -14,7 +14,7 @@ import { searchUsers } from './utils/methods';
 import styles from './styles';
 import FriendsList from './components/friends/list/FriendsList';
 
-const FriendsView = () => {
+const FriendsView = ({ navigation: { navigate } }) => {
   const [results, setResults] = React.useState([]);
   const searchBarInputRef = React.useRef<TextInput>();
   const [searchTerm, setSearchTerm] = React.useState('');
@@ -84,7 +84,7 @@ const FriendsView = () => {
               hasSearched={!!searchTerm && !isLoadingSearchData}
             />
           ) : (
-            <FriendsList relations={user?.relations} />
+            <FriendsList relations={user?.relations} navigate={navigate} />
           )}
         </>
       )}
