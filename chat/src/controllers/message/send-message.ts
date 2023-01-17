@@ -21,7 +21,7 @@ export const sendMessage = async (req: SendMessageRequest, res: Response) => {
   ];
 
   const message = await models.Message.create({
-    user: _id,
+    sender: _id,
     chat: chatId,
     content: {
       type: contentType,

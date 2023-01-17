@@ -5,9 +5,9 @@ const chatFormStyles = StyleSheet.create({
   container: {
     borderTopWidth: 1,
     height: scaleY(48),
-    borderColor: 'lightgrey',
     alignItems: 'center',
     flexDirection: 'row',
+    borderColor: 'lightgrey',
     justifyContent: 'center',
     paddingRight: scaleX(8),
   },

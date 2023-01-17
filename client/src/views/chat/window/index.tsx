@@ -13,9 +13,8 @@ import styles from './styles';
 const ChatWindowView = () => {
   const { params } = useRoute();
 
-  const { data, isLoading } = useQuery('messages', () =>
-    getMessages(params?.chatId ?? '')
-  );
+  const chatId = params.chatId ?? '';
+  const { data, isLoading } = useQuery('messages', () => getMessages(chatId));
 
   const { user, isLoadingUserData } = useUser();
 
@@ -31,7 +30,7 @@ const ChatWindowView = () => {
         style={styles.container}
         keyExtractor={({ _id }) => _id}
       />
-      <ChatForm />
+      <ChatForm chatId={chatId} />
     </View>
   );
 };

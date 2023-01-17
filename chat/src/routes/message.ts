@@ -1,8 +1,8 @@
 import { Router } from 'express';
+import { trycatchAsync } from '@danielfamiyeh/chamber-common';
 
 import { getMessage } from '../controllers/message/get-message';
 import { sendMessage } from '../controllers/message/send-message';
-import { trycatchAsync } from '@danielfamiyeh/chamber-common';
 
 export const messageRouter = Router()
   .post('/', (req, res) => trycatchAsync(res, () => getMessage(req, res)))
