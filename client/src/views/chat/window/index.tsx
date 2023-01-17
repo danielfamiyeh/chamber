@@ -25,6 +25,7 @@ const ChatWindowView = () => {
   ) : (
     <View style={styles.container}>
       <FlatList
+        inverted
         data={data}
         renderItem={({ item }) => <ChatBubble {...item} />}
         style={styles.container}
