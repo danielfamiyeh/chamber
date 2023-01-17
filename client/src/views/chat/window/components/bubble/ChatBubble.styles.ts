@@ -1,25 +1,48 @@
 import { StyleSheet } from 'react-native';
 import { ChatBubbleProps } from './ChatBubble';
 
+import { scaleX, scaleY } from '../../../../../utils/methods/scaleable-units';
+
 const chatBubbleStyles = StyleSheet.create({
   container: {
-    flex: 1,
+    width: '50%',
+    paddingHorizontal: scaleX(8),
+    marginVertical: scaleX(8),
   },
-  content: {},
+  content: {
+    borderRadius: scaleX(4),
+    padding: scaleX(8),
+  },
   contentText: {},
   contentImage: {},
   meta: {},
-  metaSender: {},
-  metaCreatedAt: {},
+  metaCreatedAt: {
+    color: 'grey',
+    marginTop: scaleY(2),
+    fontSize: scaleX(9),
+  },
 });
 
 export const getComputedStyles = (props: ChatBubbleProps) => {
   const computedStyles = {
-    content: { backgroundColor: '#b4b4bc' },
+    contentText: { color: 'black' },
+    container: { alignSelf: 'flex-start' },
+    content: { backgroundColor: 'lightgrey', alignSelf: 'flex-start' },
+    metaCreatedAt: {
+      alignSelf: 'flex-start',
+    },
   };
 
   if (props.isOwn) {
-    computedStyles.content.backgroundColor = '#2294fb';
+    computedStyles.contentText.color = 'white';
+    computedStyles.container.alignSelf = 'flex-end';
+    computedStyles.content = {
+      alignSelf: 'flex-end',
+      backgroundColor: '#2294fb',
+    };
+    computedStyles.metaCreatedAt = {
+      alignSelf: 'flex-end',
+    };
   }
 
   return computedStyles;

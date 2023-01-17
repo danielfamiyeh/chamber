@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { Text, View, Image } from 'react-native';
+import { Text } from 'react-native';
 import { Chat, Message } from '@danielfamiyeh/chamber-common';
 
 import Button from '../../../../../components/input/button/Button';

@@ -2,15 +2,21 @@ import React from 'react';
 import { Image, Text, View } from 'react-native';
 import { Message, User } from '@danielfamiyeh/chamber-common';
 
-import Button from '../../../../../components/input/button/Button';
-
 import styles, { getComputedStyles } from './ChatBubble.styles';
+import moment from 'moment';
 
 const ChatBubble = (props: ChatBubbleProps) => {
+  const computedStyles = getComputedStyles(props);
   const Content = React.useCallback(() => {
     switch (props.content.type) {
       case 'text':
-        return <Text style={styles.contentText}>{props.content.value}</Text>;
+        return (
+          <Text
+            style={{ ...styles.contentText, ...computedStyles.contentText }}
+          >
+            {props.content.value}
+          </Text>
+        );
 
       case 'image':
         return (
@@ -20,17 +26,20 @@ const ChatBubble = (props: ChatBubbleProps) => {
           />
         );
     }
-  }, [props.content.type, props.content.value]);
-
-  const computedStyles = getComputedStyles(props);
+  }, [props.content.type, props.content.value, computedStyles.contentText]);
 
   return (
-    <Button style={styles.container} onPress={() => {}}>
+    <View style={{ ...styles.container, ...computedStyles.container }}>
       <View style={{ ...styles.content, ...computedStyles.content }}>
         <Content />
       </View>
-      <Text style={styles.metaSender}>{(props.sender as User).username}</Text>
-    </Button>
+      <Text
+        style={{ ...styles.metaCreatedAt, ...computedStyles.metaCreatedAt }}
+      >
+        {props.isOwn ? 'You' : (props.sender as User).username} @{' '}
+        {moment(props.createdAt).format('DD/MM/YYYY HH:mm')}
+      </Text>
+    </View>
   );
 };
 

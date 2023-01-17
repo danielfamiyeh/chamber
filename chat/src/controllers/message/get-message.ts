@@ -1,4 +1,5 @@
 import { Response } from 'express';
+import { Message, User } from '@danielfamiyeh/chamber-common';
 import { models } from '@danielfamiyeh/chamber-common/dist/models';
 
 import { GetMessageRequest } from '../../../types';
@@ -36,5 +37,10 @@ export const getMessage = async (req: GetMessageRequest, res: Response) => {
       },
     ]);
 
-  return res.json({ messages });
+  return res.json({
+    messages: messages.map(({ _doc }) => ({
+      ..._doc,
+      isOwn: _doc.sender._id.toString() === _id,
+    })),
+  });
 };
