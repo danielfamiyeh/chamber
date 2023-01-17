@@ -46,5 +46,5 @@ export const onEvent = async (req: Request) => {
   if (!user) throw new Error('User does not exist');
   if (!payload) throw new Error('User ID and payload must be provided');
 
-  return NotifyService.onEvent(_id, payload);
+  return NotifyService.onEvent(payload.recipientId, payload);
 };
