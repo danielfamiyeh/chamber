@@ -7,11 +7,11 @@ export class NotifyService {
   static clients: ClientMap = {};
 
   static subscribe(userId: string, req: Request, res: Response) {
-    let client = NotifyService.clients[userId];
+    if (NotifyService.clients[userId]) {
+      throw new Error('Already listening for events');
+    }
 
-    if (client) return res.json({ info: 'Already listening for events' });
-
-    client = { req, res };
+    NotifyService.clients[userId] = { req, res };
 
     res.set({
       'Cache-Control': 'no-cache',
@@ -25,7 +25,13 @@ export class NotifyService {
       delete NotifyService.clients[userId];
       log('info', `Client ${userId} has disconnected`);
     });
+
+    NotifyService.onEvent(
+      userId,
+      'data:{"data": {"contentType": "string", "contentValue": "A message"}, "relatedCollection": "message"}'
+    );
   }
+
   static unsubscribe(userId: string) {
     const client = NotifyService.clients[userId];
     if (!client) throw new Error('No client found for this user');
@@ -35,10 +41,10 @@ export class NotifyService {
 
   static onEvent(userId: string, payload: string) {
     const client = NotifyService.clients[userId];
-
     if (!client) throw new Error('No client found for this user');
 
     client.res.write(payload);
+    client.res.write('\n\n');
 
     log('info', `Event ${payload} sent to client ${userId}`);
   }

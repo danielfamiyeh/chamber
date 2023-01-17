@@ -2593,6 +2593,11 @@
   "resolved" "https://registry.npmjs.org/@types/range-parser/-/range-parser-1.2.4.tgz"
   "version" "1.2.4"
 
+"@types/react-native-event-source@^1.1.0":
+  "integrity" "sha512-F45yAUXq5XqzXSXmToY3gtMKq4EJThhNKWybtnK6dNRkmDb285K8YWwV1XMDcM6BQCtW9RDax3oJQj4nLbSvIg=="
+  "resolved" "https://registry.npmjs.org/@types/react-native-event-source/-/react-native-event-source-1.1.0.tgz"
+  "version" "1.1.0"
+
 "@types/react-native-vector-icons@^6.4.12":
   "integrity" "sha512-gSXtv3NMOsRwSXJ/gvGebm7CNjHbkeFKCse9h/Pvi+x2yjCLOkJR1FBfec06DhaFJpsK7Y8WRQpwOS0eLqx5Rg=="
   "resolved" "https://registry.npmjs.org/@types/react-native-vector-icons/-/react-native-vector-icons-6.4.12.tgz"
@@ -7321,6 +7326,11 @@
     "flow-parser" "^0.121.0"
     "jscodeshift" "^0.13.1"
     "nullthrows" "^1.1.1"
+
+"react-native-event-source@^1.1.0":
+  "integrity" "sha512-CAs76IW8kTrdy0okfV2KPopm7E9TL0uNAR+SRrN7iZ/ii0zBeHWuhD4Q2F8gRKvmkrEtCZ6uwnfYL2TFmK0QZg=="
+  "resolved" "https://registry.npmjs.org/react-native-event-source/-/react-native-event-source-1.1.0.tgz"
+  "version" "1.1.0"
 
 "react-native-gesture-handler@^2.8.0", "react-native-gesture-handler@>= 1.0.0":
   "integrity" "sha512-poOSfz/w0IyD6Qwq7aaIRRfEaVTl1ecQFoyiIbpOpfNTjm2B1niY2FLrdVQIOtIOe+K9nH55Qal04nr4jGkHdQ=="
