@@ -16,7 +16,7 @@ A scalable, social networking application
 
 | Service          | Description                                                                                                                                           |
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Client Service   | Frontend mobile application, built in React Native styled from scratch with vanilla stylesheets.                                                      |
+| Client App       | Frontend mobile application, built in React Native styled from scratch with vanilla stylesheets.                                                      |
 | API Gateway      | Acts as a single entry point for client requests and routes them to the appropriate service. It also handles authorization, and load balancing.       |
 | Service Registry | Acts as a directory of all microservices in the system, allowing other services to discover and communicate with them.                                |
 | Auth Service     | Handles registration, login, and authentication of user credentials. Creates a session token for the mobile client to be included in server requests. |
