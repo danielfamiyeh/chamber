@@ -21,7 +21,7 @@ A scalable, social networking application
 | Service Registry | Acts as a directory of all microservices in the system, allowing other services to discover and communicate with them.                                |
 | Auth Service     | Handles registration, login, and authentication of user credentials. Creates a session token for the mobile client to be included in server requests. |
 | Event Service    | Manages the creation and delivery of notifications to users.                                                                                          |
-| Chat Service     | In conjunction with the event service,handles real-time messaging between users.                                                                      |
+| Chat Service     | In conjunction with the event service, handles real-time messaging between users.                                                                     |
 | User Service     | Responsible for managing user profiles, including updates, retrieving friends lists and user search.                                                  |
 | Feed Service     | Responsible for generating and delivering news feeds to users based on their relationships with other users.                                          |
 | Relation Service | Manages relationships between users, including adding friends, and handling friend requests.                                                          |
